@@ -1,0 +1,54 @@
+{
+    "name": "PlayerActions",
+    "maps": [
+        {
+            "name": "LeftHand",
+            "id": "70b96446-1ec0-4995-be27-ad716d9c3163",
+            "actions": [
+                {
+                    "name": "Grip",
+                    "type": "Value",
+                    "id": "ae2e4954-cf60-4fe3-a69b-2bbddb3f06b9",
+                    "expectedControlType": "Axis",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "GripRelease",
+                    "type": "Value",
+                    "id": "a6c879c1-6beb-48a8-95bd-8e20781eb850",
+                    "expectedControlType": "Axis",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "cfe878d2-f72c-4e74-8f85-ffe60aa47aab",
+                    "path": "<OculusTouchController>{LeftHand}/grip",
+                    "interactions": "Press",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Grip",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "d83b9ce2-0733-4d8b-bdf4-af16963ee675",
+                    "path": "<OculusTouchController>{LeftHand}/grip",
+                    "interactions": "Press(behavior=1)",
+                    "processors": "",
+                    "groups": "",
+                    "action": "GripRelease",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}
