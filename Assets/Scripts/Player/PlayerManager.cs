@@ -21,4 +21,13 @@ public class PlayerManager : MonoBehaviour
     public static Transform InstanceOrigin()
         => Instance().xrOrigin;
 
+    [SerializeField]
+    private PlayerActionHandler actionHandler = null;
+
+    /// <summary>
+    /// 플레이어 액션 핸들러
+    /// </summary>
+    public static PlayerActionHandler Action() => Instance().actionHandler;
+
+    
 }

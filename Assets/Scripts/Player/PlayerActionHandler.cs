@@ -4,9 +4,9 @@ using UnityEngine.XR;
 using UnityEngine.XR.Interaction.Toolkit;
 
 /// <summary>
-/// 인벤토리에서 꺼내는 잡기 액션 처리
+/// 플레이어 조작 처리
 /// </summary>
-public class GrabActionHandler : MonoBehaviour
+public class PlayerActionHandler : MonoBehaviour
 {
     [SerializeField]
     internal XRDirectInteractor[] directInteractors = new XRDirectInteractor[2];

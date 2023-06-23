@@ -49,6 +49,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   xrOrigin: {fileID: 2775505189119933495}
+  actionHandler: {fileID: 2817339928387967225}
 --- !u!1 &7434560257493031411
 GameObject:
   m_ObjectHideFlags: 0
@@ -199,6 +200,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7434560258568870410}
   - component: {fileID: 7434560258568870409}
+  - component: {fileID: 2817339928387967225}
   m_Layer: 0
   m_Name: Input Action Manager
   m_TagString: Untagged
@@ -235,6 +237,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_ActionAssets:
   - {fileID: -944628639613478452, guid: c348712bda248c246b8c49b3db54643f, type: 3}
+--- !u!114 &2817339928387967225
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7434560258568870408}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0720fa0d190101a46a0adff273da6115, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  directInteractors:
+  - {fileID: 0}
+  - {fileID: 0}
+  gripThreshold: 0.9
 --- !u!1001 &3554454812340146713
 PrefabInstance:
   m_ObjectHideFlags: 0
