@@ -40,7 +40,7 @@ public class HorseController : MonoBehaviour
         col.radius = 1f;
         sphereObj.transform.position = gameObject.transform.position + gameObject.transform.up;
 
-        stats = new(2f);
+        stats = new(2.1f);
         curStamina = stats.gallopAmount;
     }
 
@@ -116,6 +116,7 @@ public class HorseController : MonoBehaviour
             rotate = Mathf.Clamp01(rotate * 2.5f) * Mathf.Sign(handOffset);
             curRotate = rotate * 30f * Time.deltaTime;
             pulled = false;
+            playerAction.GetDevice(handOffset < 0f ? 0 : 1).SendHapticImpulse(0, 0.1f + rotate * 0.1f, 0.1f);
             return; // 회전 조작이라면 다른 조작을 받지 않음
         }
 
@@ -136,7 +137,7 @@ public class HorseController : MonoBehaviour
             if (gripL && gripR)
             {
                 brakeTime += Time.deltaTime;
-                if (brakeTime > 0.5f) { braked = true; brakeTime = 0.1f; SendHapticFeedback(0.7f, 0.3f); if (targetMode > 0) --targetMode; }
+                if (brakeTime > 0.5f) { braked = true; brakeTime = 0.1f; SendHapticFeedback(0.3f, 0.3f); if (targetMode > 0) --targetMode; }
             }
             else brakeTime = 0f;
         }
@@ -149,20 +150,20 @@ public class HorseController : MonoBehaviour
                     if (targetMode < 3)
                     {
                         ++targetMode; // 가속
-                        SendHapticFeedback(0.5f, 0.5f);
+                        SendHapticFeedback(0.2f, 0.3f);
                     }
                     else // 습보
                     {
                         if (curStamina >= 1f) // 스태미너 확인
                         {
-                            SendHapticFeedback(0.7f, 1f);
+                            SendHapticFeedback(0.4f, 0.5f);
                             curStamina -= 1f; // 스태미너 소모
                             targetMode = 4; // 습보로 전환/유지
                             gallopTimer = 4f; // 습보 타이머 리셋
                         }
                         else // 스태미너 부족
                         {
-                            SendHapticFeedback(0.7f, 1.5f);
+                            SendHapticFeedback(0.7f, 0.8f);
                             targetMode = 1; // 말 저항, 속도 평보로 늦춤
                             // TODO: 말이 거부하는 애니메이션 플레이
                             staminaRecoveryTimer += 1f; // 스태미너 회복 딜레이 추가
