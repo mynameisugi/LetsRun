@@ -4,7 +4,7 @@ using UnityEngine;
 [Serializable]
 public struct HorseStats
 {
-    public HorseStats(float stamina = 2f)
+    public HorseStats(float stamina = 2.1f)
     {
         speeds = new float[] { 2f, 4f, 6f, 16f, 16f };
         gallopAmount = stamina;
