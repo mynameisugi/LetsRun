@@ -1,5 +1,6 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.XR;
 using UnityEngine.XR.Interaction.Toolkit;
 using UnityEngine.XR.Interaction.Toolkit.Samples.StarterAssets;
 
@@ -57,7 +58,7 @@ public class HorseController : MonoBehaviour
     private void Update()
     {
         curRotate = 0f;
-        curMode = Mathf.SmoothStep(curMode, targetMode, Time.deltaTime);
+        curMode = Mathf.SmoothStep(curMode, targetMode, Time.deltaTime * 12f);
         curSpeed = stats.GetSpeed(curMode);
 
         transform.position = sphere.transform.position - transform.up;
@@ -86,14 +87,23 @@ public class HorseController : MonoBehaviour
             return; // 회전 조작이라면 다른 조작을 받지 않음
         }
 
-        
+        //temp
+        bool tempA, tempB;
+        if (playerAction.GetDevice(0).TryGetFeatureValue(CommonUsages.primaryButton, out tempA))
+        { if (tempA) { if (!tmpBtnDown && targetMode < 4) { ++targetMode; } tmpBtnDown = true; } }
+        if (playerAction.GetDevice(0).TryGetFeatureValue(CommonUsages.secondaryButton, out tempB))
+        { if (tempB) { if (!tmpBtnDown && targetMode > 0) { --targetMode; } tmpBtnDown = true; } }
+        if (!tempA && !tempB) tmpBtnDown = false;
     }
+    private bool tmpBtnDown = false;
 
     private void FixedUpdate()
     {
         sphere.AddForce(transform.forward * curSpeed, ForceMode.Acceleration);
 
         sphere.AddForce(modelNormal.up * -10f, ForceMode.Acceleration);
+
+        testText.text = $"Mode: {curMode:0.00} Spd: {curSpeed:0.00} Vel: {sphere.velocity.magnitude:0.00}";
 
         if (sphere.velocity.magnitude > curSpeed) sphere.angularDrag = Mathf.Infinity;
         else sphere.angularDrag = 0f;
@@ -103,6 +113,8 @@ public class HorseController : MonoBehaviour
         modelNormal.Rotate(0, transform.eulerAngles.y, 0);
         //transform.Rotate(0, transform.eulerAngles.y, 0);
     }
+
+    public TMP_Text testText;
 
     #region XREvents
     public void OnPlayerRideRequest()

@@ -20,6 +20,8 @@ public class PlayerActionHandler : MonoBehaviour
 
     private readonly InputDevice[] targetDevices = new InputDevice[2];
 
+    public InputDevice GetDevice(int grasp) => targetDevices[grasp];
+
     private void Start()
     {
         InitDevices();
