@@ -9,6 +9,9 @@ public class HorseController : MonoBehaviour
     private Transform playerSnap = null;
 
     [SerializeField]
+    private Transform modelNormal = null;
+
+    [SerializeField]
     private Transform[] ropeHinges = new Transform[2];
 
     public HorseStats stats = new HorseStats(2f);
@@ -23,6 +26,18 @@ public class HorseController : MonoBehaviour
     private Transform playerOrigin = null;
 
     private PlayerActionHandler playerAction = null;
+
+    private Rigidbody sphere;
+
+    private void Awake()
+    {
+        var sphereObj = new GameObject($"{gameObject.name} Sphere") { layer = 7 };
+        sphere = sphereObj.AddComponent<Rigidbody>();
+        sphere.useGravity = false;
+        var col = sphereObj.AddComponent<SphereCollider>();
+        col.radius = 1f;
+        sphereObj.transform.position = gameObject.transform.position + gameObject.transform.up;
+    }
 
     private void Start()
     {
@@ -42,8 +57,11 @@ public class HorseController : MonoBehaviour
     private void Update()
     {
         curRotate = 0f;
-        curMode = Mathf.MoveTowards(curMode, targetMode, Time.deltaTime);
+        curMode = Mathf.SmoothStep(curMode, targetMode, Time.deltaTime);
         curSpeed = stats.GetSpeed(curMode);
+
+        transform.position = sphere.transform.position - transform.up;
+
         if (!isPlayerRiding || !playerOrigin || !playerAction) return;
         PlayerControlUpdate();
 
@@ -69,6 +87,21 @@ public class HorseController : MonoBehaviour
         }
 
         
+    }
+
+    private void FixedUpdate()
+    {
+        sphere.AddForce(transform.forward * curSpeed, ForceMode.Acceleration);
+
+        sphere.AddForce(modelNormal.up * -10f, ForceMode.Acceleration);
+
+        if (sphere.velocity.magnitude > curSpeed) sphere.angularDrag = Mathf.Infinity;
+        else sphere.angularDrag = 0f;
+
+        Physics.Raycast(transform.position + (transform.up * 0.1f), Vector3.down, out var hitNear, 2.0f, LayerMask.GetMask("Ground"));
+        modelNormal.up = Vector3.Lerp(modelNormal.up, hitNear.normal, Time.deltaTime * 8.0f);
+        modelNormal.Rotate(0, transform.eulerAngles.y, 0);
+        //transform.Rotate(0, transform.eulerAngles.y, 0);
     }
 
     #region XREvents
