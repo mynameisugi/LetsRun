@@ -596,6 +596,7 @@ MonoBehaviour:
   stats:
     gallopAmount: 2
   playerRidable: 1
+  volume: {fileID: 1142336863}
   testText: {fileID: 820748982}
 --- !u!1001 &640748213
 PrefabInstance:
