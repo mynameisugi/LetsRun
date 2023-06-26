@@ -1,23 +1,29 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Networking;
 
 public class LoadURLImage : MonoBehaviour
 {
-    public string url = "";
-    RawImage rawImage;
+    public RawImage rawImage;
+    public InputField urlInputField;
+
     void Start()
     {
-        StartCoroutine(GetTexture(url));
         rawImage = GetComponent<RawImage>();
+        urlInputField.onEndEdit.AddListener(OnURLInputEndEdit);
+    }
+
+    void OnURLInputEndEdit(string url)
+    {
+        StartCoroutine(GetTexture(url));
     }
 
     IEnumerator GetTexture(string url)
     {
         UnityWebRequest www = UnityWebRequestTexture.GetTexture(url);
         yield return www.SendWebRequest();
+
         if (www.result != UnityWebRequest.Result.Success)
         {
             Debug.Log(www.error);
