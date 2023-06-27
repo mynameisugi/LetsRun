@@ -50,6 +50,7 @@ public class RopeMesh : MonoBehaviour
 
     private void FixedUpdate()
     {
+        // TODO: 플레이어와 너무 멀면 물리 시뮬레이션 중단하고, 가까워지면 리셋
         for (int i = 0; i < 3; ++i)
             ropes[i].Simulate(hinges[i].position, hinges[i + 1].position);
     }

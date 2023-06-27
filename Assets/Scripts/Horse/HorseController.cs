@@ -1,5 +1,6 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.AI;
 using UnityEngine.XR;
 using UnityEngine.XR.Interaction.Toolkit;
 using UnityEngine.XR.Interaction.Toolkit.Samples.StarterAssets;
@@ -15,7 +16,7 @@ public class HorseController : MonoBehaviour
     [SerializeField]
     private Transform[] ropeHinges = new Transform[2];
 
-    public HorseStats stats;
+    public HorseStats stats = new(2.1f);
 
     /// <summary>
     /// 플레이어가 탈 수 있는지
@@ -29,6 +30,7 @@ public class HorseController : MonoBehaviour
     private PlayerActionHandler playerAction = null;
 
     private Rigidbody sphere;
+    private NavMeshAgent agent;
 
     private void Awake()
     {
@@ -38,9 +40,10 @@ public class HorseController : MonoBehaviour
         sphere.drag = 1f;
         var col = sphereObj.AddComponent<SphereCollider>();
         col.radius = 1f;
+        agent = sphereObj.AddComponent<NavMeshAgent>();
+        agent.baseOffset = 1f;
         sphereObj.transform.position = gameObject.transform.position + gameObject.transform.up;
 
-        stats = new(2.1f);
         curStamina = stats.gallopAmount;
     }
 
@@ -65,6 +68,7 @@ public class HorseController : MonoBehaviour
 
     private void Update()
     {
+        #region GenericHorseUpdate
         curRotate = 0f;
         curMode = Mathf.SmoothStep(curMode, targetMode, Time.deltaTime * 12f);
         curSpeed = stats.GetSpeed(curMode);
@@ -88,17 +92,49 @@ public class HorseController : MonoBehaviour
             curStamina = Mathf.Min(curStamina + Time.deltaTime, stats.gallopAmount);
         }
         displayStamina = Mathf.SmoothStep(displayStamina, curStamina / stats.gallopAmount, Time.deltaTime * 12f); // 표시용 스태미너 퍼센트
+        #endregion GenericHorseUpdate
 
         transform.position = sphere.transform.position - transform.up;
 
-        if (!isPlayerRiding || !playerOrigin || !playerAction) return;
-        PlayerControlUpdate();
+        if (!isPlayerRiding || !playerOrigin || !playerAction) NPCControlUpdate();
+        else PlayerControlUpdate();
 
-        transform.Rotate(transform.up, curRotate);
     }
 
     private bool pulled = false, braked = false;
     private float pulledOffset = 0.1f, pulledTime = 0f, brakeTime = 0f;
+
+    private void NPCControlUpdate()
+    {
+        agent.speed = curSpeed;
+
+        // test
+        if (!agent.hasPath)
+        {
+            brakeTime -= Time.deltaTime;
+            targetMode = 0;
+            if (brakeTime < 0f)
+            {
+                brakeTime = 0f;
+                Vector3 offset = new(Random.Range(-5f, 5f), 0f, Random.Range(-5f, 5f));
+                //Debug.Log($"{gameObject.name} wanders off to {offset}");
+                agent.SetDestination(transform.position + offset);
+                targetMode = Random.value > 0.2f ? 1 : 2;
+            }
+        }
+        else
+        {
+            Vector3 dest = agent.destination;
+            float rotate = Mathf.Atan2(dest.x - transform.position.x, dest.z - transform.position.z) * Mathf.Rad2Deg;
+            agent.isStopped = Mathf.Abs(Mathf.DeltaAngle(transform.rotation.eulerAngles.y, rotate)) > 30f;
+            curRotate = Mathf.MoveTowardsAngle(transform.rotation.eulerAngles.y, rotate, (agent.isStopped ? 60f : 30f) * Time.deltaTime) - transform.rotation.eulerAngles.y;
+            //Debug.Log($"{rotate:0.00} {curRotate:0.00}");
+            //transform.rotation = Quaternion.Euler(0f, curRotate, 0f);
+            transform.Rotate(transform.up, curRotate);
+            brakeTime = 5f;
+        }
+
+    }
 
     private void PlayerControlUpdate()
     {
@@ -137,7 +173,11 @@ public class HorseController : MonoBehaviour
             if (gripL && gripR)
             {
                 brakeTime += Time.deltaTime;
-                if (brakeTime > 0.5f) { braked = true; brakeTime = 0.1f; SendHapticFeedback(0.3f, 0.3f); if (targetMode > 0) --targetMode; }
+                if (brakeTime > 0.5f)
+                {
+                    braked = true; brakeTime = 0.1f;
+                    RequestModeDecrease();
+                }
             }
             else brakeTime = 0f;
         }
@@ -147,52 +187,63 @@ public class HorseController : MonoBehaviour
             {
                 if (Time.timeSinceLevelLoad - pulledTime < 0.5f) // 빠른 채찍질
                 {
-                    if (targetMode < 3)
-                    {
-                        ++targetMode; // 가속
-                        SendHapticFeedback(0.2f, 0.3f);
-                    }
-                    else // 습보
-                    {
-                        if (curStamina >= 1f) // 스태미너 확인
-                        {
-                            SendHapticFeedback(0.4f, 0.5f);
-                            curStamina -= 1f; // 스태미너 소모
-                            targetMode = 4; // 습보로 전환/유지
-                            gallopTimer = 4f; // 습보 타이머 리셋
-                        }
-                        else // 스태미너 부족
-                        {
-                            SendHapticFeedback(0.7f, 0.8f);
-                            targetMode = 1; // 말 저항, 속도 평보로 늦춤
-                            // TODO: 말이 거부하는 애니메이션 플레이
-                            staminaRecoveryTimer += 1f; // 스태미너 회복 딜레이 추가
-                        }
-                    }
+                    RequestModeIncrease();
                 }
             }
             pulled = false;
             braked = false;
         }
 
+        transform.Rotate(transform.up, curRotate);
 
-        //temp
-        /*
-        bool tempA, tempB;
-        if (playerAction.GetDevice(0).TryGetFeatureValue(CommonUsages.primaryButton, out tempA))
-        { if (tempA) { if (!tmpBtnDown && targetMode < 4) { ++targetMode; } tmpBtnDown = true; } }
-        if (playerAction.GetDevice(0).TryGetFeatureValue(CommonUsages.secondaryButton, out tempB))
-        { if (tempB) { if (!tmpBtnDown && targetMode > 0) { --targetMode; } tmpBtnDown = true; } }
-        if (!tempA && !tempB) tmpBtnDown = false; */
     }
-    //private bool tmpBtnDown = false;
+
+    private void RequestModeIncrease()
+    {
+        if (targetMode < 3)
+        {
+            ++targetMode; // 가속
+            SendHapticFeedback(0.2f, 0.3f);
+        }
+        else // 습보
+        {
+            if (curStamina >= 1f) // 스태미너 확인
+            {
+                SendHapticFeedback(0.4f, 0.5f);
+                curStamina -= 1f; // 스태미너 소모
+                targetMode = 4; // 습보로 전환/유지
+                gallopTimer = 4f; // 습보 타이머 리셋
+            }
+            else // 스태미너 부족
+            {
+                SendHapticFeedback(0.7f, 0.8f);
+                targetMode = 1; // 말 저항, 속도 평보로 늦춤
+                                // TODO: 말이 거부하는 애니메이션 플레이
+                staminaRecoveryTimer += 1f; // 스태미너 회복 딜레이 추가
+            }
+        }
+    }
+
+    private void RequestModeDecrease()
+    {
+        if (targetMode > 0)
+        {
+            --targetMode;
+            SendHapticFeedback(0.3f, 0.3f);
+        }
+
+    }
 
     private void FixedUpdate()
     {
-        var vel = transform.forward * curSpeed;
-        vel.y = sphere.velocity.y;
-        sphere.velocity = vel;
+        if (isPlayerRiding)
+        {
+            var vel = transform.forward * curSpeed;
+            vel.y = sphere.velocity.y;
+            sphere.velocity = vel;
+        }
 
+        // 중력
         sphere.AddForce(modelNormal.up * -10f, ForceMode.Acceleration);
 
         //testText.text = $"Mode: {curMode:0.00} Spd: {curSpeed:0.00} Vel: {sphere.velocity.magnitude:0.00}";
@@ -209,6 +260,8 @@ public class HorseController : MonoBehaviour
     public void OnPlayerRideRequest()
     {
         if (!playerRidable || isPlayerRiding) return;
+        //character.enabled = false;
+        agent.ResetPath();
         // 플레이어 추적
         playerOrigin = PlayerManager.InstanceOrigin();
         playerAction = PlayerManager.Action();
@@ -241,11 +294,14 @@ public class HorseController : MonoBehaviour
         ropeHinges[1].localPosition = new Vector3(-0.4f, 1.6f, 0.14f);
         // 말 서서히 정지
         targetMode = 0;
+
+        agent.ResetPath();
     }
     #endregion XREvents
 
     private void SendHapticFeedback(float amplitude, float duration = 0.5f)
     {
+        if (!isPlayerRiding) return;
         playerAction.GetDevice(0).SendHapticImpulse(0, amplitude, duration);
         playerAction.GetDevice(1).SendHapticImpulse(0, amplitude, duration);
     }

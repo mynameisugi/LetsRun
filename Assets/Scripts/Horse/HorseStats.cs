@@ -27,7 +27,8 @@ public struct HorseStats
     /// </summary>
     public float SpeedGallop { get => speeds[3]; set { speeds[3] = value; speeds[4] = value; } }
 
-    private readonly float[] speeds;
+    [SerializeField]
+    private float[] speeds;
 
     /// <summary>
     /// 현재 단계에 맞는 속도값

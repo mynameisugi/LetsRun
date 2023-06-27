@@ -791,7 +791,13 @@ MonoBehaviour:
   - {fileID: 1855081933087237154}
   - {fileID: 1855081933854719715}
   stats:
-    gallopAmount: 2
+    speeds:
+    - 2
+    - 4
+    - 6
+    - 16
+    - 16
+    gallopAmount: 2.1
   playerRidable: 1
   testText: {fileID: 0}
 --- !u!1 &1855081934855755247
