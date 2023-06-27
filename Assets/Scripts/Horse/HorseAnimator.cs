@@ -3,6 +3,9 @@
 [RequireComponent(typeof(HorseController))]
 public class HorseAnimator : MonoBehaviour
 {
+    [SerializeField]
+    private Animator animCtrler;
+
     [Header("Bones")]
     [SerializeField]
     private Transform[] ears;
@@ -70,10 +73,15 @@ public class HorseAnimator : MonoBehaviour
     private float breath = 0f;
     private Vector3[] neckRotOrigins;
 
+    private float displayRot = 0f;
+
     private void Update()
     {
         breath += Time.deltaTime * (Mathf.Lerp(1f, 3f, data.curMode / 4f));
         float breathSin = Mathf.Sin(breath);
+        displayRot = Mathf.MoveTowards(displayRot, Mathf.Clamp(-data.curRotate * .3f, -20f, 20f), Time.deltaTime * 6f);
+
+        animCtrler.SetFloat("mode", Mathf.Clamp01(data.curMode / 2f));
 
         float earRot = (1f - data.displayStamina) * 60f;
         for (int i = 0; i < 2; ++i)
@@ -86,7 +94,7 @@ public class HorseAnimator : MonoBehaviour
         for (int i = 0; i < 4; ++i)
         {
             necks[i].localRotation = Quaternion.Euler(neckRotOrigins[i].x,
-                neckRotOrigins[i].y + Mathf.Clamp(data.curRotate, -10f, 10f),
+                neckRotOrigins[i].y + displayRot,
                 neckRotOrigins[i].z + breathSin * 3f - data.curMode * 6f);
         }
 

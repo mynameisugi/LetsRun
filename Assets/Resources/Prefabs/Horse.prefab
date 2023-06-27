@@ -787,6 +787,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 781fdfb4392f5cd449f27a4525e7f103, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  animCtrler: {fileID: 5818405144340658801}
   ears:
   - {fileID: 7900636905506728190}
   - {fileID: 2713127920357434792}
@@ -1021,8 +1022,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3765161039621977981}
-  m_LocalRotation: {x: 0.5817877, y: -0.41802686, z: 0.4853281, w: -0.5012318}
-  m_LocalPosition: {x: -0.63790214, y: -0.2583202, z: -0.22117627}
+  m_LocalRotation: {x: 0.58178777, y: -0.41802683, z: 0.48532838, w: -0.5012315}
+  m_LocalPosition: {x: -0.6379024, y: -0.2583211, z: -0.22117752}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1782,7 +1783,7 @@ Animator:
   m_Controller: {fileID: 9100000, guid: 0e91090caadced243b5b7dda8e4be1a9, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
-  m_ApplyRootMotion: 1
+  m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
   m_WarningMessage: 
@@ -1813,8 +1814,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6229854750575866173}
-  m_LocalRotation: {x: -0.58178914, y: 0.41802552, z: 0.48532915, w: -0.50123024}
-  m_LocalPosition: {x: -0.63790166, y: -0.25832134, z: 0.22117436}
+  m_LocalRotation: {x: -0.5817894, y: 0.41802534, z: 0.48532915, w: -0.5012301}
+  m_LocalPosition: {x: -0.6379019, y: -0.25832218, z: 0.22117397}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:

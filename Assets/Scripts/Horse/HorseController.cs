@@ -98,7 +98,6 @@ public class HorseController : MonoBehaviour
         }
         
         displayStamina = Mathf.SmoothStep(displayStamina, curStamina / stats.gallopAmount, Time.deltaTime * 6f); // 표시용 스태미너 퍼센트
-        myAnimator.SetData(new(curMode, curRotate / Time.deltaTime, displayStamina));
         
         #endregion GenericHorseUpdate
 
@@ -106,6 +105,7 @@ public class HorseController : MonoBehaviour
 
         if (!isPlayerRiding || !playerOrigin || !playerAction) NPCControlUpdate();
         else PlayerControlUpdate();
+        myAnimator.SetData(new(curMode, curRotate / Time.deltaTime, displayStamina));
 
         transform.Rotate(transform.up, curRotate);
     }
