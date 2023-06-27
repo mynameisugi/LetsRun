@@ -10,9 +10,12 @@ public class RankingUpdate : MonoBehaviour
 
     private void Update()
     {
-        List<RunnerTracker> sortedRunners = runners.OrderByDescending(runner => runner.GetDistanceTraveled()).ToList();
+        List<RunnerTracker> sortedRunners = runners.OrderByDescending(runner => runner.GetRankingScore()).ToList();
+
+        
 
         UpdateRankingText(sortedRunners);
+
     }
 
     private void UpdateRankingText(List<RunnerTracker> sortedRunners)
@@ -20,10 +23,17 @@ public class RankingUpdate : MonoBehaviour
         string ranking = "";
         for (int i = 0; i < sortedRunners.Count; i++)
         {
-            ranking += $"Rank {i + 1}: {sortedRunners[i].name}\n";
+            RunnerTracker runner = sortedRunners[i];
+            float rankingScore = runner.GetRankingScore();
+            float lapTime = runner.GetLapTime();
+
+            ranking += $"Rank {i + 1}: {runner.name} (Time: {lapTime:F2}s)\n";
         }
 
         rankingText.text = ranking;
+
+        rankingText.gameObject.SetActive(true); // rankingText È°¼ºÈ­
     }
+
 
 }
