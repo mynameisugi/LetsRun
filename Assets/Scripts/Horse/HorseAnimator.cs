@@ -6,6 +6,8 @@ public class HorseAnimator : MonoBehaviour
     [Header("Bones")]
     [SerializeField]
     private Transform[] ears;
+    [SerializeField]
+    private Transform[] necks;
 
     [Header("Renderers")]
     [SerializeField]
@@ -39,6 +41,9 @@ public class HorseAnimator : MonoBehaviour
         if (skinRenderer) skinRenderer.material = horse.stats.GetSkin();
         foreach (var r in renderers) if (r) r.material = horse.stats.GetSkin();
         rope = new RopeMesh(hinges, loseness, tension, gravity, velClamp, horse.stats.GetSkin());
+
+        neckRotOrigins = new Vector3[necks.Length];
+        for (int i = 0; i < necks.Length; ++i) neckRotOrigins[i] = necks[i].rotation.eulerAngles;
     }
 
     public struct AnimData
@@ -62,13 +67,25 @@ public class HorseAnimator : MonoBehaviour
         this.data = data;
     }
 
+    private float breath = 0f;
+    private Vector3[] neckRotOrigins;
+
     private void Update()
     {
+        breath += Time.deltaTime * (Mathf.Lerp(1f, 3f, data.curMode / 4f));
+        float breathSin = Mathf.Sin(breath);
+
         float earRot = (1f - data.displayStamina) * 60f;
         for (int i = 0; i < 2; ++i)
         {
             var rot = ears[i].localRotation.eulerAngles;
-            ears[i].localRotation = Quaternion.Euler(rot.x, earRot * (i == 0 ? 1f : -1f), rot.z);
+            ears[i].localRotation = Quaternion.Euler(rot.x + breathSin * 10f, earRot * (i == 0 ? 1f : -1f) + breathSin * 10f, rot.z);
+        }
+
+
+        for (int i = 0; i < 4; ++i)
+        {
+            necks[i].rotation = Quaternion.Euler(neckRotOrigins[i].x, neckRotOrigins[i].y + Mathf.Clamp(data.curRotate / 3f, -10f, 10f), neckRotOrigins[i].z + breath * 10f - data.curMode * 10f);
         }
 
         rope.Update();
