@@ -3,6 +3,11 @@
 [RequireComponent(typeof(HorseController))]
 public class HorseAnimator : MonoBehaviour
 {
+    [Header("Bones")]
+    [SerializeField]
+    private Transform[] ears;
+
+    [Header("Renderers")]
     [SerializeField]
     private SkinnedMeshRenderer skinRenderer;
     [SerializeField]
@@ -59,11 +64,19 @@ public class HorseAnimator : MonoBehaviour
 
     private void Update()
     {
+        float earRot = (1f - data.displayStamina) * 60f;
+        for (int i = 0; i < 2; ++i)
+        {
+            var rot = ears[i].localRotation.eulerAngles;
+            ears[i].localRotation = Quaternion.Euler(rot.x, earRot * (i == 0 ? 1f : -1f), rot.z);
+        }
+
         rope.Update();
     }
 
     private void FixedUpdate()
     {
+        // TODO: 플레이어와 너무 멀면 물리 시뮬레이션 중단하고, 가까워지면 리셋
         rope.FixedUpdate();
     }
 }

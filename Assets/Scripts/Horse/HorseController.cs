@@ -97,7 +97,7 @@ public class HorseController : MonoBehaviour
             curStamina = Mathf.Min(curStamina + Time.deltaTime, stats.gallopAmount);
         }
         
-        displayStamina = Mathf.SmoothStep(displayStamina, curStamina / stats.gallopAmount, Time.deltaTime * 12f); // 표시용 스태미너 퍼센트
+        displayStamina = Mathf.SmoothStep(displayStamina, curStamina / stats.gallopAmount, Time.deltaTime * 6f); // 표시용 스태미너 퍼센트
         myAnimator.SetData(new(curMode, curRotate, displayStamina));
         
         #endregion GenericHorseUpdate
@@ -107,6 +107,7 @@ public class HorseController : MonoBehaviour
         if (!isPlayerRiding || !playerOrigin || !playerAction) NPCControlUpdate();
         else PlayerControlUpdate();
 
+        transform.Rotate(transform.up, curRotate);
     }
 
     private bool pulled = false, braked = false;
@@ -138,7 +139,6 @@ public class HorseController : MonoBehaviour
             curRotate = Mathf.MoveTowardsAngle(transform.rotation.eulerAngles.y, rotate, (agent.isStopped ? 60f : 30f) * Time.deltaTime) - transform.rotation.eulerAngles.y;
             //Debug.Log($"{rotate:0.00} {curRotate:0.00}");
             //transform.rotation = Quaternion.Euler(0f, curRotate, 0f);
-            transform.Rotate(transform.up, curRotate);
             brakeTime = 5f;
         }
 
@@ -154,6 +154,7 @@ public class HorseController : MonoBehaviour
 
         curRotate = 0f;
         float handOffset = Vector3.Dot(lHand.position - rHand.position, transform.forward);
+        testText.text = $"Stamina: {curStamina:0.0}\nMode: {curMode:0.00} Speed: {curSpeed:0.00}";
         if (Mathf.Abs(handOffset) > 0.3f)
         {
             float rotate = Mathf.Abs(handOffset) - 0.2f;
@@ -166,7 +167,6 @@ public class HorseController : MonoBehaviour
 
         var center = Vector3.Lerp(lHand.position, rHand.position, 0.5f);
         handOffset = Vector3.Dot(center - transform.position, transform.forward);
-        testText.text = $"Hand: {handOffset:0.0} Stamina: {curStamina:0.0}\nMode: {curMode:0.00} Speed: {curSpeed:0.00}";
 
         if (handOffset < 0.1f)
         {
@@ -202,7 +202,6 @@ public class HorseController : MonoBehaviour
             braked = false;
         }
 
-        transform.Rotate(transform.up, curRotate);
 
     }
 
@@ -298,8 +297,8 @@ public class HorseController : MonoBehaviour
         playerAction = null;
         isPlayerRiding = false;
         // 로프 리셋
-        ropeHinges[0].localPosition = new Vector3(-0.4f, 1.6f, -0.14f);
-        ropeHinges[1].localPosition = new Vector3(-0.4f, 1.6f, 0.14f);
+        ropeHinges[0].localPosition = new Vector3(-0.4f, 1.6f, -0.2f);
+        ropeHinges[1].localPosition = new Vector3(-0.4f, 1.6f, 0.2f);
         // 말 서서히 정지
         targetMode = 0;
 
