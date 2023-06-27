@@ -84,8 +84,8 @@ public class RopeMesh
         }
         #endregion GetSegments
 
-        for (int j = 0; j < segs.Count - 1; ++j)
-            Debug.DrawLine(segs[j], segs[j + 1]);
+        //for (int j = 0; j < segs.Count - 1; ++j)
+        //    Debug.DrawLine(segs[j] + meshObj.transform.position, segs[j + 1] + meshObj.transform.position);
 
         #region UpdateMesh
         int segCount = segs.Count - 1;
