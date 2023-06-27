@@ -1,27 +1,33 @@
 using System;
 using UnityEngine;
-using static UnityEngine.XR.Hands.XRHandSubsystemDescriptor;
 
-public class RopeMesh : MonoBehaviour
+public class RopeMesh
 {
-    [SerializeField]
-    private Transform[] hinges = new Transform[4];
-
-    [Header("Rope Physics")]
-    [SerializeField, Range(0.5f, 1.5f)]
-    private float loseness = 1f;
-    [SerializeField, Range(0f, 1f)]
-    private float tension = 1f;
-    [SerializeField, Range(0f, 1f)]
-    private float gravity = 1f;
-    [SerializeField, Range(0f, 10f)]
-    private float velClamp = 1f;
-
-    private Rope[] ropes;
-
-    private void Start()
+    public RopeMesh(Transform[] hinges, float loseness, float tension, float gravity, float velClamp,
+        Material skin)
     {
+        this.hinges = hinges;
+        this.loseness = loseness;
+        this.tension = tension;
+        this.gravity = gravity;
+        this.velClamp = velClamp;
+        this.skin = skin;
+
         ropes = new Rope[3];
+        Initialize();
+    }
+
+    private readonly Transform[] hinges;
+    private readonly float loseness;
+    private readonly float tension;
+    private readonly float gravity;
+    private readonly float velClamp;
+    private Material skin;
+
+    private readonly Rope[] ropes;
+
+    private void Initialize()
+    {
         for (int i = 0; i < 3; ++i)
             ropes[i] = new Rope(hinges[i].position, hinges[i + 1].position, i == 1 ? 5 : 6)
             {
@@ -32,7 +38,7 @@ public class RopeMesh : MonoBehaviour
             };
     }
 
-    private void Update()
+    public void Update()
     {
         for (int i = 0; i < 3; ++i)
         {
@@ -48,7 +54,7 @@ public class RopeMesh : MonoBehaviour
         }
     }
 
-    private void FixedUpdate()
+    public void FixedUpdate()
     {
         // TODO: 플레이어와 너무 멀면 물리 시뮬레이션 중단하고, 가까워지면 리셋
         for (int i = 0; i < 3; ++i)

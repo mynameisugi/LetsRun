@@ -32,6 +32,8 @@ public class HorseController : MonoBehaviour
     private Rigidbody sphere;
     private NavMeshAgent agent;
 
+    private HorseAnimator myAnimator;
+
     private void Awake()
     {
         var sphereObj = new GameObject($"{gameObject.name} Sphere") { layer = 7 };
@@ -41,8 +43,11 @@ public class HorseController : MonoBehaviour
         var col = sphereObj.AddComponent<SphereCollider>();
         col.radius = 1f;
         agent = sphereObj.AddComponent<NavMeshAgent>();
-        agent.baseOffset = 1f;
+        agent.baseOffset = 1f;// agent.radius = 1f;
         sphereObj.transform.position = gameObject.transform.position + gameObject.transform.up;
+
+        stats.skin = Random.Range(0, 10); // test
+        myAnimator = GetComponent<HorseAnimator>();
 
         curStamina = stats.gallopAmount;
     }
@@ -91,7 +96,10 @@ public class HorseController : MonoBehaviour
             staminaRecoveryTimer = 0f;
             curStamina = Mathf.Min(curStamina + Time.deltaTime, stats.gallopAmount);
         }
+        
         displayStamina = Mathf.SmoothStep(displayStamina, curStamina / stats.gallopAmount, Time.deltaTime * 12f); // 표시용 스태미너 퍼센트
+        myAnimator.SetData(new(curMode, curRotate, displayStamina));
+        
         #endregion GenericHorseUpdate
 
         transform.position = sphere.transform.position - transform.up;

@@ -8,6 +8,7 @@ public struct HorseStats
     {
         speeds = new float[] { 2f, 4f, 6f, 16f, 16f };
         gallopAmount = stamina;
+        skin = 0;
     }
 
     /// <summary>
@@ -48,4 +49,23 @@ public struct HorseStats
     /// 습보 개수
     /// </summary>
     public float gallopAmount;
+
+    /// <summary>
+    /// 스킨 번호
+    /// </summary>
+    public int skin;
+
+
+    public Material GetSkin()
+    {
+        if (skinLibrary == null)
+        {
+            skinLibrary = new Material[10];
+            for (int i = 0; i < 10; ++i)
+                skinLibrary[i] = Resources.Load($"Materials/Horse/PolygonHorse_{i + 1:00}") as Material;
+        }
+        return skinLibrary[skin];
+    }
+
+    private static Material[] skinLibrary;
 }

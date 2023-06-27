@@ -466,6 +466,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1855081934762353250}
   - component: {fileID: 1855081934762353251}
+  - component: {fileID: 5446949823519519328}
   m_Layer: 0
   m_Name: Horse
   m_TagString: Untagged
@@ -514,8 +515,34 @@ MonoBehaviour:
     - 16
     - 16
     gallopAmount: 2.1
+    skin: 0
   playerRidable: 1
   testText: {fileID: 0}
+--- !u!114 &5446949823519519328
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1855081934762353249}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 781fdfb4392f5cd449f27a4525e7f103, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skinRenderer: {fileID: 4419528945407616028}
+  renderers:
+  - {fileID: 8519012753767696028}
+  - {fileID: 3996451197775987153}
+  hinges:
+  - {fileID: 1855081934037506217}
+  - {fileID: 1855081933087237154}
+  - {fileID: 1855081933854719715}
+  - {fileID: 1855081933199798625}
+  loseness: 0.9
+  tension: 1
+  gravity: 0.2
+  velClamp: 1
 --- !u!1 &1855081934855755247
 GameObject:
   m_ObjectHideFlags: 0
@@ -525,7 +552,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1855081934855755240}
-  - component: {fileID: 1855081934855755241}
   m_Layer: 0
   m_Name: Rope
   m_TagString: Untagged
@@ -552,27 +578,6 @@ Transform:
   m_Father: {fileID: 1855081934693763926}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
---- !u!114 &1855081934855755241
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1855081934855755247}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 05b1b5ed2ca6eca42b636c7a4770224e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hinges:
-  - {fileID: 1855081934037506217}
-  - {fileID: 1855081933087237154}
-  - {fileID: 1855081933854719715}
-  - {fileID: 1855081933199798625}
-  loseness: 0.9
-  tension: 1
-  gravity: 0.2
-  velClamp: 1
 --- !u!1 &1855081935093627970
 GameObject:
   m_ObjectHideFlags: 0
@@ -675,9 +680,27 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 62e7c512dd985c647b6d419f2faa8696, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1bfaa99f80a97894a86ae1b7184af995, type: 3}
+--- !u!23 &3996451197775987153 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: -8492824515114586515, guid: 1bfaa99f80a97894a86ae1b7184af995,
+    type: 3}
+  m_PrefabInstance: {fileID: 4419528945402310588}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &4419528945402443108 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400088, guid: 1bfaa99f80a97894a86ae1b7184af995,
+    type: 3}
+  m_PrefabInstance: {fileID: 4419528945402310588}
+  m_PrefabAsset: {fileID: 0}
+--- !u!137 &4419528945407616028 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 13700000, guid: 1bfaa99f80a97894a86ae1b7184af995,
+    type: 3}
+  m_PrefabInstance: {fileID: 4419528945402310588}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &8519012753767696028 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 5434946310725331232, guid: 1bfaa99f80a97894a86ae1b7184af995,
     type: 3}
   m_PrefabInstance: {fileID: 4419528945402310588}
   m_PrefabAsset: {fileID: 0}
