@@ -43,7 +43,11 @@ public class HorseController : MonoBehaviour
         var col = sphereObj.AddComponent<SphereCollider>();
         col.radius = 1f;
         agent = sphereObj.AddComponent<NavMeshAgent>();
-        agent.baseOffset = 1f;// agent.radius = 1f;
+        agent.baseOffset = 0.9f; agent.radius = 1f;
+        //var obstacle = sphereObj.AddComponent<NavMeshObstacle>();
+        //obstacle.shape = NavMeshObstacleShape.Capsule;
+        //obstacle.radius = 1f; obstacle.height = 2f;
+
         sphereObj.transform.position = gameObject.transform.position + gameObject.transform.up;
 
         stats.skin = Random.Range(0, 10); // test
@@ -111,7 +115,8 @@ public class HorseController : MonoBehaviour
     }
 
     private bool pulled = false, braked = false;
-    private float pulledOffset = 0.1f, pulledTime = 0f, brakeTime = 0f;
+    private float pulledOffset = 0.1f, pushedOffset = 0.3f, pulledTime = 0f, brakeTime = 2f;
+    private const float PUSHPULL = 0.2f;
 
     private void NPCControlUpdate()
     {
@@ -154,8 +159,8 @@ public class HorseController : MonoBehaviour
 
         curRotate = 0f;
         float handOffset = Vector3.Dot(lHand.position - rHand.position, transform.forward);
-        testText.text = $"Stamina: {curStamina:0.0}\nMode: {curMode:0.00} Speed: {curSpeed:0.00}";
-        if (Mathf.Abs(handOffset) > 0.3f)
+        if (testText) testText.text = $"Stamina: {curStamina:0.0}\nMode: {curMode:0.00} Speed: {curSpeed:0.00}";
+        if (Mathf.Abs(handOffset) > PUSHPULL * 1.5f)
         {
             float rotate = Mathf.Abs(handOffset) - 0.2f;
             rotate = Mathf.Clamp01(rotate * 2.5f) * Mathf.Sign(handOffset);
@@ -165,13 +170,12 @@ public class HorseController : MonoBehaviour
             return; // 회전 조작이라면 다른 조작을 받지 않음
         }
 
-        var center = Vector3.Lerp(lHand.position, rHand.position, 0.5f);
-        handOffset = Vector3.Dot(center - transform.position, transform.forward);
+        handOffset = GetHandsOffset();
 
-        if (handOffset < 0.1f)
+        if (handOffset < pulledOffset)
         {
-            if (!pulled) pulledOffset = 0.1f;
-            pulledOffset = Mathf.Min(pulledOffset, handOffset);
+            pulledOffset = handOffset;
+            pushedOffset = pulledOffset + PUSHPULL;
             pulled = true;
             pulledTime = Time.timeSinceLevelLoad;
 
@@ -189,8 +193,10 @@ public class HorseController : MonoBehaviour
             }
             else brakeTime = 0f;
         }
-        else if (handOffset > pulledOffset + 0.2f)
+        else if (handOffset > pushedOffset)
         {
+            pushedOffset = handOffset;
+            pulledOffset = pushedOffset - PUSHPULL;
             if (pulled && !braked) // 당겼고 브레이크한 적 없음
             {
                 if (Time.timeSinceLevelLoad - pulledTime < 0.5f) // 빠른 채찍질
@@ -203,6 +209,14 @@ public class HorseController : MonoBehaviour
         }
 
 
+    }
+
+    private float GetHandsOffset()
+    {
+        Transform lHand = playerAction.directInteractors[0].transform;
+        Transform rHand = playerAction.directInteractors[1].transform;
+        var center = Vector3.Lerp(lHand.position, rHand.position, 0.5f);
+        return Vector3.Dot(center - transform.position, transform.forward);
     }
 
     private void RequestModeIncrease()
@@ -280,6 +294,10 @@ public class HorseController : MonoBehaviour
         playerOrigin.SetParent(playerSnap);
         playerOrigin.SetLocalPositionAndRotation(Vector3.zero, Quaternion.identity);
         isPlayerRiding = true;
+        // 손 오프셋 보정
+        float handOffset = GetHandsOffset();
+        pulledOffset = handOffset - PUSHPULL * 0.5f;
+        pushedOffset = handOffset + PUSHPULL * 0.5f;
     }
 
     public void OnPlayerLeaveRequest()
@@ -304,7 +322,6 @@ public class HorseController : MonoBehaviour
 
         agent.ResetPath();
     }
-    #endregion XREvents
 
     private void SendHapticFeedback(float amplitude, float duration = 0.5f)
     {
@@ -312,4 +329,5 @@ public class HorseController : MonoBehaviour
         playerAction.GetDevice(0).SendHapticImpulse(0, amplitude, duration);
         playerAction.GetDevice(1).SendHapticImpulse(0, amplitude, duration);
     }
+    #endregion XREvents
 }
