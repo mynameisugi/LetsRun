@@ -79,9 +79,9 @@ public class HorseAnimator : MonoBehaviour
     {
         breath += Time.deltaTime * (Mathf.Lerp(1f, 3f, data.curMode / 4f));
         float breathSin = Mathf.Sin(breath);
-        displayRot = Mathf.MoveTowards(displayRot, Mathf.Clamp(-data.curRotate * .3f, -20f, 20f), Time.deltaTime * 6f);
+        displayRot = Mathf.MoveTowards(displayRot, Mathf.Clamp(-data.curRotate, -20f, 20f), Time.deltaTime * 6f);
 
-        animCtrler.SetFloat("mode", Mathf.Clamp01(data.curMode / 2f));
+        animCtrler.SetFloat("mode", data.curMode);
 
         float earRot = (1f - data.displayStamina) * 60f;
         for (int i = 0; i < 2; ++i)
@@ -91,7 +91,7 @@ public class HorseAnimator : MonoBehaviour
         }
 
 
-        for (int i = 0; i < 4; ++i)
+        for (int i = 0; i < necks.Length; ++i)
         {
             necks[i].localRotation = Quaternion.Euler(neckRotOrigins[i].x,
                 neckRotOrigins[i].y + displayRot,
