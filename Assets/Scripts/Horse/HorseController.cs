@@ -43,7 +43,7 @@ public class HorseController : MonoBehaviour
         var col = sphereObj.AddComponent<SphereCollider>();
         col.radius = 1f;
         agent = sphereObj.AddComponent<NavMeshAgent>();
-        agent.baseOffset = 1f;// agent.radius = 1f;
+        agent.baseOffset = 0.9f;// agent.radius = 1f;
         sphereObj.transform.position = gameObject.transform.position + gameObject.transform.up;
 
         stats.skin = Random.Range(0, 10); // test
