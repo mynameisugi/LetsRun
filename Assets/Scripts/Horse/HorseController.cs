@@ -111,7 +111,7 @@ public class HorseController : MonoBehaviour
     }
 
     private bool pulled = false, braked = false;
-    private float pulledOffset = 0.1f, pulledTime = 0f, brakeTime = 0f;
+    private float pulledOffset = 0.1f, pulledTime = 0f, brakeTime = 2f;
 
     private void NPCControlUpdate()
     {
