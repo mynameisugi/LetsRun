@@ -35,6 +35,11 @@ public class HorseController : MonoBehaviour
 
     private void Awake()
     {
+        stats.skin = Random.Range(0, 10);
+    }
+
+    private void Start()
+    {
         var sphereObj = new GameObject($"{gameObject.name} Sphere") { layer = 7 };
         sphere = sphereObj.AddComponent<Rigidbody>();
         sphere.useGravity = false;
@@ -49,14 +54,10 @@ public class HorseController : MonoBehaviour
 
         sphereObj.transform.position = gameObject.transform.position + gameObject.transform.up;
 
-        stats.skin = Random.Range(0, 10); // test
         myAnimator = GetComponent<HorseAnimator>();
 
         curStamina = stats.gallopAmount;
-    }
 
-    private void Start()
-    {
         if (!playerRidable)
         {
             // 플레이어 상호작용 제거
