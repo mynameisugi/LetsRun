@@ -594,6 +594,26 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: b13b04911b400d146856373c93ad9d85, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b08c2574c7361cf47870c5ced7a138c7, type: 3}
+--- !u!1 &1241265033 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4253780606858742643, guid: 6476fdf1dac65f0428504629e58061ec,
+    type: 3}
+  m_PrefabInstance: {fileID: 2121185882}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1241265037
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1241265033}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 65b4608b463739b4a8aae42fd63c0b37, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  percentThreshold: 0.2
+  easing: 0.5
 --- !u!1 &1302513647
 GameObject:
   m_ObjectHideFlags: 0
@@ -773,6 +793,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: XR Device Simulator
+      objectReference: {fileID: 0}
+    - target: {fileID: 6598815579406187037, guid: a141a2d50108d374c9bd67444ddf8cfc,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a141a2d50108d374c9bd67444ddf8cfc, type: 3}

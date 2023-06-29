@@ -29,7 +29,9 @@ public class HandWatch : MonoBehaviour, IDragHandler, IEndDragHandler{
             StartCoroutine(SmoothMove(transform.position, newLocation, easing));
             panelLocation = newLocation;
         } else {
-            transform.position = panelLocation; }
+            /*transform.position = panelLocation; */
+            StartCoroutine(SmoothMove(transform.position, panelLocation, easing));
+        }
     }
     IEnumerator SmoothMove(Vector3 _startpos, Vector3 _endpos, float _seconds) {
         float t = 0f;
