@@ -18,7 +18,7 @@ public class SaveManager
     public void LoadFromPrefs(int slot = 0)
     {
         string json = PlayerPrefs.GetString(GetSlotPref(slot), string.Empty);
-        if (string.IsNullOrEmpty(json)) { Reset(); return; }
+        if (string.IsNullOrEmpty(json)) { Reset(); SaveToPrefs(0); return; }
         saveData = (Dictionary<string, object>)JsonConvert.DeserializeObject(json, typeof(Dictionary<string, object>));
 
     }
@@ -41,16 +41,11 @@ public class SaveManager
         PlayerPrefs.DeleteAll();
         saveData = new Dictionary<string, object>();
         SaveValue(SAVESEED, (int)DateTime.Now.Ticks);
-        OnSaveReset?.Invoke(this);
+        SaveValue(TimeManager.SAVEKEY, 0);
         //SaveToPrefs();
     }
 
     public delegate void SaveEventHandler(SaveManager save);
-
-    /// <summary>
-    /// 새로운 세이브를 만들 때 발생
-    /// </summary>
-    public SaveEventHandler OnSaveReset = null;
 
     /// <summary>
     /// 파일을 세이브할 때 발생
