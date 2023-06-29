@@ -14,7 +14,7 @@ public class TestSplatter : MonoBehaviour
         {
             var cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
             cube.transform.localScale = new Vector3(Random.Range(1f, 5f), Random.Range(1f, 4f), Random.Range(1f, 5f));
-            cube.transform.SetPositionAndRotation(new Vector3(Random.Range(-radius, radius), 0f, Random.Range(-radius, radius)), Quaternion.Euler(0f, Random.Range(0f, 360f), 0f));
+            cube.transform.SetLocalPositionAndRotation(new Vector3(Random.Range(-radius, radius), 0f, Random.Range(-radius, radius)) + transform.position, Quaternion.Euler(0f, Random.Range(0f, 360f), 0f));
             cube.transform.SetParent(transform);
         }
     }
