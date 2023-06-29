@@ -1,4 +1,3 @@
-using TMPro;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.XR;
@@ -140,8 +139,8 @@ public class HorseController : MonoBehaviour
         {
             Vector3 dest = agent.destination;
             float rotate = Mathf.Atan2(dest.x - transform.position.x, dest.z - transform.position.z) * Mathf.Rad2Deg;
-            agent.isStopped = Mathf.Abs(Mathf.DeltaAngle(transform.rotation.eulerAngles.y, rotate)) > 30f;
-            curRotate = Mathf.MoveTowardsAngle(transform.rotation.eulerAngles.y, rotate, (agent.isStopped ? 60f : 30f) * Time.deltaTime) - transform.rotation.eulerAngles.y;
+            agent.isStopped = Mathf.Abs(Mathf.DeltaAngle(transform.rotation.eulerAngles.y, rotate)) > stats.steerStrength;
+            curRotate = Mathf.MoveTowardsAngle(transform.rotation.eulerAngles.y, rotate, (agent.isStopped ? 2f : 1f) * stats.steerStrength * Time.deltaTime) - transform.rotation.eulerAngles.y;
             //Debug.Log($"{rotate:0.00} {curRotate:0.00}");
             //transform.rotation = Quaternion.Euler(0f, curRotate, 0f);
             brakeTime = 5f;
@@ -159,12 +158,12 @@ public class HorseController : MonoBehaviour
 
         curRotate = 0f;
         float handOffset = Vector3.Dot(lHand.position - rHand.position, transform.forward);
-        if (testText) testText.text = $"Stamina: {curStamina:0.0}\nMode: {curMode:0.00} Speed: {curSpeed:0.00}";
+        // if (testText) testText.text = $"Stamina: {curStamina:0.0}\nMode: {curMode:0.00} Speed: {curSpeed:0.00}";
         if (Mathf.Abs(handOffset) > PUSHPULL * 1.5f)
         {
             float rotate = Mathf.Abs(handOffset) - 0.2f;
             rotate = Mathf.Clamp01(rotate * 2.5f) * Mathf.Sign(handOffset);
-            curRotate = rotate * 30f * Time.deltaTime;
+            curRotate = rotate * stats.steerStrength * Time.deltaTime;
             pulled = false;
             playerAction.GetDevice(handOffset < 0f ? 0 : 1).SendHapticImpulse(0, 0.1f + rotate * 0.1f, 0.1f);
             return; // 회전 조작이라면 다른 조작을 받지 않음
@@ -275,7 +274,7 @@ public class HorseController : MonoBehaviour
         //transform.Rotate(0, transform.eulerAngles.y, 0);
     }
 
-    public TMP_Text testText;
+    // public TMP_Text testText;
 
     #region XREvents
     public void OnPlayerRideRequest()

@@ -8,6 +8,7 @@ public struct HorseStats
     {
         speeds = new float[] { 2f, 4f, 6f, 16f, 16f };
         gallopAmount = stamina;
+        steerStrength = 30f;
         skin = 0;
     }
 
@@ -49,6 +50,11 @@ public struct HorseStats
     /// 습보 개수
     /// </summary>
     public float gallopAmount;
+
+    /// <summary>
+    /// 커브 속도
+    /// </summary>
+    public float steerStrength;
 
     /// <summary>
     /// 스킨 번호
