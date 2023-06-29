@@ -1,9 +1,7 @@
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 /// <summary>
 /// 저장 관리
@@ -17,7 +15,7 @@ public class SaveManager
     /// <summary>
     /// 세이브를 파일에서 불러옴
     /// </summary>
-    public void LoadFromPrefs(int slot)
+    public void LoadFromPrefs(int slot = 0)
     {
         string json = PlayerPrefs.GetString(GetSlotPref(slot), string.Empty);
         if (string.IsNullOrEmpty(json)) { Reset(); return; }
@@ -28,7 +26,7 @@ public class SaveManager
     /// <summary>
     /// 세이브를 파일로 저장
     /// </summary>
-    public void SaveToPrefs(int slot)
+    public void SaveToPrefs(int slot = 0)
     {
         OnSaveToPref?.Invoke(this);
         string json = JsonConvert.SerializeObject(saveData);
