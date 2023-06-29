@@ -303,6 +303,7 @@ Transform:
   - {fileID: 8339831209828741407}
   - {fileID: 7346843345186520417}
   - {fileID: 1018510791254647295}
+  - {fileID: 8802927205370512951}
   m_Father: {fileID: 6315869052825041115}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
@@ -1011,3 +1012,63 @@ Transform:
   m_Father: {fileID: 5992060702029563311}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &4693367963859035094
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 566912609291641190}
+    m_Modifications:
+    - target: {fileID: 4253780606527100805, guid: 6476fdf1dac65f0428504629e58061ec,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 180
+      objectReference: {fileID: 0}
+    - target: {fileID: 4253780606527100809, guid: 6476fdf1dac65f0428504629e58061ec,
+        type: 3}
+      propertyPath: m_AdditionalShaderChannelsFlag
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 4253780606950794721, guid: 6476fdf1dac65f0428504629e58061ec,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 4253780606950794721, guid: 6476fdf1dac65f0428504629e58061ec,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.01
+      objectReference: {fileID: 0}
+    - target: {fileID: 4253780606950794721, guid: 6476fdf1dac65f0428504629e58061ec,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4253780606950794721, guid: 6476fdf1dac65f0428504629e58061ec,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 4253780606950794721, guid: 6476fdf1dac65f0428504629e58061ec,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4253780606950794750, guid: 6476fdf1dac65f0428504629e58061ec,
+        type: 3}
+      propertyPath: m_Name
+      value: HandWatch
+      objectReference: {fileID: 0}
+    - target: {fileID: 7534797366970270950, guid: 6476fdf1dac65f0428504629e58061ec,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 6476fdf1dac65f0428504629e58061ec, type: 3}
+--- !u!4 &8802927205370512951 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4253780606950794721, guid: 6476fdf1dac65f0428504629e58061ec,
+    type: 3}
+  m_PrefabInstance: {fileID: 4693367963859035094}
+  m_PrefabAsset: {fileID: 0}
