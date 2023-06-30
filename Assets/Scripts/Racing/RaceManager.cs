@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using static UnityEngine.Rendering.DebugUI.Table;
 using Random = UnityEngine.Random;
 
 /// <summary>
@@ -28,6 +29,18 @@ public class RaceManager : MonoBehaviour
 
             NextRace = (RaceType)Random.Range(0, 3); // 그 다음 경기 랜덤 선택
         });
+    }
+
+    private void Update()
+    {
+        // DEBUG
+        if (Input.GetKeyDown(KeyCode.O))
+        {
+            Debug.Log("DEBUG Race Ready");
+            var raceObj = Instantiate(racePrefab, transform);
+            CurrentRace = raceObj.GetComponent<Race>();
+            CurrentRace.info = infos[(int)NextRace];
+        }
     }
 
     /// <summary>
