@@ -9,11 +9,14 @@ public class RaceManager : MonoBehaviour
     [SerializeField]
     private GameObject racePrefab;
 
+    [SerializeField]
+    private Race.RaceInfo[] infos;
+
     public enum RaceType
     {
-        Easy, // 500m
-        Normal, // 1000m
-        Hard // 1500m
+        Easy = 0, // 500m
+        Normal = 1, // 1000m
+        Hard = 2 // 1500m
     }
 
     private void Start()
@@ -21,9 +24,9 @@ public class RaceManager : MonoBehaviour
         GameManager.Instance().Time.RegisterEvent(TimeManager.LOOP - 60, () => { // 1분 전에 다음 경기 준비
             var raceObj = Instantiate(racePrefab, transform);
             CurrentRace = raceObj.GetComponent<Race>();
-            CurrentRace.type = NextType;
+            CurrentRace.info = infos[(int)NextRace];
 
-            NextType = (RaceType)Random.Range(0, 3); // 그 다음 경기 랜덤 선택
+            NextRace = (RaceType)Random.Range(0, 3); // 그 다음 경기 랜덤 선택
         });
     }
 
@@ -35,11 +38,11 @@ public class RaceManager : MonoBehaviour
     /// <summary>
     /// 다음 경기 종류
     /// </summary>
-    public RaceType NextType { get; private set; } = RaceType.Easy;
+    public RaceType NextRace { get; private set; } = RaceType.Easy;
 
     /// <summary>
     /// 다음 경기 종류를 수정
     /// </summary>
-    public void SetNextRace(RaceType type) => NextType = type;
+    public void SetNextRace(RaceType type) => NextRace = type;
 
 }

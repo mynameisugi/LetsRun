@@ -59,3 +59,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   racePrefab: {fileID: 3894280954671188657, guid: ee3ee9b0140cd6745971b421364003c8,
     type: 3}
+  infos:
+  - type: 0
+    start: {fileID: 0}
+    trackNodes: []
+  - type: 1
+    start: {fileID: 0}
+    trackNodes: []
+  - type: 2
+    start: {fileID: 0}
+    trackNodes: []
