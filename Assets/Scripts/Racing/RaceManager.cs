@@ -12,7 +12,7 @@ public class RaceManager : MonoBehaviour
     [SerializeField]
     private Race.RaceInfo[] infos;
 
-    public enum RaceType
+    public enum RaceType : int
     {
         Easy = 0, // 500m
         Normal = 1, // 1000m
