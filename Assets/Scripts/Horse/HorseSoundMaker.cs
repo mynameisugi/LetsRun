@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
+using static HorseSoundMaker;
 using static HorseSoundMaker.Foot;
+using static Unity.VisualScripting.Member;
 
 /// <summary>
 /// 말의 소리를 재생
@@ -35,7 +37,7 @@ public class HorseSoundMaker : MonoBehaviour
             2 => new Foot[] { RearLeft, RearRight, FrontRight },
             _ => new Foot[] { RearLeft, RearRight, FrontLeft }
         };
-        Debug.Log($"{transform.root.gameObject.name} OnFootTrotStep {i}");
+        //Debug.Log($"{transform.root.gameObject.name} OnFootTrotStep {i}");
         // 바닥에 닿은 발굽마다 소리 재생
         foreach (var foot in feet)
         {
@@ -51,8 +53,10 @@ public class HorseSoundMaker : MonoBehaviour
     private static AudioClip GetFootsound(AudioSource source)
     {
         AudioClip clip;
+        clip = Resources.Load("Sounds/Horse/walksound") as AudioClip;
         // 이건 땅 아래의 재질에 따라 다른 발소리를 내는 예시인데,
         // 이걸 빼고 그냥 랜덤한 발소리를 재생하는 걸로 일단 해도 됨.
+        /*
         if (Physics.Raycast(source.transform.position + Vector3.up * 0.5f, Vector3.down,
                         out RaycastHit info, 1f, LayerMask.GetMask("Ground"))) // 발 아래의 땅을 확인
         {
@@ -61,7 +65,7 @@ public class HorseSoundMaker : MonoBehaviour
         }
         else // 정보를 못 구하면 그냥 기본 발소리 재생
             clip = Resources.Load("기본 발소리") as AudioClip;
-        
+        */
         return clip;
     }
 
@@ -71,4 +75,56 @@ public class HorseSoundMaker : MonoBehaviour
         headAudio.Play();
     }
 
+    public void OnFootWalkStep(int i)
+    {
+        Foot foot = i switch
+        {
+            0 => FrontLeft,
+            1 => RearRight,
+            2 => FrontRight,
+            _ => RearLeft
+        };
+
+        AudioSource source = GetFootAudioSource(foot);
+        AudioClip clip = GetFootsound(source);
+        source.clip = clip;
+        source.pitch = Random.Range(0.8f, 1.2f);
+        source.Play();
+    }
+
+    public void OnFootCanterStep(int i)
+    {
+        Foot[] feet = i switch
+        {
+            0 => new Foot[] { FrontRight },
+            1 => new Foot[] { FrontLeft },
+            _ => new Foot[] { RearLeft, RearRight }
+        };
+
+        foreach (var foot in feet)
+        {
+            AudioSource source = GetFootAudioSource(foot);
+            AudioClip clip = GetFootsound(source);
+            source.clip = clip;
+            source.pitch = Random.Range(0.8f, 1.2f);
+            source.Play();
+        }
+    }
+
+    public void OnFootGallopStep(int i)
+    {
+        Foot foot = i switch
+        {
+            0 => FrontRight,
+            1 => RearLeft,
+            2 => FrontLeft,
+            _ => RearRight
+        };
+
+        AudioSource source = GetFootAudioSource(foot);
+        AudioClip clip = GetFootsound(source);
+        source.clip = clip;
+        source.pitch = Random.Range(0.8f, 1.2f);
+        source.Play();
+    }
 }
