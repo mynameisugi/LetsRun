@@ -77,9 +77,11 @@ public class HorseAnimator : MonoBehaviour
 
     private void Update()
     {
+        if (!active) return;
+
         breath += Time.deltaTime * (Mathf.Lerp(1f, 3f, data.curMode / 4f));
         float breathSin = Mathf.Sin(breath);
-        displayRot = Mathf.MoveTowards(displayRot, Mathf.Clamp(-data.curRotate, -20f, 20f), Time.deltaTime * 6f);
+        displayRot = Mathf.MoveTowards(displayRot, Mathf.Clamp(-data.curRotate * 2f, -20f, 20f), Time.deltaTime * 12f);
 
         animCtrler.SetFloat("mode", data.curMode);
 
@@ -89,7 +91,6 @@ public class HorseAnimator : MonoBehaviour
             var rot = ears[i].localRotation.eulerAngles;
             ears[i].localRotation = Quaternion.Euler(rot.x + breathSin * 8f, earRot * (i == 0 ? 1f : -1f) + breathSin * 8f, rot.z);
         }
-
 
         for (int i = 0; i < necks.Length; ++i)
         {
@@ -101,9 +102,15 @@ public class HorseAnimator : MonoBehaviour
         rope.Update();
     }
 
+    private bool active = true;
+
     private void FixedUpdate()
     {
-        // TODO: 플레이어와 너무 멀면 물리 시뮬레이션 중단하고, 가까워지면 리셋
-        rope.FixedUpdate();
+        if (Vector3.Distance(transform.position, Camera.main.transform.position) < 100f)
+        {
+            if (!active) rope.Reset();
+            rope.FixedUpdate(); active = true;
+        }
+        else active = false;
     }
 }

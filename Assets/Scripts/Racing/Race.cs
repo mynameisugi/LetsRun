@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using static RaceManager;
 using Random = UnityEngine.Random;
 
@@ -29,11 +30,60 @@ public class Race : MonoBehaviour
     {
         var entryObj = Instantiate(horsePrefab);
         entries[entryFilled] = entryObj.GetComponent<HorseController>();
-        entries[entryFilled].stats = CreateRandomStats(type);
+        entries[entryFilled].stats = info.CreateRandomStats();
+        entryObj.transform.position = info.GetStartPos(entryFilled).position;
         ++entryFilled;
         if (entryFilled < entries.Length) Invoke(nameof(CreateEntry), 1f);
 
-        static HorseStats CreateRandomStats(RaceType type)
+    }
+
+    private void StartRace()
+    {
+        stage = RaceStage.Racing;
+    }
+
+    public RaceInfo info;
+
+    private RaceStage stage;
+
+    private enum RaceStage
+    {
+        Prepare, // 1분전. 경쟁자 말을 생성하고 케이지에 배치
+        Racing, // 경주중/직후. 트랙 안의 말은 달리고, 도착한 말은 텐트로 이동.
+        Clean // 플레이어가 경주를 안 했거나 텐트 밖으로 이동하면 경쟁자 말을 삭제하고 이 레이스 종료.
+    }
+
+    private HorseController[] entries;
+    private int entryFilled;
+
+    private void Update()
+    {
+        switch (stage)
+        {
+            case RaceStage.Prepare:
+                break;
+        }
+    }
+
+    [Serializable]
+    public struct RaceInfo
+    {
+        /// <summary>
+        /// 레이스 종류
+        /// </summary>
+        [SerializeField] public RaceType type;
+        /// <summary>
+        /// 레이스 시작점
+        /// </summary>
+        [SerializeField] public StartCubicle start;
+        /// <summary>
+        /// 레이스 경로
+        /// </summary>
+        [SerializeField] public BoxCollider[] trackNodes;
+
+        public Transform GetStartPos(int i) => start.GetStartPos(i);
+
+        public HorseStats CreateRandomStats()
         {
             HorseStats stats = new(type switch
             {
@@ -62,41 +112,5 @@ public class Race : MonoBehaviour
 
             return stats;
         }
-    }
-
-    private void StartRace()
-    {
-        stage = RaceStage.Racing;
-    }
-
-    public RaceType type;
-
-    private RaceStage stage;
-
-    private enum RaceStage
-    {
-        Prepare, // 1분전. 경쟁자 말을 생성하고 케이지에 배치
-        Racing, // 경주중/직후. 트랙 안의 말은 달리고, 도착한 말은 텐트로 이동.
-        Clean // 플레이어가 경주를 안 했거나 텐트 밖으로 이동하면 경쟁자 말을 삭제하고 이 레이스 종료.
-    }
-
-    private HorseController[] entries;
-    private int entryFilled;
-
-    private void Update()
-    {
-        switch (stage)
-        {
-            case RaceStage.Prepare:
-                break;
-        }
-    }
-
-    [SerializeField]
-    public struct RaceInfo
-    {
-        public Transform[] startPos;
-
-        public Transform[] trackNodes;
     }
 }

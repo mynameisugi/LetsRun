@@ -617,9 +617,9 @@ MonoBehaviour:
     - 16
     - 16
     gallopAmount: 2.1
+    steerStrength: 30
     skin: 0
   playerRidable: 0
-  testText: {fileID: 0}
 --- !u!114 &5446949823519519328
 MonoBehaviour:
   m_ObjectHideFlags: 0

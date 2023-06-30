@@ -38,6 +38,8 @@ public class HorseController : MonoBehaviour
         stats.skin = Random.Range(0, 10);
     }
 
+    private const float RAD = 0.5f;
+
     private void Start()
     {
         var sphereObj = new GameObject($"{gameObject.name} Sphere") { layer = 7 };
@@ -45,14 +47,14 @@ public class HorseController : MonoBehaviour
         sphere.useGravity = false;
         sphere.drag = 1f;
         var col = sphereObj.AddComponent<SphereCollider>();
-        col.radius = 1f;
+        col.radius = RAD;
         agent = sphereObj.AddComponent<NavMeshAgent>();
-        agent.baseOffset = 0.9f; agent.radius = 1f;
+        agent.baseOffset = RAD - 0.1f; agent.radius = RAD;
         //var obstacle = sphereObj.AddComponent<NavMeshObstacle>();
         //obstacle.shape = NavMeshObstacleShape.Capsule;
         //obstacle.radius = 1f; obstacle.height = 2f;
 
-        sphereObj.transform.position = gameObject.transform.position + gameObject.transform.up;
+        sphereObj.transform.position = gameObject.transform.position + gameObject.transform.up * RAD;
 
         myAnimator = GetComponent<HorseAnimator>();
 
@@ -105,7 +107,7 @@ public class HorseController : MonoBehaviour
         
         #endregion GenericHorseUpdate
 
-        transform.position = sphere.transform.position - transform.up;
+        transform.position = sphere.transform.position - transform.up * RAD;
 
         if (!isPlayerRiding || !playerOrigin || !playerAction) NPCControlUpdate();
         else PlayerControlUpdate();
@@ -129,7 +131,7 @@ public class HorseController : MonoBehaviour
             targetMode = 0;
             if (brakeTime < 0f)
             {
-                brakeTime = 0f;
+                pulledTime = 5f; brakeTime = Random.Range(1f, 9f);
                 Vector3 offset = new(Random.Range(-5f, 5f), 0f, Random.Range(-5f, 5f));
                 //Debug.Log($"{gameObject.name} wanders off to {offset}");
                 agent.SetDestination(transform.position + offset);
@@ -141,10 +143,15 @@ public class HorseController : MonoBehaviour
             Vector3 dest = agent.destination;
             float rotate = Mathf.Atan2(dest.x - transform.position.x, dest.z - transform.position.z) * Mathf.Rad2Deg;
             agent.isStopped = Mathf.Abs(Mathf.DeltaAngle(transform.rotation.eulerAngles.y, rotate)) > stats.steerStrength;
+            if(!agent.isStopped) pulledTime -= Time.deltaTime;
             curRotate = Mathf.MoveTowardsAngle(transform.rotation.eulerAngles.y, rotate, (agent.isStopped ? 2f : 1f) * stats.steerStrength * Time.deltaTime) - transform.rotation.eulerAngles.y;
             //Debug.Log($"{rotate:0.00} {curRotate:0.00}");
             //transform.rotation = Quaternion.Euler(0f, curRotate, 0f);
-            brakeTime = 5f;
+            if (pulledTime < 0f)
+            {
+                brakeTime = Random.Range(1f, 9f);
+                agent.ResetPath();
+            }
         }
 
     }
@@ -282,6 +289,7 @@ public class HorseController : MonoBehaviour
     {
         if (!playerRidable || isPlayerRiding) return;
         //character.enabled = false;
+        pulledTime = 0f; brakeTime = 0f;
         agent.ResetPath();
         // 플레이어 추적
         playerOrigin = PlayerManager.InstanceOrigin();
