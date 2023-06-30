@@ -1,4 +1,5 @@
 ﻿using System;
+using UnityEditorInternal.Profiling.Memory.Experimental.FileFormat;
 using UnityEngine;
 using static RaceManager;
 using Random = UnityEngine.Random;
@@ -13,14 +14,14 @@ public class Race : MonoBehaviour
 
     private void Start()
     {
+        Debug.Log($"Race Ready: {info.type}");
+
         stage = RaceStage.Prepare; // 준비
-
-
 
         // 참가자 생성
         entries = new HorseController[8];
         entryFilled = 0;
-        Invoke(nameof(CreateEntry), 1f);
+        Invoke(nameof(CreateEntry), 0.1f);
 
         // 경기 시작 대기
         GameManager.Instance().Time.RegisterEvent(TimeManager.LOOP, StartRace);
@@ -28,18 +29,26 @@ public class Race : MonoBehaviour
 
     private void CreateEntry()
     {
+        // 새로운 참가자 말 생성
         var entryObj = Instantiate(horsePrefab);
+        entryObj.name = $"Horse RaceEntry{entryFilled + 1}";
         entries[entryFilled] = entryObj.GetComponent<HorseController>();
         entries[entryFilled].stats = info.CreateRandomStats();
+        entries[entryFilled].playerRidable = false;
         entryObj.transform.position = info.GetStartPos(entryFilled).position;
+        entryObj.transform.rotation = info.GetStartPos(entryFilled).rotation;
+        // 말에게 경기 정보 전달
+        entries[entryFilled].NPCJoinRace(this);
         ++entryFilled;
-        if (entryFilled < entries.Length) Invoke(nameof(CreateEntry), 1f);
-
+        // 다음 참가자 0.1초 뒤 생성
+        if (entryFilled < entries.Length) Invoke(nameof(CreateEntry), 0.1f);
     }
 
     private void StartRace()
     {
+        Debug.Log($"Race Start! {info.type}");
         stage = RaceStage.Racing;
+        foreach (var entry in entries) if (entry) entry.StartRace();
     }
 
     public RaceInfo info;
@@ -58,10 +67,10 @@ public class Race : MonoBehaviour
 
     private void Update()
     {
-        switch (stage)
+        if (Input.GetKeyDown(KeyCode.P))
         {
-            case RaceStage.Prepare:
-                break;
+            Debug.Log("DEBUG Race Start");
+            StartRace();
         }
     }
 

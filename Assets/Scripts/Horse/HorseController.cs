@@ -23,6 +23,7 @@ public class HorseController : MonoBehaviour
     public bool playerRidable = false;
 
     internal bool isPlayerRiding = false;
+    internal bool isRacing = false;
 
     private Transform playerOrigin = null;
 
@@ -102,15 +103,20 @@ public class HorseController : MonoBehaviour
             staminaRecoveryTimer = 0f;
             curStamina = Mathf.Min(curStamina + Time.deltaTime, stats.gallopAmount);
         }
-        
+
         displayStamina = Mathf.SmoothStep(displayStamina, curStamina / stats.gallopAmount, Time.deltaTime * 6f); // 표시용 스태미너 퍼센트
-        
+
         #endregion GenericHorseUpdate
 
         transform.position = sphere.transform.position - transform.up * RAD;
 
-        if (!isPlayerRiding || !playerOrigin || !playerAction) NPCControlUpdate();
-        else PlayerControlUpdate();
+        if (!isPlayerRiding)
+        {
+            if (!isRacing) NPCWanderUpdate();
+            else NPCRaceUpdate();
+        }
+        else if (playerOrigin && playerAction) PlayerControlUpdate();
+
         myAnimator.SetData(new(curMode, curRotate / Time.deltaTime, displayStamina));
 
         transform.Rotate(transform.up, curRotate);
@@ -120,11 +126,104 @@ public class HorseController : MonoBehaviour
     private float pulledOffset = 0.1f, pushedOffset = 0.3f, pulledTime = 0f, brakeTime = 2f;
     private const float PUSHPULL = 0.2f;
 
-    private void NPCControlUpdate()
+    public void NPCJoinRace(Race race)
+    {
+        isRacing = true; curMode = 0f; targetMode = 0;
+        this.race = race;
+        raceInfo = this.race.info;
+        nextNodeIndex = -1;
+        pulledTime = 0f; brakeTime = 0f;
+    }
+
+    public void StartRace()
+    {
+        nextNodeIndex = 0;
+        TargetNextNode();
+    }
+
+    private Race race = null;
+    private Race.RaceInfo raceInfo;
+    private int nextNodeIndex = -1;
+
+    private void TargetNextNode()
+    {
+        BoxCollider nextNode = raceInfo.trackNodes[nextNodeIndex];
+        Vector3 point = new(
+            Random.Range(nextNode.bounds.min.x, nextNode.bounds.max.x),
+            nextNode.bounds.max.y,
+            Random.Range(nextNode.bounds.min.z, nextNode.bounds.max.z)
+        );
+        //point = nextNode.transform.TransformPoint(point);
+        if (Physics.Raycast(point, Vector3.down, out var info, 10f, LayerMask.GetMask("Ground")))
+            point = info.point;
+        agent.SetDestination(point);
+        Debug.Log($"{gameObject.name} goes to node {nextNodeIndex} {point} (dist: {Vector3.Distance(point, sphere.position)})");
+
+        ++nextNodeIndex;
+        if (nextNodeIndex >= raceInfo.trackNodes.Length) nextNodeIndex = -1;
+    }
+
+    private void NPCRaceUpdate()
+    {
+        if (nextNodeIndex < 0) return; // 대기중
+
+        Vector3 next = agent.destination;
+        if (Vector3.Distance(next, sphere.position) < 2f)
+        {
+            Debug.Log($"{gameObject.name}: {next} ~ {sphere.position} ({Vector3.Distance(next, sphere.position)})");
+            TargetNextNode();
+        }
+        float rotate = Mathf.Atan2(next.x - transform.position.x, next.z - transform.position.z) * Mathf.Rad2Deg;
+        curRotate = Mathf.MoveTowardsAngle(transform.rotation.eulerAngles.y, rotate, stats.steerStrength * Time.deltaTime) - transform.rotation.eulerAngles.y;
+
+        if (curMode < 3)
+        {
+            pulledTime -= Time.deltaTime; brakeTime = 0f;
+            if (pulledTime < 0f)
+            {
+                RequestModeIncrease();
+                pulledTime = raceInfo.type switch
+                {
+                    RaceManager.RaceType.Easy => Random.Range(1f, 2f),
+                    RaceManager.RaceType.Normal => Random.Range(0.5f, 1.5f),
+                    _ => Random.Range(0.3f, 0.6f),
+                };
+            }
+        }
+        else
+        {
+            brakeTime -= Time.deltaTime; pulledTime = 0f;
+            if (brakeTime < 0f)
+            {
+                if (curStamina < 1f)
+                {
+                    float cancel = raceInfo.type switch
+                    {
+                        RaceManager.RaceType.Easy => 0.2f,
+                        RaceManager.RaceType.Normal => 0.6f,
+                        _ => 0.95f,
+                    };
+                    if (Random.value < cancel)
+                    {
+                        brakeTime = Mathf.Max(1f, stats.gallopAmount * Random.Range(0.3f, 1.1f));
+                        return;
+                    }
+                }
+                RequestModeIncrease();
+                brakeTime = raceInfo.type switch
+                {
+                    RaceManager.RaceType.Easy => Random.Range(1f, 6f),
+                    RaceManager.RaceType.Normal => Random.Range(3f, 5f),
+                    _ => Random.Range(4f, 5f),
+                };
+            }
+        }
+    }
+
+    private void NPCWanderUpdate()
     {
         agent.speed = curSpeed;
 
-        // test
         if (!agent.hasPath)
         {
             brakeTime -= Time.deltaTime;
@@ -143,7 +242,7 @@ public class HorseController : MonoBehaviour
             Vector3 dest = agent.destination;
             float rotate = Mathf.Atan2(dest.x - transform.position.x, dest.z - transform.position.z) * Mathf.Rad2Deg;
             agent.isStopped = Mathf.Abs(Mathf.DeltaAngle(transform.rotation.eulerAngles.y, rotate)) > stats.steerStrength;
-            if(!agent.isStopped) pulledTime -= Time.deltaTime;
+            if (!agent.isStopped) pulledTime -= Time.deltaTime;
             curRotate = Mathf.MoveTowardsAngle(transform.rotation.eulerAngles.y, rotate, (agent.isStopped ? 2f : 1f) * stats.steerStrength * Time.deltaTime) - transform.rotation.eulerAngles.y;
             //Debug.Log($"{rotate:0.00} {curRotate:0.00}");
             //transform.rotation = Quaternion.Euler(0f, curRotate, 0f);
