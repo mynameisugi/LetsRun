@@ -175,7 +175,7 @@ public class HorseController : MonoBehaviour
         }
         float rotate = Mathf.Atan2(next.x - transform.position.x, next.z - transform.position.z) * Mathf.Rad2Deg;
         curRotate = Mathf.MoveTowardsAngle(transform.rotation.eulerAngles.y, rotate, stats.steerStrength * Time.deltaTime) - transform.rotation.eulerAngles.y;
-        
+
         if (curMode < 3)
         {
             pulledTime -= Time.deltaTime; brakeTime = 0f;
@@ -205,7 +205,7 @@ public class HorseController : MonoBehaviour
                     };
                     if (Random.value < cancel)
                     {
-                        brakeTime = 2f;
+                        brakeTime = Mathf.Max(1f, stats.gallopAmount * Random.Range(0.3f, 1.1f));
                         return;
                     }
                 }
