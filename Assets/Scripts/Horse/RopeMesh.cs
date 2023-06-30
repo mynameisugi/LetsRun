@@ -34,7 +34,7 @@ public class RopeMesh
     private void Initialize()
     {
         meshObj = new GameObject("RopeMesh");
-        meshObj.transform.SetParent(hinges[0].parent);
+        meshObj.transform.SetParent(hinges[1].parent);
         meshObj.transform.SetLocalPositionAndRotation(Vector3.zero, Quaternion.identity);
 
         for (int i = 0; i < 3; ++i)

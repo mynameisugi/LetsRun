@@ -129,7 +129,7 @@ public class HorseController : MonoBehaviour
             targetMode = 0;
             if (brakeTime < 0f)
             {
-                brakeTime = 0f;
+                pulledTime = 5f; brakeTime = Random.Range(1f, 9f);
                 Vector3 offset = new(Random.Range(-5f, 5f), 0f, Random.Range(-5f, 5f));
                 //Debug.Log($"{gameObject.name} wanders off to {offset}");
                 agent.SetDestination(transform.position + offset);
@@ -141,10 +141,15 @@ public class HorseController : MonoBehaviour
             Vector3 dest = agent.destination;
             float rotate = Mathf.Atan2(dest.x - transform.position.x, dest.z - transform.position.z) * Mathf.Rad2Deg;
             agent.isStopped = Mathf.Abs(Mathf.DeltaAngle(transform.rotation.eulerAngles.y, rotate)) > stats.steerStrength;
+            if(!agent.isStopped) pulledTime -= Time.deltaTime;
             curRotate = Mathf.MoveTowardsAngle(transform.rotation.eulerAngles.y, rotate, (agent.isStopped ? 2f : 1f) * stats.steerStrength * Time.deltaTime) - transform.rotation.eulerAngles.y;
             //Debug.Log($"{rotate:0.00} {curRotate:0.00}");
             //transform.rotation = Quaternion.Euler(0f, curRotate, 0f);
-            brakeTime = 5f;
+            if (pulledTime < 0f)
+            {
+                brakeTime = Random.Range(1f, 9f);
+                agent.ResetPath();
+            }
         }
 
     }
@@ -282,6 +287,7 @@ public class HorseController : MonoBehaviour
     {
         if (!playerRidable || isPlayerRiding) return;
         //character.enabled = false;
+        pulledTime = 0f; brakeTime = 0f;
         agent.ResetPath();
         // 플레이어 추적
         playerOrigin = PlayerManager.InstanceOrigin();
