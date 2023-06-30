@@ -38,6 +38,8 @@ public class HorseController : MonoBehaviour
         stats.skin = Random.Range(0, 10);
     }
 
+    private const float RAD = 0.5f;
+
     private void Start()
     {
         var sphereObj = new GameObject($"{gameObject.name} Sphere") { layer = 7 };
@@ -45,14 +47,14 @@ public class HorseController : MonoBehaviour
         sphere.useGravity = false;
         sphere.drag = 1f;
         var col = sphereObj.AddComponent<SphereCollider>();
-        col.radius = 1f;
+        col.radius = RAD;
         agent = sphereObj.AddComponent<NavMeshAgent>();
-        agent.baseOffset = 0.9f; agent.radius = 1f;
+        agent.baseOffset = RAD - 0.1f; agent.radius = RAD;
         //var obstacle = sphereObj.AddComponent<NavMeshObstacle>();
         //obstacle.shape = NavMeshObstacleShape.Capsule;
         //obstacle.radius = 1f; obstacle.height = 2f;
 
-        sphereObj.transform.position = gameObject.transform.position + gameObject.transform.up;
+        sphereObj.transform.position = gameObject.transform.position + gameObject.transform.up * RAD;
 
         myAnimator = GetComponent<HorseAnimator>();
 
@@ -105,7 +107,7 @@ public class HorseController : MonoBehaviour
         
         #endregion GenericHorseUpdate
 
-        transform.position = sphere.transform.position - transform.up;
+        transform.position = sphere.transform.position - transform.up * RAD;
 
         if (!isPlayerRiding || !playerOrigin || !playerAction) NPCControlUpdate();
         else PlayerControlUpdate();
