@@ -45,7 +45,18 @@ public class PlayerManager : MonoBehaviour
     /// <summary>
     /// 플레이어 액션 핸들러
     /// </summary>
-    public static PlayerActionHandler Action() => Instance().actionHandler;
+    public PlayerActionHandler Action() => actionHandler;
 
-    
+    /// <summary>
+    /// 플레이어 인벤토리
+    /// </summary>
+    public PlayerInventory Inventory() => inventory;
+
+    private PlayerInventory inventory = null;
+
+    private void Start()
+    {
+        inventory = new PlayerInventory(this);
+    }
+
 }

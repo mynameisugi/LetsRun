@@ -59,7 +59,7 @@ public class HorseController : MonoBehaviour
 
         myAnimator = GetComponent<HorseAnimator>();
 
-        curStamina = stats.gallopAmount;
+        curStamina = stats.GallopAmount;
 
         if (!playerRidable)
         {
@@ -101,10 +101,10 @@ public class HorseController : MonoBehaviour
         else
         {
             staminaRecoveryTimer = 0f;
-            curStamina = Mathf.Min(curStamina + Time.deltaTime, stats.gallopAmount);
+            curStamina = Mathf.Min(curStamina + Time.deltaTime, stats.GallopAmount);
         }
 
-        displayStamina = Mathf.SmoothStep(displayStamina, curStamina / stats.gallopAmount, Time.deltaTime * 6f); // 표시용 스태미너 퍼센트
+        displayStamina = Mathf.SmoothStep(displayStamina, curStamina / stats.GallopAmount, Time.deltaTime * 6f); // 표시용 스태미너 퍼센트
 
         #endregion GenericHorseUpdate
 
@@ -174,7 +174,7 @@ public class HorseController : MonoBehaviour
             TargetNextNode();
         }
         float rotate = Mathf.Atan2(next.x - transform.position.x, next.z - transform.position.z) * Mathf.Rad2Deg;
-        curRotate = Mathf.MoveTowardsAngle(transform.rotation.eulerAngles.y, rotate, stats.steerStrength * Time.deltaTime) - transform.rotation.eulerAngles.y;
+        curRotate = Mathf.MoveTowardsAngle(transform.rotation.eulerAngles.y, rotate, stats.SteerStrength * Time.deltaTime) - transform.rotation.eulerAngles.y;
 
         if (curMode < 3)
         {
@@ -205,7 +205,7 @@ public class HorseController : MonoBehaviour
                     };
                     if (Random.value < cancel)
                     {
-                        brakeTime = Mathf.Max(1f, stats.gallopAmount * Random.Range(0.3f, 1.1f));
+                        brakeTime = Mathf.Max(1f, stats.GallopAmount * Random.Range(0.3f, 1.1f));
                         return;
                     }
                 }
@@ -241,9 +241,9 @@ public class HorseController : MonoBehaviour
         {
             Vector3 dest = agent.destination;
             float rotate = Mathf.Atan2(dest.x - transform.position.x, dest.z - transform.position.z) * Mathf.Rad2Deg;
-            agent.isStopped = Mathf.Abs(Mathf.DeltaAngle(transform.rotation.eulerAngles.y, rotate)) > stats.steerStrength;
+            agent.isStopped = Mathf.Abs(Mathf.DeltaAngle(transform.rotation.eulerAngles.y, rotate)) > stats.SteerStrength;
             if (!agent.isStopped) pulledTime -= Time.deltaTime;
-            curRotate = Mathf.MoveTowardsAngle(transform.rotation.eulerAngles.y, rotate, (agent.isStopped ? 2f : 1f) * stats.steerStrength * Time.deltaTime) - transform.rotation.eulerAngles.y;
+            curRotate = Mathf.MoveTowardsAngle(transform.rotation.eulerAngles.y, rotate, (agent.isStopped ? 2f : 1f) * stats.SteerStrength * Time.deltaTime) - transform.rotation.eulerAngles.y;
             //Debug.Log($"{rotate:0.00} {curRotate:0.00}");
             //transform.rotation = Quaternion.Euler(0f, curRotate, 0f);
             if (pulledTime < 0f)
@@ -270,7 +270,7 @@ public class HorseController : MonoBehaviour
         {
             float rotate = Mathf.Abs(handOffset) - 0.2f;
             rotate = Mathf.Clamp01(rotate * 2.5f) * Mathf.Sign(handOffset);
-            curRotate = rotate * stats.steerStrength * Time.deltaTime;
+            curRotate = rotate * stats.SteerStrength * Time.deltaTime;
             pulled = false;
             playerAction.GetDevice(handOffset < 0f ? 0 : 1).SendHapticImpulse(0, 0.1f + rotate * 0.1f, 0.1f);
             return; // 회전 조작이라면 다른 조작을 받지 않음
@@ -394,7 +394,7 @@ public class HorseController : MonoBehaviour
         PlayerManager.Instance().IsRiding = true;
         // 플레이어 추적
         playerOrigin = PlayerManager.InstanceOrigin();
-        playerAction = PlayerManager.Action();
+        playerAction = PlayerManager.Instance().Action();
         // 플레이어 이동 중지
         playerOrigin.GetComponent<DynamicMoveProvider>().enabled = false;
         playerOrigin.GetComponent<ActionBasedSnapTurnProvider>().enabled = false;
