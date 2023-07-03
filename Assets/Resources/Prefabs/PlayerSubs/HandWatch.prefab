@@ -63,7 +63,7 @@ GameObject:
   - component: {fileID: 6556005867193775612}
   - component: {fileID: 1719755459733138132}
   m_Layer: 5
-  m_Name: Panel (1)
+  m_Name: PanelFill
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -81,12 +81,12 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 6258375179382482621}
-  m_RootOrder: 1
+  m_Father: {fileID: 417635463960609804}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -0.00048828125, y: 0.000015258789}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6556005867193775612
@@ -139,7 +139,7 @@ GameObject:
   - component: {fileID: 2542470679492648916}
   - component: {fileID: 720443596021280440}
   m_Layer: 5
-  m_Name: Panel (1)
+  m_Name: PanelFill
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -157,12 +157,12 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 2980089681645402657}
-  m_RootOrder: 1
+  m_Father: {fileID: 9015095529246718487}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -0.00048828125, y: 0.000015258789}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2542470679492648916
@@ -236,7 +236,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 417635463960609804}
-  - {fileID: 1119265374329736472}
   m_Father: {fileID: 4253780606950794721}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
@@ -344,7 +343,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &4705044752850157154
 RectTransform:
   m_ObjectHideFlags: 0
@@ -358,7 +357,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1525782717873116558}
-  - {fileID: 1875144505256559984}
   m_Father: {fileID: 4253780606950794721}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
@@ -480,7 +478,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6050382579165501431}
-  - {fileID: 851166976701545249}
   m_Father: {fileID: 4253780606950794721}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
@@ -581,7 +578,7 @@ GameObject:
   - component: {fileID: 1945530349564824554}
   - component: {fileID: 5870421993993345461}
   m_Layer: 5
-  m_Name: Panel
+  m_Name: PanelEdge
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -598,13 +595,14 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1119265374329736472}
   m_Father: {fileID: 6258375179382482621}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -0.00048828125, y: 0.000015258789}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1945530349564824554
@@ -657,7 +655,7 @@ GameObject:
   - component: {fileID: 1279294352756872110}
   - component: {fileID: 7186122461834803218}
   m_Layer: 5
-  m_Name: Panel
+  m_Name: PanelEdge
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -674,13 +672,14 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1875144505256559984}
   m_Father: {fileID: 4705044752850157154}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0.000015258789}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1279294352756872110
@@ -704,7 +703,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 0, a: 1}
+  m_Color: {r: 0, g: 1, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -733,7 +732,7 @@ GameObject:
   - component: {fileID: 9172963963743577407}
   - component: {fileID: 958298204281422290}
   m_Layer: 5
-  m_Name: Panel (1)
+  m_Name: PanelEdge
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -750,13 +749,14 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 851166976701545249}
   m_Father: {fileID: 3067692396590835510}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -0.000030517578}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &9172963963743577407
@@ -809,7 +809,7 @@ GameObject:
   - component: {fileID: 7479172866871082099}
   - component: {fileID: 5992210038249013942}
   m_Layer: 5
-  m_Name: Panel
+  m_Name: PanelEdge
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -826,13 +826,14 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1834524251974509308}
   m_Father: {fileID: 6668595990226545446}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -0.00048828125, y: 0.000015258789}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7479172866871082099
@@ -1018,7 +1019,7 @@ GameObject:
   - component: {fileID: 9097560694395752108}
   - component: {fileID: 8559486590454583765}
   m_Layer: 5
-  m_Name: GameObject
+  m_Name: View
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1143,7 +1144,7 @@ GameObject:
   - component: {fileID: 1245929758429246711}
   - component: {fileID: 3410201919646138311}
   m_Layer: 5
-  m_Name: Panel (1)
+  m_Name: PanelFill
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1161,12 +1162,12 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 6668595990226545446}
-  m_RootOrder: 1
+  m_Father: {fileID: 2002964973012515314}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -0.00048828125, y: 0.000015258789}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1245929758429246711
@@ -1219,7 +1220,7 @@ GameObject:
   - component: {fileID: 3689662470172350873}
   - component: {fileID: 4581280257019171199}
   m_Layer: 5
-  m_Name: Panel (2)
+  m_Name: PanelFill
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1237,12 +1238,12 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 3067692396590835510}
-  m_RootOrder: 1
+  m_Father: {fileID: 6050382579165501431}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -0.000030517578}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3689662470172350873
@@ -1449,7 +1450,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2002964973012515314}
-  - {fileID: 1834524251974509308}
   m_Father: {fileID: 4253780606950794721}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
@@ -1734,7 +1734,7 @@ GameObject:
   - component: {fileID: 7455036293501107474}
   - component: {fileID: 2752718332047750539}
   m_Layer: 5
-  m_Name: Panel (1)
+  m_Name: PanelFill
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1752,12 +1752,12 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 5771517501869737413}
-  m_RootOrder: 1
+  m_Father: {fileID: 7249771951236655845}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -0.00048828125, y: 0.000015258789}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7455036293501107474
@@ -2056,7 +2056,7 @@ GameObject:
   - component: {fileID: 5003708167524410102}
   - component: {fileID: 4527814499594510303}
   m_Layer: 5
-  m_Name: GameObject
+  m_Name: View
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2263,7 +2263,7 @@ GameObject:
   - component: {fileID: 7058173273003302886}
   - component: {fileID: 3662162317399699414}
   m_Layer: 5
-  m_Name: GameObject
+  m_Name: View
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2521,7 +2521,7 @@ GameObject:
   - component: {fileID: 1172667288549681933}
   - component: {fileID: 2703450027857778027}
   m_Layer: 5
-  m_Name: GameObject
+  m_Name: View
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2749,7 +2749,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7249771951236655845}
-  - {fileID: 2753310564163778559}
   m_Father: {fileID: 4253780606950794721}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
@@ -2871,7 +2870,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 9015095529246718487}
-  - {fileID: 8410262188431816395}
   m_Father: {fileID: 4253780606950794721}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
@@ -3023,7 +3021,7 @@ GameObject:
   - component: {fileID: 3922247760908232359}
   - component: {fileID: 4283729187521164186}
   m_Layer: 5
-  m_Name: GameObject
+  m_Name: View
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3097,7 +3095,7 @@ GameObject:
   - component: {fileID: 6692017832056254360}
   - component: {fileID: 1924173415119074277}
   m_Layer: 5
-  m_Name: Panel (1)
+  m_Name: PanelFill
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3115,12 +3113,12 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 4705044752850157154}
-  m_RootOrder: 1
+  m_Father: {fileID: 1525782717873116558}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0.000015258789}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6692017832056254360
@@ -3144,7 +3142,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 0, a: 0.392}
+  m_Color: {r: 0, g: 1, b: 0, a: 0.392}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -3173,7 +3171,7 @@ GameObject:
   - component: {fileID: 6756071965742656261}
   - component: {fileID: 6729398739646083892}
   m_Layer: 5
-  m_Name: Panel
+  m_Name: PanelEdge
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3190,13 +3188,14 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 2753310564163778559}
   m_Father: {fileID: 5771517501869737413}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -0.00048828125, y: 0.000015258789}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6756071965742656261
@@ -3249,7 +3248,7 @@ GameObject:
   - component: {fileID: 4793855556154964028}
   - component: {fileID: 157085014759795241}
   m_Layer: 5
-  m_Name: GameObject
+  m_Name: View
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3323,7 +3322,7 @@ GameObject:
   - component: {fileID: 7814717424590162122}
   - component: {fileID: 7903003372198093521}
   m_Layer: 5
-  m_Name: Panel
+  m_Name: PanelEdge
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3340,13 +3339,14 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 8410262188431816395}
   m_Father: {fileID: 2980089681645402657}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -0.00048828125, y: 0.000015258789}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7814717424590162122
@@ -3397,7 +3397,7 @@ PrefabInstance:
     - target: {fileID: 3772900299665377282, guid: ad413e47aab71da4da9dc100f508a93d,
         type: 3}
       propertyPath: m_Name
-      value: PageDot (4)
+      value: PageDot 5
       objectReference: {fileID: 0}
     - target: {fileID: 3772900299665377285, guid: ad413e47aab71da4da9dc100f508a93d,
         type: 3}
@@ -3528,7 +3528,7 @@ PrefabInstance:
     - target: {fileID: 3772900299665377282, guid: ad413e47aab71da4da9dc100f508a93d,
         type: 3}
       propertyPath: m_Name
-      value: PageDot (1)
+      value: PageDot 2
       objectReference: {fileID: 0}
     - target: {fileID: 3772900299665377285, guid: ad413e47aab71da4da9dc100f508a93d,
         type: 3}
@@ -3659,7 +3659,7 @@ PrefabInstance:
     - target: {fileID: 3772900299665377282, guid: ad413e47aab71da4da9dc100f508a93d,
         type: 3}
       propertyPath: m_Name
-      value: PageDot (5)
+      value: PageDot 6
       objectReference: {fileID: 0}
     - target: {fileID: 3772900299665377285, guid: ad413e47aab71da4da9dc100f508a93d,
         type: 3}
@@ -4115,7 +4115,7 @@ PrefabInstance:
     - target: {fileID: 3772900299665377282, guid: ad413e47aab71da4da9dc100f508a93d,
         type: 3}
       propertyPath: m_Name
-      value: PageDot (3)
+      value: PageDot 4
       objectReference: {fileID: 0}
     - target: {fileID: 3772900299665377285, guid: ad413e47aab71da4da9dc100f508a93d,
         type: 3}
@@ -4246,7 +4246,7 @@ PrefabInstance:
     - target: {fileID: 3772900299665377282, guid: ad413e47aab71da4da9dc100f508a93d,
         type: 3}
       propertyPath: m_Name
-      value: PageDot
+      value: PageDot 1
       objectReference: {fileID: 0}
     - target: {fileID: 3772900299665377285, guid: ad413e47aab71da4da9dc100f508a93d,
         type: 3}
@@ -4377,7 +4377,7 @@ PrefabInstance:
     - target: {fileID: 3772900299665377282, guid: ad413e47aab71da4da9dc100f508a93d,
         type: 3}
       propertyPath: m_Name
-      value: PageDot (2)
+      value: PageDot 3
       objectReference: {fileID: 0}
     - target: {fileID: 3772900299665377285, guid: ad413e47aab71da4da9dc100f508a93d,
         type: 3}

@@ -3,8 +3,6 @@ using UnityEngine.XR;
 
 public class HandWatchController : MonoBehaviour
 {
-    //[Header("Canvases")]
-
     [SerializeField]
     private GameObject[] canvases = new GameObject[5];
 
@@ -58,7 +56,6 @@ public class HandWatchController : MonoBehaviour
         var device = action.GetDevice(0);
         if (device.TryGetFeatureValue(CommonUsages.devicePosition, out var pos))
             if (pos.y < -0.5f) RequestModeSwitch(Mode.Main); // 왼손이 너무 내려가면 시계 메뉴 끄기
-
     }
 
 }
