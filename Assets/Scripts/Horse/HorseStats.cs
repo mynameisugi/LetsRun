@@ -15,22 +15,43 @@ public struct HorseStats
     /// <summary>
     /// 평보 속도 (1단계)
     /// </summary>
-    public float SpeedWalk { get => speeds[0]; set => speeds[0] = value; }
+    public float SpeedWalk { get => speeds[0]; set => speeds[0] = Mathf.Clamp(value, MinStats[0], MaxStats[0]); }
     /// <summary>
     /// 속보 속도 (2단계)
     /// </summary>
-    public float SpeedTrot { get => speeds[1]; set => speeds[1] = value; }
+    public float SpeedTrot { get => speeds[1]; set => speeds[1] = Mathf.Clamp(value, MinStats[1], MaxStats[1]); }
     /// <summary>
     /// 구보 속도 (3단계)
     /// </summary>
-    public float SpeedCanter { get => speeds[2]; set => speeds[2] = value; }
+    public float SpeedCanter { get => speeds[2]; set => speeds[2] = Mathf.Clamp(value, MinStats[2], MaxStats[2]); }
     /// <summary>
     /// 습보 속도 (4단계 - 전력 질주)
     /// </summary>
-    public float SpeedGallop { get => speeds[3]; set { speeds[3] = value; speeds[4] = value; } }
+    public float SpeedGallop
+    {
+        get => speeds[3];
+        set
+        {
+            speeds[3] = Mathf.Clamp(value, MinStats[3], MaxStats[3]);
+            speeds[4] = Mathf.Clamp(value, MinStats[3], MaxStats[3]);
+        }
+    }
+
+    /// <summary>
+    /// 습보 개수
+    /// </summary>
+    public float GallopAmount { get => gallopAmount; set => gallopAmount = Mathf.Clamp(value, MinStats[4], MaxStats[4]); }
+
+    /// <summary>
+    /// 커브 속도
+    /// </summary>
+    public float SteerStrength { get => steerStrength; set => steerStrength = Mathf.Clamp(value, MinStats[5], MaxStats[5]); }
 
     [SerializeField]
     private float[] speeds;
+
+    public readonly static float[] MaxStats = new float[] { 3f, 5f, 9f, 24f, 10f, 50f };
+    public readonly static float[] MinStats = new float[] { 1f, 3f, 4f, 12f, 1f, 20f };
 
     /// <summary>
     /// 현재 단계에 맞는 속도값
@@ -46,15 +67,9 @@ public struct HorseStats
         return Mathf.Lerp(speeds[intMode], speeds[intMode + 1], offset);
     }
 
-    /// <summary>
-    /// 습보 개수
-    /// </summary>
-    public float gallopAmount;
+    private float gallopAmount;
 
-    /// <summary>
-    /// 커브 속도
-    /// </summary>
-    public float steerStrength;
+    private float steerStrength;
 
     /// <summary>
     /// 스킨 번호

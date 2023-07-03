@@ -3,22 +3,28 @@ using UnityEngine;
 public class HWHorse : MonoBehaviour
 {
     [SerializeField]
-    private GameObject horseYes;
-    [SerializeField]
     private GameObject horseNo;
 
+    [SerializeField]
+    private GameObject horseYes;
+
+    [SerializeField]
+    private HWHorseStat[] statDisplays;
 
     private HorseStats stats;
-
-    private bool hasHorse = false;
 
     private void OnEnable()
     {
         horseYes.SetActive(false);
         horseNo.SetActive(false);
         var horse = PlayerManager.Instance().horse;
-        if (!horse) { hasHorse = false; horseNo.SetActive(true); return; }
+        if (!horse) { horseNo.SetActive(true); return; }
+
         stats = PlayerManager.Instance().horse.stats;
-        hasHorse = true; horseYes.SetActive(true);
+        horseYes.SetActive(true);
+        float[] s = new float[] { stats.SpeedWalk, stats.SpeedTrot, stats.SpeedCanter, stats.SpeedGallop, stats.GallopAmount, stats.SteerStrength };
+        for (int i = 0; i < 6; ++i)
+            statDisplays[i].SetTarget((s[i] - HorseStats.MinStats[i]) / (HorseStats.MaxStats[i] - HorseStats.MinStats[i]));
+
     }
 }

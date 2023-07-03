@@ -116,7 +116,7 @@ public class Race : MonoBehaviour
                     _ => Random.Range(12f, 18f)
                 },
                 skin = Random.Range(0, 10),
-                steerStrength = type switch { RaceType.Hard => 50f, RaceType.Normal => 40f, _ => 30f }
+                SteerStrength = type switch { RaceType.Hard => 50f, RaceType.Normal => 40f, _ => 30f }
             };
 
             return stats;
