@@ -20,6 +20,11 @@ public class PlayerManager : MonoBehaviour
     private bool isRiding = false;
 
     /// <summary>
+    /// 소유 중인 말
+    /// </summary>
+    public HorseController horse;
+
+    /// <summary>
     /// <see cref="PlayerManager"/> 인스턴스
     /// </summary>
     public static PlayerManager Instance()
