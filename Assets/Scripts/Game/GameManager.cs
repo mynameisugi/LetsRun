@@ -33,9 +33,15 @@ public class GameManager : MonoBehaviour
     /// </summary>
     public RaceManager Race => GetComponent<RaceManager>();
 
+    /// <summary>
+    /// 설정 관리
+    /// </summary>
+    public GameSettings Settings { get; private set; }
+
     private void Initiate()
     {
         Save = new SaveManager();
+        Settings = new GameSettings();
         Save.LoadFromPrefs(0); // 자동 세이브 불러오기
 
         // 시간 매니저 추가
@@ -43,13 +49,9 @@ public class GameManager : MonoBehaviour
         for (int i = 180; i < TimeManager.LOOP; i += 180)
             Time.RegisterEvent(i, AutoSave); // 3분마다 자동 저장
 
-        void AutoSave() { if (DoAutoSave) Save.SaveToPrefs(0); }
+        void AutoSave() { if (Settings.DoAutoSave) Save.SaveToPrefs(0); }
     }
 
-    /// <summary>
-    /// 자동저장 여부
-    /// </summary>
-    public bool DoAutoSave { get; set; } = true;
 
     private void Update()
     {
