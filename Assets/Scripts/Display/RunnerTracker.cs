@@ -2,53 +2,55 @@ using UnityEngine;
 
 public class RunnerTracker : MonoBehaviour
 {
-    private Transform runnerTransform;
-    private float lapDistance = 0f;
-    private int lapCount = 0;
-    private float lapStartTime = 0f;
-    private float lapTime = 0f;
-    private Vector3 previousPosition;
+    private Transform runnerTransform;     // 러너의 Transform 컴포넌트
+    private float lapDistance = 0f;         // 현재 주행한 거리
+    private int lapCount = 0;               // 주행한 랩 수
+    private float lapStartTime = 0f;        // 현재 랩의 시작 시간
+    private float lapTime = 0f;             // 현재 랩의 주행 시간
+    public Animator animator;              // Animator 컴포넌트
+    public Transform finishLine;           // 결승지점 Transform
+
+    private bool hasCrossedFinishLine = false;   // 결승지점을 통과했는지 여부
 
     private void Start()
     {
-        runnerTransform = transform;
-        previousPosition = runnerTransform.position;
+        runnerTransform = transform;         // Transform 컴포넌트 할당
     }
 
     private void Update()
     {
-        Vector3 currentPosition = runnerTransform.position;
-        float distanceTraveled = Vector3.Distance(currentPosition, previousPosition);
+        Vector3 currentPosition = runnerTransform.position;                        // 현재 위치
+        float distanceTraveled = Vector3.Distance(currentPosition, runnerTransform.position);    // 이동한 거리 계산
 
-        Vector3 movementDirection = currentPosition - previousPosition;
-        float dotProduct = Vector3.Dot(movementDirection.normalized, runnerTransform.forward);
+        lapDistance += distanceTraveled;                     // 주행한 거리 누적
 
-        if (dotProduct > 0f)
+        if (!hasCrossedFinishLine && IsAtFinishLine())
         {
-            lapDistance += distanceTraveled;
+            hasCrossedFinishLine = true;
+            animator.SetBool("Active", true);
         }
-        else
-        {
-            lapDistance -= distanceTraveled;
-        }
+    }
 
-        previousPosition = currentPosition;
+    private bool IsAtFinishLine()
+    {
+        float distanceToFinishLine = Vector3.Distance(transform.position, finishLine.position);
+        return distanceToFinishLine < 0.5f;
     }
 
     public float GetRankingScore()
     {
-        return lapCount * 10000f - lapTime;
+        return lapCount * 10000f - lapTime;                   // 랭킹 점수 계산하여 반환
     }
 
     public void IncreaseLapCount()
     {
-        lapCount++;
-        lapTime = Time.time - lapStartTime;
-        lapStartTime = Time.time;
+        lapCount++;                                           // 랩 수 증가
+        lapTime = Time.time - lapStartTime;                   // 주행 시간 계산
+        lapStartTime = Time.time;                             // 다음 랩의 시작 시간 설정
     }
 
     public float GetLapTime()
     {
-        return lapTime;
+        return lapTime;                                       // 주행 시간 반환
     }
 }
