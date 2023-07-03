@@ -1,8 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Rendering;
-using UnityEngine.UI;
+using UnityEngine.XR;
 
 public class HandWatchController : MonoBehaviour
 {
@@ -11,8 +8,11 @@ public class HandWatchController : MonoBehaviour
     [SerializeField]
     private GameObject[] canvases = new GameObject[5];
 
+    private PlayerActionHandler action = null;
+
     private void Start()
     {
+        action = PlayerManager.Action();
         RequestModeSwitch(Mode.Main);
     }
 
@@ -35,6 +35,7 @@ public class HandWatchController : MonoBehaviour
     {
         if (mode != Mode.Main)
         {
+            if (PlayerManager.Instance().IsRiding) return; // 말 타는 중에는 조작 금지
             //if (CurMode != Mode.Main) return; // Switching to other mode directly
             CurMode = mode;
         }
@@ -53,7 +54,10 @@ public class HandWatchController : MonoBehaviour
 
     private void Update()
     {
-        
+        if (CurMode == Mode.Main) return;
+        var device = action.GetDevice(0);
+        if (device.TryGetFeatureValue(CommonUsages.devicePosition, out var pos))
+            if (pos.y < -0.5f) RequestModeSwitch(Mode.Main); // 왼손이 너무 내려가면 시계 메뉴 끄기
 
     }
 
