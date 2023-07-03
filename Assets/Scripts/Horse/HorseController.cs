@@ -387,9 +387,11 @@ public class HorseController : MonoBehaviour
     public void OnPlayerRideRequest()
     {
         if (!playerRidable || isPlayerRiding) return;
-        //character.enabled = false;
+        // 말 NPC AI 제거
         pulledTime = 0f; brakeTime = 0f;
         agent.ResetPath();
+        // 플레이어 탑승 상태 변경
+        PlayerManager.Instance().IsRiding = true;
         // 플레이어 추적
         playerOrigin = PlayerManager.InstanceOrigin();
         playerAction = PlayerManager.Action();
@@ -410,12 +412,14 @@ public class HorseController : MonoBehaviour
     public void OnPlayerLeaveRequest()
     {
         if (!isPlayerRiding) return;
-        // 플레이어 말 오른쪽으로 이동
+        // 플레이어를 말 오른쪽으로 이동
         playerOrigin.transform.position = playerSnap.position + playerSnap.right * 2f - playerSnap.up;
         // 플레이어 이동 허용
         playerOrigin.GetComponent<DynamicMoveProvider>().enabled = true;
         playerOrigin.GetComponent<ActionBasedSnapTurnProvider>().enabled = true;
         playerOrigin.GetComponent<ActionBasedContinuousTurnProvider>().enabled = true;
+        // 플레이어 탑승 상태 변경
+        PlayerManager.Instance().IsRiding = false;
         // 플레이어 추적 중단
         playerOrigin.SetParent(PlayerManager.Instance().transform);
         playerOrigin = null;
@@ -426,7 +430,7 @@ public class HorseController : MonoBehaviour
         ropeHinges[1].localPosition = new Vector3(-0.4f, 1.6f, 0.2f);
         // 말 서서히 정지
         targetMode = 0;
-
+        // NPC AI 초기화
         agent.ResetPath();
     }
 

@@ -9,6 +9,21 @@ public class PlayerManager : MonoBehaviour
 {
     public Transform xrOrigin = null;
 
+    public bool IsRiding {
+        get => isRiding;
+        set
+        {
+            if (value) handWatch.RequestModeSwitch(HandWatchController.Mode.Main);
+            isRiding = value;
+        }
+    }
+    private bool isRiding = false;
+
+    /// <summary>
+    /// 소유 중인 말
+    /// </summary>
+    public HorseController horse;
+
     /// <summary>
     /// <see cref="PlayerManager"/> 인스턴스
     /// </summary>
@@ -23,6 +38,9 @@ public class PlayerManager : MonoBehaviour
 
     [SerializeField]
     private PlayerActionHandler actionHandler = null;
+
+    [SerializeField]
+    private HandWatchController handWatch = null;
 
     /// <summary>
     /// 플레이어 액션 핸들러
