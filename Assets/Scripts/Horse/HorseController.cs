@@ -394,7 +394,7 @@ public class HorseController : MonoBehaviour
         PlayerManager.Instance().IsRiding = true;
         // 플레이어 추적
         playerOrigin = PlayerManager.InstanceOrigin();
-        playerAction = PlayerManager.Action();
+        playerAction = PlayerManager.Instance().Action();
         // 플레이어 이동 중지
         playerOrigin.GetComponent<DynamicMoveProvider>().enabled = false;
         playerOrigin.GetComponent<ActionBasedSnapTurnProvider>().enabled = false;
