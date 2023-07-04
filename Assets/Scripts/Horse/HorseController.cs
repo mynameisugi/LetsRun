@@ -15,6 +15,7 @@ public class HorseController : MonoBehaviour
     [SerializeField]
     private Transform[] ropeHinges = new Transform[2];
 
+
     public HorseStats stats = new(2.1f);
 
     /// <summary>
@@ -313,7 +314,6 @@ public class HorseController : MonoBehaviour
             pulled = false;
             braked = false;
         }
-
 
     }
 
