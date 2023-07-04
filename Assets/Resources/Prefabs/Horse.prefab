@@ -1332,7 +1332,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d5110754b281304cb48b7a106d5ae46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  horse: {fileID: 0}
+  horse: {fileID: 1855081934762353251}
   feetAudios:
   - {fileID: 8572689543069451310}
   - {fileID: 1782997780280915463}
