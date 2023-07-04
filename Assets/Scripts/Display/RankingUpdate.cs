@@ -29,6 +29,9 @@ public class RankingUpdate : MonoBehaviour
             runners[j + 1] = currentRunner;
         }
 
+        rankingText.gameObject.SetActive(true);
+        rankingText2.gameObject.SetActive(true);
+
         UpdateRankingText(); // 랭킹 텍스트 업데이트
     }
 
