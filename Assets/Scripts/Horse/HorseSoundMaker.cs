@@ -44,7 +44,7 @@ public class HorseSoundMaker : MonoBehaviour
             AudioSource source = GetFootAudioSource(foot);
             AudioClip clip = GetFootsound(source);
             source.clip = clip;
-            source.pitch = Random.Range(0.8f, 1.2f);
+            source.pitch = Random.Range(0.9f, 1.1f);
             source.Play();
         }
     }
@@ -53,7 +53,8 @@ public class HorseSoundMaker : MonoBehaviour
     private static AudioClip GetFootsound(AudioSource source)
     {
         AudioClip clip;
-        clip = Resources.Load("Sounds/Horse/walksound") as AudioClip;
+        clip = Resources.Load("Sounds/Horse/Walksound" + Random.Range(1, 5).ToString()) as AudioClip;
+        
         // 이건 땅 아래의 재질에 따라 다른 발소리를 내는 예시인데,
         // 이걸 빼고 그냥 랜덤한 발소리를 재생하는 걸로 일단 해도 됨.
         /*
@@ -88,7 +89,7 @@ public class HorseSoundMaker : MonoBehaviour
         AudioSource source = GetFootAudioSource(foot);
         AudioClip clip = GetFootsound(source);
         source.clip = clip;
-        source.pitch = Random.Range(0.8f, 1.2f);
+        source.pitch = Random.Range(0.9f, 1.1f);
         source.Play();
     }
 
@@ -106,7 +107,7 @@ public class HorseSoundMaker : MonoBehaviour
             AudioSource source = GetFootAudioSource(foot);
             AudioClip clip = GetFootsound(source);
             source.clip = clip;
-            source.pitch = Random.Range(0.8f, 1.2f);
+            source.pitch = Random.Range(0.9f, 1.1f);
             source.Play();
         }
     }
@@ -124,7 +125,7 @@ public class HorseSoundMaker : MonoBehaviour
         AudioSource source = GetFootAudioSource(foot);
         AudioClip clip = GetFootsound(source);
         source.clip = clip;
-        source.pitch = Random.Range(0.8f, 1.2f);
+        source.pitch = Random.Range(0.9f, 1.1f);
         source.Play();
     }
 }
