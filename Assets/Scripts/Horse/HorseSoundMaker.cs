@@ -70,8 +70,7 @@ public class HorseSoundMaker : MonoBehaviour
         AudioClip clip = GetFootsound(source);
         source.clip = clip;
         source.pitch = Random.Range(0.9f, 1.1f);
-        source.volume = 0.3f;
-        if (!horse.isPlayerRiding) source.volume *= 0.5f;
+        source.volume = 0.5f;
         source.Play();
 
         bool left = IsLeft(foot);
@@ -97,8 +96,7 @@ public class HorseSoundMaker : MonoBehaviour
             AudioClip clip = GetFootsound(source);
             source.clip = clip;
             source.pitch = Random.Range(0.9f, 1.1f);
-            source.volume = 0.2f;
-            if (!horse.isPlayerRiding) source.volume *= 0.5f;
+            source.volume = 0.3f;
             source.Play();
             if (IsLeft(foot)) ++l; else ++r;
         }
@@ -122,8 +120,7 @@ public class HorseSoundMaker : MonoBehaviour
             AudioClip clip = GetFootsound(source);
             source.clip = clip;
             source.pitch = Random.Range(0.9f, 1.1f);
-            source.volume = 0.5f;
-            if (!horse.isPlayerRiding) source.volume *= 0.5f;
+            source.volume = 0.7f;
             source.Play();
             if (IsLeft(foot)) ++l; else ++r;
         }
@@ -144,8 +141,7 @@ public class HorseSoundMaker : MonoBehaviour
         AudioClip clip = GetFootsound(source);
         source.clip = clip;
         source.pitch = Random.Range(0.9f, 1.1f);
-        source.volume = 0.8f;
-        if (!horse.isPlayerRiding) source.volume *= 0.5f;
+        source.volume = 1.0f;
         source.Play();
 
         bool left = IsLeft(foot);
