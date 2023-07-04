@@ -40,6 +40,7 @@ public class RankingUpdate : MonoBehaviour
         {
             RunnerTracker runner = runners[i]; // 러너 객체
             float lapTime = runner.GetLapTime(); // 주행 시간
+            if (lapTime == 0f) break;
 
             rankingBuilder.Append($"Rank {i + 1}: {runner.name}           (Time: {lapTime.ToString("F2")}s)\n");
         }
