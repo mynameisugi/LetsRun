@@ -15,21 +15,21 @@ public struct HorseStats
     /// <summary>
     /// 평보 속도 (1단계)
     /// </summary>
-    public float SpeedWalk { get => speeds[0]; set => speeds[0] = Mathf.Clamp(value, MinStats[0], MaxStats[0]); }
+    public float SpeedWalk { get => speeds[0] * 2f; set => speeds[0] = Mathf.Clamp(value, MinStats[0], MaxStats[0]); }
     /// <summary>
     /// 속보 속도 (2단계)
     /// </summary>
-    public float SpeedTrot { get => speeds[1]; set => speeds[1] = Mathf.Clamp(value, MinStats[1], MaxStats[1]); }
+    public float SpeedTrot { get => speeds[1] * 2f; set => speeds[1] = Mathf.Clamp(value, MinStats[1], MaxStats[1]); }
     /// <summary>
     /// 구보 속도 (3단계)
     /// </summary>
-    public float SpeedCanter { get => speeds[2]; set => speeds[2] = Mathf.Clamp(value, MinStats[2], MaxStats[2]); }
+    public float SpeedCanter { get => speeds[2] * 2f; set => speeds[2] = Mathf.Clamp(value, MinStats[2], MaxStats[2]); }
     /// <summary>
     /// 습보 속도 (4단계 - 전력 질주)
     /// </summary>
     public float SpeedGallop
     {
-        get => speeds[3];
+        get => speeds[3] * 2f;
         set
         {
             speeds[3] = Mathf.Clamp(value, MinStats[3], MaxStats[3]);
@@ -45,7 +45,7 @@ public struct HorseStats
     /// <summary>
     /// 커브 속도
     /// </summary>
-    public float SteerStrength { get => steerStrength; set => steerStrength = Mathf.Clamp(value, MinStats[5], MaxStats[5]); }
+    public float SteerStrength { get => steerStrength * 1.5f; set => steerStrength = Mathf.Clamp(value, MinStats[5], MaxStats[5]); }
 
     [SerializeField]
     private float[] speeds;

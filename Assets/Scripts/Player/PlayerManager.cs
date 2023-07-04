@@ -39,8 +39,7 @@ public class PlayerManager : MonoBehaviour
     [SerializeField]
     private PlayerActionHandler actionHandler = null;
 
-    [SerializeField]
-    private HandWatchController handWatch = null;
+    internal HandWatchController handWatch = null;
 
     /// <summary>
     /// 플레이어 액션 핸들러
@@ -59,4 +58,6 @@ public class PlayerManager : MonoBehaviour
         inventory = new PlayerInventory(this);
     }
 
+
+    public GameObject mapCamera;
 }

@@ -1,10 +1,14 @@
 ﻿using UnityEngine;
+using UnityEngine.Rendering;
 
 [RequireComponent(typeof(HorseController))]
 public class HorseAnimator : MonoBehaviour
 {
     [SerializeField]
     private Animator animCtrler;
+
+    [SerializeField]
+    private ParticleSystem speedEffect = null;
 
     [Header("Bones")]
     [SerializeField]
@@ -47,6 +51,8 @@ public class HorseAnimator : MonoBehaviour
 
         neckRotOrigins = new Vector3[necks.Length];
         for (int i = 0; i < necks.Length; ++i) neckRotOrigins[i] = necks[i].localRotation.eulerAngles;
+
+        speedEffect.gameObject.SetActive(false);
     }
 
     public struct AnimData
@@ -98,8 +104,18 @@ public class HorseAnimator : MonoBehaviour
                 neckRotOrigins[i].y + displayRot,
                 neckRotOrigins[i].z + breathSin * 3f - data.curMode * 6f);
         }
-
         rope.Update();
+
+        if (horse.isPlayerRiding && data.curMode > 3f)
+        {
+            speedEffect.gameObject.SetActive(true);
+            var emit = speedEffect.emission;
+            emit.rateOverTime = (data.curMode - 3f) * 20f;
+            var main = speedEffect.main;
+            main.startSpeed = Mathf.Lerp(20f, 80f, (horse.stats.SpeedGallop * 0.5f - HorseStats.MinStats[3]) / (HorseStats.MaxStats[3] - HorseStats.MinStats[3]));
+        }
+        else
+            speedEffect.gameObject.SetActive(false);
     }
 
     private bool active = true;

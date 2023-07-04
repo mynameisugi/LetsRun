@@ -10,6 +10,7 @@ public class HandWatchController : MonoBehaviour
 
     private void Start()
     {
+        PlayerManager.Instance().handWatch = this;
         action = PlayerManager.Instance().Action();
         RequestModeSwitch(Mode.Main);
     }
