@@ -281,7 +281,7 @@ public class HorseController : MonoBehaviour
 
         if (handOffset < pulledOffset)
         {
-            pulledOffset = handOffset;
+            if (brakeTime < 0.1f) pulledOffset = Mathf.Min(pulledOffset, handOffset);
             pushedOffset = pulledOffset + PUSHPULL;
             pulled = true;
             pulledTime = Time.timeSinceLevelLoad;
