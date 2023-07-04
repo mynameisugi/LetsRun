@@ -223,7 +223,7 @@ public class HorseController : MonoBehaviour
 
     private void NPCWanderUpdate()
     {
-        agent.speed = curSpeed;
+        agent.speed = curSpeed * 3f;
 
         if (!agent.hasPath)
         {

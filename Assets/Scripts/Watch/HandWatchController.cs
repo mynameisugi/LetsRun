@@ -54,9 +54,9 @@ public class HandWatchController : MonoBehaviour
     private void Update()
     {
         if (CurMode == Mode.Main) return;
-        var device = action.GetDevice(0);
-        if (device.TryGetFeatureValue(CommonUsages.devicePosition, out var pos))
-            if (pos.y < -0.5f) RequestModeSwitch(Mode.Main); // 왼손이 너무 내려가면 시계 메뉴 끄기
+        //var device = action.GetDevice(0);
+        //if (device.TryGetFeatureValue(CommonUsages.devicePosition, out var pos))
+        //    if (pos.y < -0.5f) RequestModeSwitch(Mode.Main); // 왼손이 너무 내려가면 시계 메뉴 끄기
     }
 
 }
