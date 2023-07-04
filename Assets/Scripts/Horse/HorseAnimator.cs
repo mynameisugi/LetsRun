@@ -83,11 +83,11 @@ public class HorseAnimator : MonoBehaviour
 
     private void Update()
     {
-        if (!active) return;
+        if (!active) { animCtrler.SetFloat("mode", 0f); return; }
 
         breath += Time.deltaTime * (Mathf.Lerp(1f, 3f, data.curMode / 4f));
         float breathSin = Mathf.Sin(breath);
-        displayRot = Mathf.MoveTowards(displayRot, Mathf.Clamp(-data.curRotate * 2f, -20f, 20f), Time.deltaTime * 12f);
+        displayRot = Mathf.MoveTowards(displayRot, Mathf.Clamp(-data.curRotate, -20f, 20f), Time.deltaTime * 12f);
 
         animCtrler.SetFloat("mode", data.curMode);
 
@@ -122,7 +122,7 @@ public class HorseAnimator : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (Vector3.Distance(transform.position, Camera.main.transform.position) < 100f)
+        if (Vector3.Distance(transform.position, Camera.main.transform.position) < 200f)
         {
             if (!active) rope.Reset();
             rope.FixedUpdate(); active = true;

@@ -28,7 +28,7 @@ public class HorseController : MonoBehaviour
 
     private Transform playerOrigin = null;
 
-    private PlayerActionHandler playerAction = null;
+    internal PlayerActionHandler playerAction = null;
 
     private Rigidbody sphere;
     private NavMeshAgent agent;
