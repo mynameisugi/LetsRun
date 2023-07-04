@@ -1571,7 +1571,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 7500515337495512337}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1231842522275022631}
+        m_TargetAssemblyTypeName: HWPopup, Assembly-CSharp
+        m_MethodName: OnClickedYes
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1582201049100823227
 GameObject:
   m_ObjectHideFlags: 0
@@ -4823,7 +4835,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 8319028256023777475}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1231842522275022631}
+        m_TargetAssemblyTypeName: HWPopup, Assembly-CSharp
+        m_MethodName: OnClickedNo
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &4471653965598826832
 GameObject:
   m_ObjectHideFlags: 0
@@ -5255,6 +5279,7 @@ GameObject:
   - component: {fileID: 1298964983512573952}
   - component: {fileID: 410545985367809619}
   - component: {fileID: 2423965596675943362}
+  - component: {fileID: 1231842522275022631}
   m_Layer: 5
   m_Name: PanelPopup
   m_TagString: Untagged
@@ -5325,6 +5350,20 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &1231842522275022631
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4980485367993865853}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b3e5b1cc1ee7f3d4bbe04e5bd4cb8361, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  textTitle: {fileID: 5946367815366395555}
+  textDesc: {fileID: 1978521752405246812}
 --- !u!1 &5156448122359953208
 GameObject:
   m_ObjectHideFlags: 0
