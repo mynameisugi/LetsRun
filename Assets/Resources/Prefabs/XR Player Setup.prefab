@@ -49,7 +49,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   xrOrigin: {fileID: 2775505189119933495}
+  horse: {fileID: 0}
   actionHandler: {fileID: 2817339928387967225}
+  mapCamera: {fileID: 0}
 --- !u!1 &7434560257493031411
 GameObject:
   m_ObjectHideFlags: 0
@@ -514,6 +516,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_TrackingStateInput.m_Action.m_Name
       value: Tracking State Input
+      objectReference: {fileID: 0}
+    - target: {fileID: 6232745470614056091, guid: f6336ac4ac8b4d34bc5072418cdc62a0,
+        type: 3}
+      propertyPath: m_MoveSpeed
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6262581375458096094, guid: f6336ac4ac8b4d34bc5072418cdc62a0,
         type: 3}
