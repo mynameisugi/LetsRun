@@ -7,6 +7,7 @@ public class RankingUpdate : MonoBehaviour
 {
     public List<RunnerTracker> runners; // RunnerTracker 객체를 담는 리스트
     public Text rankingText; // 랭킹을 표시할 텍스트
+    public Text rankingText2; // 랭킹을 표시할 텍스트
 
     private StringBuilder rankingBuilder = new StringBuilder(); // 랭킹 텍스트를 구성하기 위한 StringBuilder 객체
 
@@ -46,5 +47,6 @@ public class RankingUpdate : MonoBehaviour
         }
 
         rankingText.text = rankingBuilder.ToString(); // 텍스트 업데이트
+        rankingText2.text = rankingBuilder.ToString(); // 텍스트 업데이트
     }
 }
