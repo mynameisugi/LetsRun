@@ -64,7 +64,7 @@ public struct HorseStats
         mode = Mathf.Clamp(mode - 1f, 0f, 3f);
         int intMode = Mathf.FloorToInt(mode); float offset = mode - intMode;
         //if (offset == 0f) return speeds[intMode];
-        return Mathf.Lerp(speeds[intMode], speeds[intMode + 1], offset);
+        return Mathf.Lerp(speeds[intMode], speeds[intMode + 1], offset) * 2f;
     }
 
     private float gallopAmount;

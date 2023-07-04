@@ -1,13 +1,14 @@
 ﻿using UnityEngine;
-using static HorseSoundMaker;
 using static HorseSoundMaker.Foot;
-using static Unity.VisualScripting.Member;
 
 /// <summary>
 /// 말의 소리를 재생
 /// </summary>
 public class HorseSoundMaker : MonoBehaviour
 {
+    [SerializeField]
+    private HorseController horse;
+
     [SerializeField]
     private AudioSource[] feetAudios;
 
@@ -22,39 +23,18 @@ public class HorseSoundMaker : MonoBehaviour
         FrontRight = 3
     }
 
+    private static bool IsLeft(Foot foot) => foot == FrontLeft || foot == RearLeft;
+
     private AudioSource GetFootAudioSource(Foot foot) => feetAudios[(int)foot];
 
-    // 예시. 이를 참고해 OnFootWalkStep, OnFootCanterStep, OnFootGallopStep을 만들면 됨.
-    // 애니메이션은 Assets/Resources/Models/Horse에 H_로 시작하는 애니메이션 5개가 있고,
-    // 그 중 H_Trot은 내가 예시로 Animation Event를 세팅해뒀음.
-    public void OnFootTrotStep(int i)
-    {
-        // Trot 애니메이션은 발굽 3개가 동시에 닿아서 이렇게 배열을 만듦
-        Foot[] feet = i switch
-        {
-            0 => new Foot[] { RearLeft, RearRight, FrontRight },
-            1 => new Foot[] { RearLeft, RearRight, FrontLeft },
-            2 => new Foot[] { RearLeft, RearRight, FrontRight },
-            _ => new Foot[] { RearLeft, RearRight, FrontLeft }
-        };
-        //Debug.Log($"{transform.root.gameObject.name} OnFootTrotStep {i}");
-        // 바닥에 닿은 발굽마다 소리 재생
-        foreach (var foot in feet)
-        {
-            AudioSource source = GetFootAudioSource(foot);
-            AudioClip clip = GetFootsound(source);
-            source.clip = clip;
-            source.pitch = Random.Range(0.9f, 1.1f);
-            source.Play();
-        }
-    }
+
 
     // 발소리를 Resources에 추가하고 이를 고쳐야 함.
     private static AudioClip GetFootsound(AudioSource source)
     {
         AudioClip clip;
         clip = Resources.Load("Sounds/Horse/Walksound" + Random.Range(1, 5).ToString()) as AudioClip;
-        
+
         // 이건 땅 아래의 재질에 따라 다른 발소리를 내는 예시인데,
         // 이걸 빼고 그냥 랜덤한 발소리를 재생하는 걸로 일단 해도 됨.
         /*
@@ -90,7 +70,40 @@ public class HorseSoundMaker : MonoBehaviour
         AudioClip clip = GetFootsound(source);
         source.clip = clip;
         source.pitch = Random.Range(0.9f, 1.1f);
+        source.volume = 0.3f;
+        if (!horse.isPlayerRiding) source.volume *= 0.5f;
         source.Play();
+
+        bool left = IsLeft(foot);
+        SendHapticFeedback(left ? 0.03f : 0f, left ? 0f : 0.03f);
+    }
+
+    public void OnFootTrotStep(int i)
+    {
+        // Trot 애니메이션은 발굽 3개가 동시에 닿아서 이렇게 배열을 만듦
+        Foot[] feet = i switch
+        {
+            0 => new Foot[] { RearLeft, RearRight, FrontRight },
+            1 => new Foot[] { RearLeft, RearRight, FrontLeft },
+            2 => new Foot[] { RearLeft, RearRight, FrontRight },
+            _ => new Foot[] { RearLeft, RearRight, FrontLeft }
+        };
+
+        // 바닥에 닿은 발굽마다 소리 재생
+        int l = 0, r = 0;
+        foreach (var foot in feet)
+        {
+            AudioSource source = GetFootAudioSource(foot);
+            AudioClip clip = GetFootsound(source);
+            source.clip = clip;
+            source.pitch = Random.Range(0.9f, 1.1f);
+            source.volume = 0.2f;
+            if (!horse.isPlayerRiding) source.volume *= 0.5f;
+            source.Play();
+            if (IsLeft(foot)) ++l; else ++r;
+        }
+
+        SendHapticFeedback(0.05f * l, 0.05f * r);
     }
 
     public void OnFootCanterStep(int i)
@@ -102,14 +115,19 @@ public class HorseSoundMaker : MonoBehaviour
             _ => new Foot[] { RearLeft, RearRight }
         };
 
+        int l = 0, r = 0;
         foreach (var foot in feet)
         {
             AudioSource source = GetFootAudioSource(foot);
             AudioClip clip = GetFootsound(source);
             source.clip = clip;
             source.pitch = Random.Range(0.9f, 1.1f);
+            source.volume = 0.5f;
+            if (!horse.isPlayerRiding) source.volume *= 0.5f;
             source.Play();
+            if (IsLeft(foot)) ++l; else ++r;
         }
+        SendHapticFeedback(0.08f * l, 0.08f * r);
     }
 
     public void OnFootGallopStep(int i)
@@ -126,6 +144,18 @@ public class HorseSoundMaker : MonoBehaviour
         AudioClip clip = GetFootsound(source);
         source.clip = clip;
         source.pitch = Random.Range(0.9f, 1.1f);
+        source.volume = 0.8f;
+        if (!horse.isPlayerRiding) source.volume *= 0.5f;
         source.Play();
+
+        bool left = IsLeft(foot);
+        SendHapticFeedback(left ? 0.2f : 0f, left ? 0f : 0.2f);
+    }
+
+    private void SendHapticFeedback(float leftAmplitude, float rightAmplitude)
+    {
+        if (!horse.isPlayerRiding) return;
+        if (leftAmplitude > 0f) horse.playerAction.GetDevice(0).SendHapticImpulse(0, leftAmplitude, 0.05f);
+        if (rightAmplitude > 0f) horse.playerAction.GetDevice(1).SendHapticImpulse(0, rightAmplitude, 0.05f);
     }
 }
