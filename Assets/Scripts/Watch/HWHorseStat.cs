@@ -12,7 +12,7 @@ public class HWHorseStat : MonoBehaviour
     {
         curDisplay = 0f;
         targetDisplay = target * 300f;
-        Debug.Log($"{gameObject.name} {targetDisplay}");
+        // Debug.Log($"{gameObject.name} {targetDisplay}");
     }
 
     private void Update()

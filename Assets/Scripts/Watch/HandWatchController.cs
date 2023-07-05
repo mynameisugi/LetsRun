@@ -33,12 +33,10 @@ public class HandWatchController : MonoBehaviour
     public void RequestModeSwitch(Mode mode)
     {
         if (mode != Mode.Main)
-        {
             if (PlayerManager.Instance().IsRiding) return; // 말 타는 중에는 조작 금지
-            //if (CurMode != Mode.Main) return; // Switching to other mode directly
-            CurMode = mode;
-        }
-        else CurMode = mode;
+        else if (CurMode == mode) mode = Mode.Main; // 다시 클릭: 메뉴 끄기
+        // Debug.Log($"RequestModSwitch {CurMode} > {mode}");
+        CurMode = mode;
         ToggleCanvases(mode);
 
         void ToggleCanvases(Mode newMode)
@@ -54,9 +52,9 @@ public class HandWatchController : MonoBehaviour
     private void Update()
     {
         if (CurMode == Mode.Main) return;
-        //var device = action.GetDevice(0);
-        //if (device.TryGetFeatureValue(CommonUsages.devicePosition, out var pos))
-        //    if (pos.y < -0.5f) RequestModeSwitch(Mode.Main); // 왼손이 너무 내려가면 시계 메뉴 끄기
+        var device = action.GetDevice(0);
+        if (device.TryGetFeatureValue(CommonUsages.devicePosition, out var pos))
+            if (pos.y < -0.2f) RequestModeSwitch(Mode.Main); // 왼손이 너무 내려가면 시계 메뉴 끄기
     }
 
 }
