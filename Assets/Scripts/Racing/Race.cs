@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 using static RaceManager;
 using Random = UnityEngine.Random;
@@ -40,7 +41,7 @@ public class Race : MonoBehaviour
         entryObj.transform.rotation = info.GetStartPos(entryFilled).rotation;
         // 말에게 경기 정보 전달
         entries[entryFilled].NPCJoinRace(this);
-        Skip: ++entryFilled;
+    Skip: ++entryFilled;
         // 다음 참가자 0.1초 뒤 생성
         if (entryFilled < entries.Length) Invoke(nameof(CreateEntry), 0.1f);
     }
@@ -96,6 +97,28 @@ public class Race : MonoBehaviour
         }
     }
 
+    public void HorseGoal(HorseController horse)
+    {
+        int num = -1;
+        if (horse.isPlayerRiding && playerNum >= 0)
+        { num = playerNum; }
+        else if (horse.isRacing)
+        {
+            for (int i = 0; i < entries.Length; ++i)
+                if (entries[i] == horse)
+                {
+                    num = i;
+                    // TODO: NPC 말을 도착지로 유도
+                    break;
+                }
+        }
+        if (num < 0) return; // 경주에 참가한 말이 아님
+
+        goalInfos.Add(new(horse, num, GameManager.Instance().Time.Now));
+    }
+
+    public List<GoalInfo> goalInfos = new(8);
+
     [Serializable]
     public struct RaceInfo
     {
@@ -142,6 +165,20 @@ public class Race : MonoBehaviour
             };
 
             return stats;
+        }
+    }
+
+    public readonly struct GoalInfo
+    {
+        public readonly HorseController horse;
+        public readonly int index;
+        public readonly float time;
+
+        public GoalInfo(HorseController horse, int index, float time)
+        {
+            this.horse = horse;
+            this.index = index;
+            this.time = time;
         }
     }
 }

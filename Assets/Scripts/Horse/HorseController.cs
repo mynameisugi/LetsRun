@@ -58,6 +58,7 @@ public class HorseController : MonoBehaviour
     {
         var sphereObj = new GameObject($"{gameObject.name} Sphere") { layer = 7 };
         sphereObj.transform.position = gameObject.transform.position + gameObject.transform.up * RAD;
+        sphereObj.AddComponent<HorseSphere>().horse = this;
         sphere = sphereObj.AddComponent<Rigidbody>();
         sphere.useGravity = false;
         sphere.drag = 1f;
