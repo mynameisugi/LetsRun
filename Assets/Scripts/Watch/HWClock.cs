@@ -58,7 +58,8 @@ public class HWClock : MonoBehaviour
     public void OnArmDragEnd()
     {
         dragMode = 2;
-        int offset = Mathf.FloorToInt(dragAngle / 360f * TimeManager.LOOP - (TimeManager.LOOP - time.Now));
+        int offset = Mathf.FloorToInt((TimeManager.LOOP - time.Now) - dragAngle / 360f * TimeManager.LOOP);
+        //Debug.Log($"offset {offset}: dragAngle {dragAngle} rot {(TimeManager.LOOP - time.Now) * 360f / TimeManager.LOOP}");
         if (offset < 10) { dragMode = 0; return; }
         string offsetText = "";
         if (offset > 60) offsetText = $"{offset / 60}분 ";
@@ -66,7 +67,11 @@ public class HWClock : MonoBehaviour
 
         popup.OpenPopup("시간을 넘기겠습니까?",
             $"{offsetText} 뒤로\r\n시간을 넘깁니다.",
-            () => { Time.timeScale = 1f; dragMode = 0; },
+            () => {
+                dragMode = 0;
+                GameManager.Instance().Time.RequestSkipForward(offset);
+                transform.parent.GetComponent<HandWatchController>().RequestModeSwitch(HandWatchController.Mode.Main);
+            },
             () => { Time.timeScale = 1f; dragMode = 0; });
     }
 }

@@ -33,14 +33,34 @@ public class TimeManager
     {
         if (events.Count > 0 && Now < nextEvent && Now + Time.deltaTime >= nextEvent)
         {
-            // 다음 이벤트를 시행할 시간이 되면 등록된 이벤트 시행
-            foreach (var a in events[nextEventIdx].actions) a?.Invoke();
-            // 다음 이벤트 시간을 마크
-            nextEventIdx = (nextEventIdx + 1) % events.Count;
-            nextEvent = events[nextEventIdx].time;
+            InvokeEvents();
         }
         // 현재 시간 갱신
         Now = (Now + Time.deltaTime) % LOOP;
+    }
+
+    private void InvokeEvents()
+    {
+        // 다음 이벤트를 시행할 시간이 되면 등록된 이벤트 시행
+        foreach (var a in events[nextEventIdx].actions) a?.Invoke();
+        // 다음 이벤트 시간을 마크
+        nextEventIdx = (nextEventIdx + 1) % events.Count;
+        nextEvent = events[nextEventIdx].time;
+    }
+
+    public void RequestSkipForward(int skip)
+    {
+        // TODO: IEnumerator로 만들고, 페이드 아웃 / 인 효과 넣기
+        int now = Mathf.FloorToInt(Now);
+        for (int i = 0; i < skip; ++i)
+        {
+            ++now;
+            if (nextEvent == now) InvokeEvents();
+        }
+        Now = now;
+        Time.timeScale = 1f;
+        if (GameManager.Instance().Settings.DoAutoSave) // 자동 저장
+            GameManager.Instance().Save.SaveToPrefs(0);
     }
 
     private readonly List<Event> events = new();
@@ -79,7 +99,7 @@ public class TimeManager
         events.Add(new Event(time, action));
         events.Sort(Event.Comparer);
         if (events.Count == 1 || // 첫 이벤트이거나
-            (Now < time && time < nextEvent)) // 새 이벤트가 다음 이벤트보다 먼저면
+            (Now < time && (nextEvent < Now || time < nextEvent))) // 새 이벤트가 다음 이벤트보다 먼저면
             nextEvent = time; // 다음 이벤트를 새 이벤트로 재지정
         nextEventIdx = events.FindIndex(x => x.time == nextEvent); // 다음 이벤트 인덱스 다시 찾기
     }

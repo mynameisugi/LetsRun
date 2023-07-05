@@ -46,6 +46,7 @@ public class Race : MonoBehaviour
 
     private void StartRace()
     {
+        GameManager.Instance().Time.UnregisterEvent(TimeManager.LOOP, StartRace);
         Debug.Log($"Race Start! {info.type}");
         stage = RaceStage.Racing;
         foreach (var entry in entries) if (entry) entry.StartRace();
