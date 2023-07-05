@@ -89,4 +89,5 @@ public struct HorseStats
     }
 
     private static Material[] skinLibrary;
+
 }
