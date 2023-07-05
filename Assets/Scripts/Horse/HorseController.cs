@@ -42,6 +42,18 @@ public class HorseController : MonoBehaviour
 
     private const float RAD = 0.5f;
 
+    public void Teleport(Vector3 position, Quaternion rotation)
+    {
+        transform.rotation = rotation;
+        sphere.transform.position = position;
+        sphere.transform.rotation = rotation;
+        sphere.velocity = Vector3.zero;
+        agent.ResetPath();
+        curMode = 0f; targetMode = 0;
+        curSpeed = 0f; curRotate = 0;
+        Update();
+    }
+
     private void Start()
     {
         var sphereObj = new GameObject($"{gameObject.name} Sphere") { layer = 7 };

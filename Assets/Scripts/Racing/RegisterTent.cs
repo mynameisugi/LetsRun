@@ -8,7 +8,7 @@ public class RegisterTent : MonoBehaviour
     [SerializeField]
     private GameObject ticketPrefab;
 
-    private RegisterTicket ticket;
+    internal RegisterTicket ticket;
 
 
     public void OnNewTicketGrabbed(XRSimpleInteractable pile)
@@ -20,5 +20,11 @@ public class RegisterTent : MonoBehaviour
         pile.interactionManager.SelectEnter(pile.firstInteractorSelecting, ticketGrab);
         //ticketGrab.interactorsSelecting.Add(pile.firstInteractorSelecting);
         //ticket.transform.SetPositionAndRotation(fakeTicket.position, fakeTicket.rotation);
+    }
+
+    public void ReceiveTicket()
+    {
+        GameManager.Instance().Race.RegisterPlayer(ticket.ParseTicket());
+        Destroy(ticket.gameObject); ticket = null;
     }
 }

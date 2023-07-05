@@ -1,5 +1,4 @@
 ﻿using System;
-using UnityEditorInternal.Profiling.Memory.Experimental.FileFormat;
 using UnityEngine;
 using static RaceManager;
 using Random = UnityEngine.Random;
@@ -16,7 +15,7 @@ public class Race : MonoBehaviour
     {
         Debug.Log($"Race Ready: {info.type}");
 
-        stage = RaceStage.Prepare; // 준비
+        Status = RaceStage.Prepare; // 준비
 
         // 참가자 생성
         entries = new HorseController[8];
@@ -29,6 +28,8 @@ public class Race : MonoBehaviour
 
     private void CreateEntry()
     {
+        // 플레이어가 이미 차지한 자리면 스킵
+        if (playerNum == entryFilled) goto Skip;
         // 새로운 참가자 말 생성
         var entryObj = Instantiate(horsePrefab);
         entryObj.name = $"Horse RaceEntry{entryFilled + 1}";
@@ -39,7 +40,7 @@ public class Race : MonoBehaviour
         entryObj.transform.rotation = info.GetStartPos(entryFilled).rotation;
         // 말에게 경기 정보 전달
         entries[entryFilled].NPCJoinRace(this);
-        ++entryFilled;
+        Skip: ++entryFilled;
         // 다음 참가자 0.1초 뒤 생성
         if (entryFilled < entries.Length) Invoke(nameof(CreateEntry), 0.1f);
     }
@@ -48,15 +49,35 @@ public class Race : MonoBehaviour
     {
         GameManager.Instance().Time.UnregisterEvent(TimeManager.LOOP, StartRace);
         Debug.Log($"Race Start! {info.type}");
-        stage = RaceStage.Racing;
+        Status = RaceStage.Racing;
         foreach (var entry in entries) if (entry) entry.StartRace();
+    }
+
+    private int playerNum = -1;
+
+    public void AddPlayer(int num)
+    {
+        playerNum = num;
+        if (entries[playerNum]) // 이미 NPC가 있으면 삭제
+        {
+            Destroy(entries[playerNum].gameObject);
+            entries[playerNum] = null;
+        }
+    }
+
+    public void JoinPlayer()
+    {
+        var playerHorse = PlayerManager.Instance().horse;
+        playerHorse.OnPlayerRideRequest();
+        var start = info.GetStartPos(playerNum);
+        playerHorse.Teleport(start.position, start.rotation);
     }
 
     public RaceInfo info;
 
-    private RaceStage stage;
+    internal RaceStage Status { get; private set; }
 
-    private enum RaceStage
+    public enum RaceStage
     {
         Prepare, // 1분전. 경쟁자 말을 생성하고 케이지에 배치
         Racing, // 경주중/직후. 트랙 안의 말은 달리고, 도착한 말은 텐트로 이동.
