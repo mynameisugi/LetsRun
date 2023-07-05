@@ -163,15 +163,15 @@ public class HorseController : MonoBehaviour
     {
         BoxCollider nextNode = raceInfo.trackNodes[nextNodeIndex];
         Vector3 point = new(
-            Random.Range(nextNode.bounds.min.x, nextNode.bounds.max.x),
+            Random.Range(nextNode.bounds.min.x + 1f, nextNode.bounds.max.x - 1f),
             nextNode.bounds.max.y,
-            Random.Range(nextNode.bounds.min.z, nextNode.bounds.max.z)
+            Random.Range(nextNode.bounds.min.z + 1f, nextNode.bounds.max.z - 1f)
         );
         //point = nextNode.transform.TransformPoint(point);
         if (Physics.Raycast(point, Vector3.down, out var info, 10f, LayerMask.GetMask("Ground")))
             point = info.point;
         agent.SetDestination(point);
-        Debug.Log($"{gameObject.name} goes to node {nextNodeIndex} {point} (dist: {Vector3.Distance(point, sphere.position)})");
+        //Debug.Log($"{gameObject.name} goes to node {nextNodeIndex} {point} (dist: {Vector3.Distance(point, sphere.position)})");
 
         ++nextNodeIndex;
         if (nextNodeIndex >= raceInfo.trackNodes.Length) nextNodeIndex = -1;
@@ -181,10 +181,12 @@ public class HorseController : MonoBehaviour
     {
         if (nextNodeIndex < 0) return; // ´ë±âÁß
 
+        agent.speed = curSpeed;
+
         Vector3 next = agent.destination;
         if (Vector3.Distance(next, sphere.position) < 2f)
         {
-            Debug.Log($"{gameObject.name}: {next} ~ {sphere.position} ({Vector3.Distance(next, sphere.position)})");
+            //Debug.Log($"{gameObject.name}: {next} ~ {sphere.position} ({Vector3.Distance(next, sphere.position)})");
             TargetNextNode();
         }
         float rotate = Mathf.Atan2(next.x - transform.position.x, next.z - transform.position.z) * Mathf.Rad2Deg;
@@ -236,7 +238,7 @@ public class HorseController : MonoBehaviour
 
     private void NPCWanderUpdate()
     {
-        agent.speed = curSpeed * 3f;
+        agent.speed = curSpeed;
 
         if (!agent.hasPath)
         {
@@ -378,7 +380,7 @@ public class HorseController : MonoBehaviour
     {
         if (isPlayerRiding)
         {
-            var vel = transform.forward * curSpeed;
+            var vel = curSpeed * transform.forward;
             vel.y = sphere.velocity.y;
             sphere.velocity = vel;
         }

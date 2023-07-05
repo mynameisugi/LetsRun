@@ -42,7 +42,7 @@ public class TimeManager
     private void InvokeEvents()
     {
         // 다음 이벤트를 시행할 시간이 되면 등록된 이벤트 시행
-        foreach (var a in events[nextEventIdx].actions) a?.Invoke();
+        foreach (var a in events[nextEventIdx].actions.ToArray()) a?.Invoke();
         // 다음 이벤트 시간을 마크
         nextEventIdx = (nextEventIdx + 1) % events.Count;
         nextEvent = events[nextEventIdx].time;

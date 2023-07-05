@@ -115,6 +115,7 @@ public class Race : MonoBehaviour
         if (num < 0) return; // 경주에 참가한 말이 아님
 
         goalInfos.Add(new(horse, num, GameManager.Instance().Time.Now));
+        Debug.Log($"Goal! {horse.gameObject.name} at {GameManager.Instance().Time.Now:0.00}");
     }
 
     public List<GoalInfo> goalInfos = new(8);
