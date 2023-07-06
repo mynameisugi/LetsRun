@@ -108,9 +108,9 @@ public class HorseSoundMaker : MonoBehaviour
     {
         Foot[] feet = i switch
         {
-            0 => new Foot[] { FrontRight },
+            0 => new Foot[] { FrontRight, RearLeft },
             1 => new Foot[] { FrontLeft },
-            _ => new Foot[] { RearLeft, RearRight }
+            _ => new Foot[] { RearRight }
         };
 
         int l = 0, r = 0;
@@ -146,6 +146,28 @@ public class HorseSoundMaker : MonoBehaviour
 
         bool left = IsLeft(foot);
         SendHapticFeedback(left ? 0.2f : 0f, left ? 0f : 0.2f);
+    }
+
+    public void OnFootJumpStep(int i)
+    {
+        Foot[] feet = i switch
+        {
+            0 => new Foot[] { FrontRight, FrontLeft },
+            _ => new Foot[] { RearRight, RearLeft }
+        };
+
+        int l = 0, r = 0;
+        foreach (var foot in feet)
+        {
+            AudioSource source = GetFootAudioSource(foot);
+            AudioClip clip = GetFootsound(source);
+            source.clip = clip;
+            source.pitch = Random.Range(0.9f, 1.1f);
+            source.volume = 0.7f;
+            source.Play();
+            if (IsLeft(foot)) ++l; else ++r;
+        }
+        SendHapticFeedback(0.08f * l, 0.08f * r);
     }
 
     private void SendHapticFeedback(float leftAmplitude, float rightAmplitude)
