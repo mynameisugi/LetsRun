@@ -195,8 +195,9 @@ public class HorseController : MonoBehaviour
 
         agent.speed = curSpeed;
 
-        Vector3 next = agent.destination;
-        if (Vector3.Distance(next, sphere.position) < 2f)
+        Vector3 next = agent.destination; next.y = 0f;
+        Vector3 spherePos = sphere.position; spherePos.y = 0f;
+        if (Vector3.Distance(next, spherePos) < (RaceEnded ? 0.2f : 3f))
         {
             //Debug.Log($"{gameObject.name}: {next} ~ {sphere.position} ({Vector3.Distance(next, sphere.position)})");
             TargetNextNode();

@@ -21,12 +21,17 @@ public class RaceManager : MonoBehaviour
 
     private void Start()
     {
-        foreach (var info in infos) foreach (var box in info.trackNodes)
+        foreach (var info in infos)
+        {
+            foreach (var box in info.trackNodes)
                 if (box)
                 {
                     var r = box.GetComponent<MeshRenderer>();
                     if (r) r.enabled = false;
                 }
+            foreach (var obst in info.obstacles)
+                if (obst) obst.SetActive(false);
+        }
 
         GameManager.Instance().Time.RegisterEvent(TimeManager.LOOP - 60, () =>
         {

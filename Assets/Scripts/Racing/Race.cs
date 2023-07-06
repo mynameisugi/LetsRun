@@ -28,6 +28,16 @@ public class Race : MonoBehaviour
 
         // 경기 시작 대기
         GameManager.Instance().Time.RegisterEvent(TimeManager.LOOP, StartRace);
+
+        // 장애물 랜덤 켜기
+        for (int i = 0; i < info.obstacles.Length; ++i)
+        {
+            if (Random.value < info.obstacleRate)
+            {
+                info.obstacles[i].SetActive(true);
+                //++i;
+            }
+        }
     }
 
     private void CreateEntry()
@@ -63,6 +73,14 @@ public class Race : MonoBehaviour
         Debug.Log($"Destroy Race! {info.type}");
         GameManager.Instance().Time.UnregisterEvent(TimeManager.LOOP - 90, DestroyRace);
         Destroy(gameObject);
+    }
+
+    private void OnDestroy()
+    {
+        foreach (var entry in entries)
+            if (entry) Destroy(entry.gameObject);
+        foreach (var obst in info.obstacles)
+            if (obst) obst.SetActive(false);
     }
 
     private int playerNum = -1;
@@ -162,11 +180,6 @@ public class Race : MonoBehaviour
         entries[num] = null;
     }
 
-    private void OnDestroy()
-    {
-        foreach (var entry in entries)
-            if (entry) Destroy(entry.gameObject);
-    }
 
     [Serializable]
     public struct RaceInfo
@@ -187,6 +200,14 @@ public class Race : MonoBehaviour
         /// 레이스 끝
         /// </summary>
         [SerializeField] public EndTent end;
+        /// <summary>
+        /// 장애물들
+        /// </summary>
+        [SerializeField] public GameObject[] obstacles;
+        /// <summary>
+        /// 장애물 확률
+        /// </summary>
+        [SerializeField, Range(0f, 1f)] public float obstacleRate;
 
         public Transform GetStartPos(int i) => start.GetStartPos(i);
 
