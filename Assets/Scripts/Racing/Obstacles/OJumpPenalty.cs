@@ -15,6 +15,6 @@ public class OJumpPenalty : MonoBehaviour
         if (sphere.horse.Jumping > 0f) return;
 
         // 점프하지 않는 말 페널티
-        sphere.horse.Penalty(0);
+        sphere.horse.Penalty(1);
     }
 }

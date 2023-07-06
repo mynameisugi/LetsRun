@@ -400,10 +400,8 @@ public class HorseController : MonoBehaviour
 
     public void Penalty(int type)
     {
-        switch (type)
-        {
-            case 0: CurMode = 1f; targetMode = 1; break;
-        }
+        CurMode = type;
+        targetMode = type;
     }
 
     private void FixedUpdate()
