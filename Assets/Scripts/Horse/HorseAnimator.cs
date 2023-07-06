@@ -132,7 +132,7 @@ public class HorseAnimator : MonoBehaviour
 
     public void PlayJump()
     {
-        Debug.Log("Jump!");
+        // Debug.Log($"{gameObject.name} Jump!");
         animCtrler.SetTrigger("jump");
     }
 }

@@ -39,7 +39,7 @@ public class ScreenRanking : MonoBehaviour
 
 
 
-        return $"경주 {TimeManager.LOOP - time / 60}분 전";
+        return $"경주 {(TimeManager.LOOP - time) / 60}분 전";
     }
 
     private string RaceDisplay(Race race, float time)

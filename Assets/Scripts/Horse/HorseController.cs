@@ -164,10 +164,12 @@ public class HorseController : MonoBehaviour
     private Race race = null;
     private Race.RaceInfo raceInfo;
     private int nextNodeIndex = -1;
+    private bool RaceEnded => nextNodeIndex > raceInfo.trackNodes.Length;
 
     private void TargetNextNode()
     {
-        BoxCollider nextNode = raceInfo.trackNodes[nextNodeIndex];
+        BoxCollider nextNode = nextNodeIndex < raceInfo.trackNodes.Length ? raceInfo.trackNodes[nextNodeIndex] :
+            raceInfo.end.NPCWaypoints[^(nextNodeIndex - raceInfo.trackNodes.Length + 1)];
         Vector3 point = new(
             Random.Range(nextNode.bounds.min.x + 1f, nextNode.bounds.max.x - 1f),
             nextNode.bounds.max.y,
@@ -180,7 +182,11 @@ public class HorseController : MonoBehaviour
         //Debug.Log($"{gameObject.name} goes to node {nextNodeIndex} {point} (dist: {Vector3.Distance(point, sphere.position)})");
 
         ++nextNodeIndex;
-        if (nextNodeIndex >= raceInfo.trackNodes.Length) nextNodeIndex = -1;
+        if (nextNodeIndex >= raceInfo.trackNodes.Length + raceInfo.end.NPCWaypoints.Length)
+        {
+            nextNodeIndex = -1;
+            race.NPCEntryEnd(this);
+        }
     }
 
     private void NPCRaceUpdate()
@@ -189,14 +195,22 @@ public class HorseController : MonoBehaviour
 
         agent.speed = curSpeed;
 
-        Vector3 next = agent.destination;
-        if (Vector3.Distance(next, sphere.position) < 2f)
+        Vector3 next = agent.destination; next.y = 0f;
+        Vector3 spherePos = sphere.position; spherePos.y = 0f;
+        if (Vector3.Distance(next, spherePos) < (RaceEnded ? 0.2f : 3f))
         {
             //Debug.Log($"{gameObject.name}: {next} ~ {sphere.position} ({Vector3.Distance(next, sphere.position)})");
             TargetNextNode();
         }
         float rotate = Mathf.Atan2(next.x - transform.position.x, next.z - transform.position.z) * Mathf.Rad2Deg;
         curRotate = Mathf.MoveTowardsAngle(transform.rotation.eulerAngles.y, rotate, stats.SteerStrength * Time.deltaTime) - transform.rotation.eulerAngles.y;
+
+        if (RaceEnded)
+        {
+            if (targetMode > 1 && Random.value < 0.04f * targetMode * targetMode) RequestModeDecrease();
+            else if (targetMode < 1) RequestModeIncrease();
+            return;
+        }
 
         if (CurMode < 3)
         {
