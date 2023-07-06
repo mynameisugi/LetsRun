@@ -88,6 +88,12 @@ public class Race : MonoBehaviour
     private HorseController[] entries;
     private int entryFilled;
 
+    public HorseController GetEntry(int i)
+    {
+        if (playerNum == i) return PlayerManager.Instance().horse;
+        return entries[i];
+    }
+
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.P))

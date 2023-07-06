@@ -150,7 +150,7 @@ public class HorseSoundMaker : MonoBehaviour
 
     private void SendHapticFeedback(float leftAmplitude, float rightAmplitude)
     {
-        if (!horse.isPlayerRiding) return;
+        if (!horse.isPlayerRiding || !GameSettings.Settings.Rumble) return;
         if (leftAmplitude > 0f) horse.playerAction.GetDevice(0).SendHapticImpulse(0, leftAmplitude, 0.05f);
         if (rightAmplitude > 0f) horse.playerAction.GetDevice(1).SendHapticImpulse(0, rightAmplitude, 0.05f);
     }
