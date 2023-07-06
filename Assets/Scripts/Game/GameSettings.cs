@@ -11,6 +11,8 @@ public class GameSettings
 
     }
 
+    public static GameSettings Settings => GameManager.Instance().Settings;
+
     /// <summary>
     /// 자동저장 여부
     /// </summary>
@@ -22,9 +24,15 @@ public class GameSettings
 
     public bool SoftTurn { get; set; } = true;
 
-    public int BGM { get; set; } = 10;
+    public bool Rumble { get; set; } = true;
 
-    public int SE { get; set; } = 10;
+    public float BGM => settingBGM * 0.1f;
+
+    private int settingBGM = 10;
+
+    public float SE => settingSE * 0.1f;
+
+    private int settingSE = 10;
 
 
     public string ToSaveString()

@@ -42,18 +42,6 @@ public class HorseController : MonoBehaviour
 
     private const float RAD = 0.5f;
 
-    public void Teleport(Vector3 position, Quaternion rotation)
-    {
-        transform.rotation = rotation;
-        sphere.transform.position = position;
-        sphere.transform.rotation = rotation;
-        sphere.velocity = Vector3.zero;
-        agent.ResetPath();
-        curMode = 0f; targetMode = 0;
-        curSpeed = 0f; curRotate = 0;
-        Update();
-    }
-
     private void Start()
     {
         var sphereObj = new GameObject($"{gameObject.name} Sphere") { layer = 7 };
@@ -85,19 +73,33 @@ public class HorseController : MonoBehaviour
 
     private float curSpeed = 0f;
     private int targetMode = 0;
-    private float curMode = 0f;
+    public float CurMode { get; private set; } = 0f;
     private float curRotate = 0f;
     private float gallopTimer = 0f;
     private float staminaRecoveryTimer = 0f;
     private float curStamina = 0f;
     private float displayStamina = 0f;
 
+    public float wantToJump = 0f;
+    public float Jumping { get; private set; } = 0f;
+
     private void Update()
     {
         #region GenericHorseUpdate
         curRotate = 0f;
-        curMode = Mathf.SmoothStep(curMode, targetMode, Time.deltaTime * 12f);
-        curSpeed = stats.GetSpeed(curMode);
+        CurMode = Mathf.SmoothStep(CurMode, targetMode, Time.deltaTime * 12f);
+        curSpeed = stats.GetSpeed(CurMode);
+        if (wantToJump > 0f)
+        {
+            wantToJump -= Time.deltaTime;
+            if (CurMode == 4f && Jumping <= 0f)
+            {
+                Jumping = 2f;
+                myAnimator.PlayJump();
+            }
+        }
+        if (Jumping > 0f) Jumping -= Time.deltaTime;
+
         if (gallopTimer > 0f)
         {
             staminaRecoveryTimer = 2f;
@@ -131,7 +133,7 @@ public class HorseController : MonoBehaviour
         }
         else if (playerOrigin && playerAction) PlayerControlUpdate();
 
-        myAnimator.SetData(new(curMode, curRotate / Time.deltaTime, displayStamina));
+        myAnimator.SetData(new(CurMode, curRotate / Time.deltaTime, displayStamina));
 
         transform.Rotate(transform.up, curRotate);
     }
@@ -140,9 +142,11 @@ public class HorseController : MonoBehaviour
     private float pulledOffset = 0.1f, pushedOffset = 0.3f, pulledTime = 0f, brakeTime = 2f;
     private const float PUSHPULL = 0.2f;
 
+    #region NPCControl
+
     public void NPCJoinRace(Race race)
     {
-        isRacing = true; curMode = 0f; targetMode = 0;
+        isRacing = true; CurMode = 0f; targetMode = 0;
         this.race = race;
         raceInfo = this.race.info;
         nextNodeIndex = -1;
@@ -192,7 +196,7 @@ public class HorseController : MonoBehaviour
         float rotate = Mathf.Atan2(next.x - transform.position.x, next.z - transform.position.z) * Mathf.Rad2Deg;
         curRotate = Mathf.MoveTowardsAngle(transform.rotation.eulerAngles.y, rotate, stats.SteerStrength * Time.deltaTime) - transform.rotation.eulerAngles.y;
 
-        if (curMode < 3)
+        if (CurMode < 3)
         {
             pulledTime -= Time.deltaTime; brakeTime = 0f;
             if (pulledTime < 0f)
@@ -271,6 +275,10 @@ public class HorseController : MonoBehaviour
 
     }
 
+    #endregion NPCControl
+
+    #region PlayerControl
+
     private void PlayerControlUpdate()
     {
         Transform lHand = playerAction.directInteractors[0].transform;
@@ -339,6 +347,20 @@ public class HorseController : MonoBehaviour
         var center = Vector3.Lerp(lHand.position, rHand.position, 0.5f);
         return Vector3.Dot(center - transform.position, transform.forward);
     }
+
+    public void Teleport(Vector3 position, Quaternion rotation)
+    {
+        transform.rotation = rotation;
+        sphere.transform.position = position;
+        sphere.transform.rotation = rotation;
+        sphere.velocity = Vector3.zero;
+        agent.ResetPath();
+        CurMode = 0f; targetMode = 0;
+        curSpeed = 0f; curRotate = 0;
+        Update();
+    }
+
+    #endregion PlayerControl
 
     private void RequestModeIncrease()
     {
@@ -451,7 +473,7 @@ public class HorseController : MonoBehaviour
 
     private void SendHapticFeedback(float amplitude, float duration = 0.5f)
     {
-        if (!isPlayerRiding) return;
+        if (!isPlayerRiding || !GameSettings.Settings.Rumble) return;
         playerAction.GetDevice(0).SendHapticImpulse(0, amplitude, duration);
         playerAction.GetDevice(1).SendHapticImpulse(0, amplitude, duration);
     }

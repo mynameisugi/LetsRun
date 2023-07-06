@@ -129,4 +129,6 @@ public class HorseAnimator : MonoBehaviour
         }
         else active = false;
     }
+
+    public void PlayJump() => animCtrler.SetTrigger("jump");
 }
