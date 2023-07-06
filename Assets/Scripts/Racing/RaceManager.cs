@@ -21,14 +21,21 @@ public class RaceManager : MonoBehaviour
 
     private void Start()
     {
-        GameManager.Instance().Time.RegisterEvent(TimeManager.LOOP - 60, () => {
+        foreach (var info in infos) foreach (var box in info.trackNodes)
+                if (box)
+                {
+                    var r = box.GetComponent<MeshRenderer>();
+                    if (r) r.enabled = false;
+                }
+
+        GameManager.Instance().Time.RegisterEvent(TimeManager.LOOP - 60, () =>
+        {
             PrepareRace(); // 1분 전에 다음 경기 준비
         });
 
         if (GameManager.Instance().Time.Now > TimeManager.LOOP - 60 &&
             GameManager.Instance().Time.Now < TimeManager.LOOP - 10)
             PrepareRace(); // 이미 1분 전 이내면 바로 준비
-
     }
 
     private void PrepareRace()
@@ -71,10 +78,10 @@ public class RaceManager : MonoBehaviour
             // 현재 경기에 참가
             if (CurrentRace.info.type != type)
             {
-                // TODO: 현재 경기를 터뜨리기
-                //CurrentRace = null;
-                //NextRace = type;
-                //PrepareRace();
+                Destroy(CurrentRace.gameObject);
+                CurrentRace = null;
+                NextRace = type;
+                PrepareRace();
             }
 
             CurrentRace.AddPlayer(Random.Range(0, 8));

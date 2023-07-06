@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using static RaceManager;
 using Random = UnityEngine.Random;
@@ -17,6 +18,8 @@ public class Race : MonoBehaviour
         Debug.Log($"Race Ready: {info.type}");
 
         Status = RaceStage.Prepare; // 준비
+
+        info.end.playerRank = -1; // 플레이어 기록 리셋
 
         // 참가자 생성
         entries = new HorseController[8];
@@ -52,6 +55,14 @@ public class Race : MonoBehaviour
         Debug.Log($"Race Start! {info.type}");
         Status = RaceStage.Racing;
         foreach (var entry in entries) if (entry) entry.StartRace();
+        GameManager.Instance().Time.RegisterEvent(TimeManager.LOOP - 90, DestroyRace);
+    }
+
+    private void DestroyRace()
+    {
+        Debug.Log($"Destroy Race! {info.type}");
+        GameManager.Instance().Time.UnregisterEvent(TimeManager.LOOP - 90, DestroyRace);
+        Destroy(gameObject);
     }
 
     private int playerNum = -1;
@@ -96,7 +107,14 @@ public class Race : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.P))
+        if (Status == RaceStage.Clean)
+        {
+            int alive = entries.Count(x => x);
+            if (alive == 0) DestroyRace();
+            return;
+        }
+
+        if (Status == RaceStage.Prepare && Input.GetKeyDown(KeyCode.P))
         {
             Debug.Log("DEBUG Race Start");
             StartRace();
@@ -104,6 +122,17 @@ public class Race : MonoBehaviour
     }
 
     public void HorseGoal(HorseController horse)
+    {
+        int num = GetHorseEntryIndex(horse);
+        if (num < 0) return; // 경주에 참가한 말이 아님
+
+        goalInfos.Add(new(horse, num, GameManager.Instance().Time.Now));
+        if (horse.isPlayerRiding) info.end.playerRank = goalInfos.Count; // 플레이어 등수 저장
+        if (goalInfos.Count == 8) Status = RaceStage.Clean;
+        // Debug.Log($"Goal! {horse.gameObject.name} at {GameManager.Instance().Time.Now:0.00}");
+    }
+
+    private int GetHorseEntryIndex(HorseController horse)
     {
         int num = -1;
         if (horse.isPlayerRiding && playerNum >= 0)
@@ -118,13 +147,26 @@ public class Race : MonoBehaviour
                     break;
                 }
         }
-        if (num < 0) return; // 경주에 참가한 말이 아님
 
-        goalInfos.Add(new(horse, num, GameManager.Instance().Time.Now));
-        Debug.Log($"Goal! {horse.gameObject.name} at {GameManager.Instance().Time.Now:0.00}");
+        return num;
     }
 
     public List<GoalInfo> goalInfos = new(8);
+
+    public void NPCEntryEnd(HorseController horse)
+    {
+        int num = GetHorseEntryIndex(horse);
+        if (num < 0) return; // 경주에 참가한 말이 아님
+
+        Destroy(horse.gameObject);
+        entries[num] = null;
+    }
+
+    private void OnDestroy()
+    {
+        foreach (var entry in entries)
+            if (entry) Destroy(entry.gameObject);
+    }
 
     [Serializable]
     public struct RaceInfo
@@ -141,6 +183,10 @@ public class Race : MonoBehaviour
         /// 레이스 경로
         /// </summary>
         [SerializeField] public BoxCollider[] trackNodes;
+        /// <summary>
+        /// 레이스 끝
+        /// </summary>
+        [SerializeField] public EndTent end;
 
         public Transform GetStartPos(int i) => start.GetStartPos(i);
 
