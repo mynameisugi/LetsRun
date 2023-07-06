@@ -89,6 +89,7 @@ GameObject:
   - component: {fileID: 3351977020229576414}
   - component: {fileID: 3351977020229576415}
   - component: {fileID: 3351977020229576412}
+  - component: {fileID: 5754622344808676765}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -181,6 +182,21 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &5754622344808676765
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3351977020229576413}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 79f9ff4200022984f89f903d62933956, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  texts:
+  - {fileID: 2361733649938025510}
+  - {fileID: 4734415097614498107}
 --- !u!1 &3754323826250624425
 GameObject:
   m_ObjectHideFlags: 0
@@ -291,8 +307,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4278190080
-  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
+    rgba: 4278215935
+  m_fontColor: {r: 1, g: 0.39215687, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -541,8 +557,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4278190080
-  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
+    rgba: 4278215935
+  m_fontColor: {r: 1, g: 0.39215687, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -855,7 +871,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: a88bb4e8bad90e94695f47b40aebdb72, type: 2}
+      objectReference: {fileID: 2100000, guid: c6c0b09a1ca4fc24d8bd418a9af4b38b, type: 2}
     - target: {fileID: -6250076149019478384, guid: bc6e43abd308743439eb30f17ef9a85a,
         type: 3}
       propertyPath: m_IsActive
@@ -865,7 +881,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: a88bb4e8bad90e94695f47b40aebdb72, type: 2}
+      objectReference: {fileID: 2100000, guid: c6c0b09a1ca4fc24d8bd418a9af4b38b, type: 2}
     - target: {fileID: -2422315340263230684, guid: bc6e43abd308743439eb30f17ef9a85a,
         type: 3}
       propertyPath: m_IsActive
@@ -880,7 +896,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: a88bb4e8bad90e94695f47b40aebdb72, type: 2}
+      objectReference: {fileID: 2100000, guid: c6c0b09a1ca4fc24d8bd418a9af4b38b, type: 2}
     - target: {fileID: 919132149155446097, guid: bc6e43abd308743439eb30f17ef9a85a,
         type: 3}
       propertyPath: m_Name
@@ -890,7 +906,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: c6c0b09a1ca4fc24d8bd418a9af4b38b, type: 2}
+      objectReference: {fileID: 2100000, guid: 929ff99292ebe224a9961df1ed168b83, type: 2}
     - target: {fileID: 8144394004440419581, guid: bc6e43abd308743439eb30f17ef9a85a,
         type: 3}
       propertyPath: m_IsActive
@@ -900,7 +916,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: a88bb4e8bad90e94695f47b40aebdb72, type: 2}
+      objectReference: {fileID: 2100000, guid: c6c0b09a1ca4fc24d8bd418a9af4b38b, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bc6e43abd308743439eb30f17ef9a85a, type: 3}
 --- !u!4 &8141318186382242286 stripped
