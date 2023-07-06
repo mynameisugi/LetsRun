@@ -89,12 +89,14 @@ public class HorseController : MonoBehaviour
         curRotate = 0f;
         CurMode = Mathf.SmoothStep(CurMode, targetMode, Time.deltaTime * 12f);
         curSpeed = stats.GetSpeed(CurMode);
+
+        const float JUMPTIME = 2f;
         if (wantToJump > 0f)
         {
             wantToJump -= Time.deltaTime;
             if (CurMode > 3.5f && Jumping <= 0f)
             {
-                Jumping = 2f;
+                Jumping = JUMPTIME;
                 myAnimator.PlayJump();
             }
         }
@@ -123,8 +125,8 @@ public class HorseController : MonoBehaviour
         displayStamina = Mathf.SmoothStep(displayStamina, curStamina / stats.GallopAmount, Time.deltaTime * 6f); // 표시용 스태미너 퍼센트
 
         #endregion GenericHorseUpdate
-        const float JPI = Mathf.PI / 2f;
-        transform.position = sphere.transform.position + transform.up * (Mathf.Sin(Jumping * JPI) - RAD);
+        const float JUMPPI = Mathf.PI / JUMPTIME;
+        transform.position = sphere.transform.position + transform.up * (Mathf.Sin(Jumping * JUMPPI) - RAD);
 
         if (!isPlayerRiding)
         {
