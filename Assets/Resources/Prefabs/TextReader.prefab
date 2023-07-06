@@ -28,8 +28,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 6400987940533983750}
   - {fileID: 6400987941585421652}
+  - {fileID: 6400987940533983750}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -143,7 +143,7 @@ RectTransform:
   m_Children:
   - {fileID: 6400987940433770998}
   m_Father: {fileID: 5488424618072483518}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -237,12 +237,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6400987941585421654}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 2.62, z: 17.82}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5488424618072483518}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &6400987941585421655
 MonoBehaviour:
@@ -268,7 +268,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ff658a01ade2a846b680fc80d68ee51, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  uiText: {fileID: 6400987941681344627}
+  textComponent: {fileID: 6400987941681344627}
+  dialogPanel: {fileID: 0}
+  filePath: /Text/TestText.txt
+  interactionDistance: 3
 --- !u!1 &6400987941681344629
 GameObject:
   m_ObjectHideFlags: 0
