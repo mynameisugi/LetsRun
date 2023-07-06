@@ -1,61 +1,69 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System.IO;
+using System;
 
 public class TextReader : MonoBehaviour
 {
-    public Text uiText;
+    public Text textComponent;
+    public string filePath = "/Text/TestText.txt";
+    public GameObject conversationWindow;
+    private bool isPlayerInRange = false;
+    private string[] words;
 
     void Start()
     {
-        string path = Application.dataPath;
-        path += "/Text/TestText.txt";
+        string fullPath = Application.dataPath + filePath;
 
-        string[] contents = System.IO.File.ReadAllLines(path);
-        if (contents.Length > 0)
+        if (File.Exists(fullPath))
         {
-            List<string> textLines = new List<string>();
-            List<string> numberLines = new List<string>();
-
-            for (int i = 0; i < contents.Length; i++)
-            {
-                if (i < 1000)
-                {
-                    textLines.Add(contents[i]);
-                }
-                else
-                {
-                    numberLines.Add(contents[i]);
-                }
-            }
-
-            // 텍스트 또는 숫자 중 랜덤하게 하나를 선택하여 출력
-            if (Random.value < 0.5f && textLines.Count > 0)
-            {
-                int randomIndex = Random.Range(0, textLines.Count);
-                string randomText = textLines[randomIndex];
-                uiText.text = randomText;
-            }
-            else if (numberLines.Count > 0)
-            {
-                int randomIndex = Random.Range(0, numberLines.Count);
-                string randomLine = numberLines[randomIndex];
-
-                string[] txtArr = randomLine.Split(',');
-                int[] numArr = new int[txtArr.Length];
-                int total = 0;
-
-                for (int j = 0; j < txtArr.Length; j++)
-                {
-                    numArr[j] = int.Parse(txtArr[j]);
-                    total += numArr[j];
-                }
-
-                uiText.text = total.ToString();
-            }
+            string fileContents = File.ReadAllText(fullPath);
+            words = fileContents.Split(new char[] { ' ', '\n', '\r' }, StringSplitOptions.RemoveEmptyEntries);
         }
+        else
+        {
+            Debug.LogError("파일을 찾을 수 없습니다: " + fullPath);
+        }
+    }
 
-        string content = System.IO.File.ReadAllText(path);
+    void Update()
+    {
+        if (isPlayerInRange && Input.GetMouseButtonDown(0))
+        {
+            conversationWindow.SetActive(false);
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            isPlayerInRange = true;
+            conversationWindow.SetActive(true);
+            UpdateConversationText();
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            isPlayerInRange = false;
+            conversationWindow.SetActive(false);
+        }
+    }
+
+    private void UpdateConversationText()
+    {
+        if (words != null && words.Length > 0)
+        {
+            int randomIndex = UnityEngine.Random.Range(0, words.Length);
+            string randomWord = words[randomIndex];
+            textComponent.text = randomWord;
+        }
+        else
+        {
+            Debug.LogError("대화 내용 배열이 비어 있습니다.");
+        }
     }
 }
