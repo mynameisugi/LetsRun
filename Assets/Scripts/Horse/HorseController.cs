@@ -92,7 +92,7 @@ public class HorseController : MonoBehaviour
         if (wantToJump > 0f)
         {
             wantToJump -= Time.deltaTime;
-            if (CurMode == 4f && Jumping <= 0f)
+            if (CurMode > 3.5f && Jumping <= 0f)
             {
                 Jumping = 2f;
                 myAnimator.PlayJump();
@@ -100,7 +100,7 @@ public class HorseController : MonoBehaviour
         }
         if (Jumping > 0f) Jumping -= Time.deltaTime;
 
-        if (gallopTimer > 0f)
+        if (gallopTimer > 0f && Jumping <= 0f)
         {
             staminaRecoveryTimer = 2f;
             gallopTimer -= Time.deltaTime;
@@ -123,8 +123,8 @@ public class HorseController : MonoBehaviour
         displayStamina = Mathf.SmoothStep(displayStamina, curStamina / stats.GallopAmount, Time.deltaTime * 6f); // 표시용 스태미너 퍼센트
 
         #endregion GenericHorseUpdate
-
-        transform.position = sphere.transform.position - transform.up * RAD;
+        const float JPI = Mathf.PI / 2f;
+        transform.position = sphere.transform.position + transform.up * (Mathf.Sin(Jumping * JPI) - RAD);
 
         if (!isPlayerRiding)
         {
@@ -396,6 +396,14 @@ public class HorseController : MonoBehaviour
             SendHapticFeedback(0.3f, 0.3f);
         }
 
+    }
+
+    public void Penalty(int type)
+    {
+        switch (type)
+        {
+            case 0: CurMode = 1f; targetMode = 1; break;
+        }
     }
 
     private void FixedUpdate()

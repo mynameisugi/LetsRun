@@ -1,18 +1,20 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class OJumpPenalty : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
-        
+        var renderer = GetComponent<MeshRenderer>();
+        if (renderer) renderer.enabled = false;
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnTriggerEnter(Collider other)
     {
-        
+        var sphere = other.GetComponent<HorseSphere>();
+        if (!sphere) return;
+        if (sphere.horse.Jumping > 0f) return;
+
+        // 점프하지 않는 말 페널티
+        sphere.horse.Penalty(0);
     }
 }

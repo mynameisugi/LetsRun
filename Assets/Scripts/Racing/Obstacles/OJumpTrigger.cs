@@ -1,18 +1,17 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class OJumpTrigger : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
-        
+        var renderer = GetComponent<MeshRenderer>();
+        if (renderer) renderer.enabled = false;
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnTriggerStay(Collider other)
     {
-        
+        var sphere = other.GetComponent<HorseSphere>();
+        if (!sphere) return;
+        sphere.horse.wantToJump = 1f;
     }
 }
