@@ -24,7 +24,7 @@ public class RegisterTent : MonoBehaviour
 
     public void ReceiveTicket()
     {
-        GameManager.Instance().Race.RegisterPlayer(ticket.ParseTicket());
+        GameManager.Instance().Race.RegisterPlayer(ticket.ParseTicket(), ticket.ObstacleTicket());
         Destroy(ticket.gameObject); ticket = null;
     }
 }

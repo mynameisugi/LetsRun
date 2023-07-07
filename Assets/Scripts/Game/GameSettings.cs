@@ -1,5 +1,4 @@
-﻿using System.Data;
-using System.Text;
+﻿using System.Text;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
 using UnityEngine.XR.Interaction.Toolkit.Samples.StarterAssets;
@@ -92,7 +91,7 @@ public class GameSettings
 
         public static Settings FromSaveString(string saveString)
         {
-            bool d = true, t = false, s = true, r = true; int b = 10, e = 100;
+            bool d = true, t = true, s = true, r = true; int b = 10, e = 100;
 
             if (string.IsNullOrEmpty(saveString)) goto END;
             var array = saveString.Split('|');
@@ -121,14 +120,14 @@ public class GameSettings
                         break;
                 }
             }
-            END:
+        END:
             return new Settings(d, t, s, r, b, e);
         }
     }
 
-    
 
 
-    
+
+
 
 }
