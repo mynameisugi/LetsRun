@@ -35,22 +35,24 @@ public class RaceManager : MonoBehaviour
 
         GameManager.Instance().Time.RegisterEvent(TimeManager.LOOP - 60, () =>
         {
-            PrepareRace(); // 1분 전에 다음 경기 준비
+            PrepareRace(nextObstacle); // 1분 전에 다음 경기 준비
         });
 
         if (GameManager.Instance().Time.Now > TimeManager.LOOP - 60 &&
             GameManager.Instance().Time.Now < TimeManager.LOOP - 10)
-            PrepareRace(); // 이미 1분 전 이내면 바로 준비
+            PrepareRace(nextObstacle); // 이미 1분 전 이내면 바로 준비
     }
 
-    private void PrepareRace()
+    private void PrepareRace(bool obstacle)
     {
         var raceObj = Instantiate(racePrefab, transform);
         CurrentRace = raceObj.GetComponent<Race>();
         CurrentRace.info = infos[(int)NextRace];
+        if (!obstacle) CurrentRace.info.obstacleRate = 0f;
         if (playerNum > 0) { CurrentRace.AddPlayer(playerNum); playerNum = -1; }
 
         NextRace = (RaceType)Random.Range(0, 3); // 그 다음 경기 랜덤 선택
+        nextObstacle = Random.value > 0.3f;
     }
 
     private void Update()
@@ -75,7 +77,9 @@ public class RaceManager : MonoBehaviour
     /// </summary>
     public RaceType NextRace { get; private set; } = RaceType.Easy;
 
-    public void RegisterPlayer(RaceType type)
+    private bool nextObstacle = true;
+
+    public void RegisterPlayer(RaceType type, bool obstacle)
     {
         if (CurrentRace != null && CurrentRace.Status == Race.RaceStage.Prepare
             && GameManager.Instance().Time.Now < TimeManager.LOOP - 10f)
@@ -86,7 +90,7 @@ public class RaceManager : MonoBehaviour
                 Destroy(CurrentRace.gameObject);
                 CurrentRace = null;
                 NextRace = type;
-                PrepareRace();
+                PrepareRace(obstacle);
             }
 
             CurrentRace.AddPlayer(Random.Range(0, 8));
@@ -94,6 +98,7 @@ public class RaceManager : MonoBehaviour
             return;
         }
         NextRace = type;
+        nextObstacle = obstacle;
         playerNum = Random.Range(0, 8);
     }
 
