@@ -8176,7 +8176,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 3998371964258443619}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 4590135560377453158}
+        m_TargetAssemblyTypeName: HWSetting, Assembly-CSharp
+        m_MethodName: OnClickedReset
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &6761479295659676350
 GameObject:
   m_ObjectHideFlags: 0
@@ -8643,7 +8655,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 102878757492956206}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 4590135560377453158}
+        m_TargetAssemblyTypeName: HWSetting, Assembly-CSharp
+        m_MethodName: OnClickedExit
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &7148688211898893742
 GameObject:
   m_ObjectHideFlags: 0
@@ -9069,6 +9093,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   popup: {fileID: 1231842522275022631}
+  toggleAutoSave: {fileID: 1173766245987228596}
+  toggleAntiAlias: {fileID: 2331408432742883458}
+  toggleSoftTurn: {fileID: 8203834454263538636}
+  sliderBGM: {fileID: 8381749740352732735}
+  sliderSE: {fileID: 5620797305898033307}
 --- !u!1 &7552162042889282724
 GameObject:
   m_ObjectHideFlags: 0

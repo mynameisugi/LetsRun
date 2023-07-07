@@ -32,6 +32,12 @@ public class GameSettings
         ApplySettings();
     }
 
+    public void ChangeSettings(Settings newSettings)
+    {
+        values = newSettings;
+        SaveSettings();
+    }
+
     private void ApplySettings()
     {
         var player = PlayerManager.Instance();
