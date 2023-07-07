@@ -42,7 +42,7 @@ public class SaveManager
         saveData = new Dictionary<string, object>();
         SaveValue(SAVESEED, (int)DateTime.Now.Ticks);
         SaveValue(TimeManager.SAVEKEY, 0);
-        //SaveToPrefs();
+        SaveToPrefs(0);
     }
 
     public delegate void SaveEventHandler(SaveManager save);

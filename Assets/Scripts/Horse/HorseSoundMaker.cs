@@ -71,6 +71,7 @@ public class HorseSoundMaker : MonoBehaviour
         source.clip = clip;
         source.pitch = Random.Range(0.9f, 1.1f);
         source.volume = 0.5f;
+        source.volume *= GameSettings.Values.SE;
         source.Play();
 
         bool left = IsLeft(foot);
@@ -97,6 +98,7 @@ public class HorseSoundMaker : MonoBehaviour
             source.clip = clip;
             source.pitch = Random.Range(0.9f, 1.1f);
             source.volume = 0.3f;
+            source.volume *= GameSettings.Values.SE;
             source.Play();
             if (IsLeft(foot)) ++l; else ++r;
         }
@@ -121,6 +123,7 @@ public class HorseSoundMaker : MonoBehaviour
             source.clip = clip;
             source.pitch = Random.Range(0.9f, 1.1f);
             source.volume = 0.7f;
+            source.volume *= GameSettings.Values.SE;
             source.Play();
             if (IsLeft(foot)) ++l; else ++r;
         }
@@ -142,6 +145,7 @@ public class HorseSoundMaker : MonoBehaviour
         source.clip = clip;
         source.pitch = Random.Range(0.9f, 1.1f);
         source.volume = 1.0f;
+        source.volume *= GameSettings.Values.SE;
         source.Play();
 
         bool left = IsLeft(foot);
@@ -164,6 +168,7 @@ public class HorseSoundMaker : MonoBehaviour
             source.clip = clip;
             source.pitch = Random.Range(0.9f, 1.1f);
             source.volume = 0.7f;
+            source.volume *= GameSettings.Values.SE;
             source.Play();
             if (IsLeft(foot)) ++l; else ++r;
         }
@@ -172,7 +177,7 @@ public class HorseSoundMaker : MonoBehaviour
 
     private void SendHapticFeedback(float leftAmplitude, float rightAmplitude)
     {
-        if (!horse.isPlayerRiding || !GameSettings.Settings.Rumble) return;
+        if (!horse.isPlayerRiding || !GameSettings.Values.rumble) return;
         if (leftAmplitude > 0f) horse.playerAction.GetDevice(0).SendHapticImpulse(0, leftAmplitude, 0.05f);
         if (rightAmplitude > 0f) horse.playerAction.GetDevice(1).SendHapticImpulse(0, rightAmplitude, 0.05f);
     }

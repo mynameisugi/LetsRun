@@ -1,5 +1,4 @@
 using UnityEngine;
-using static RaceManager;
 
 public class GameManager : MonoBehaviour
 {
@@ -49,7 +48,18 @@ public class GameManager : MonoBehaviour
         for (int i = 180; i < TimeManager.LOOP; i += 180)
             Time.RegisterEvent(i, AutoSave); // 3분마다 자동 저장
 
-        void AutoSave() { if (Settings.DoAutoSave) Save.SaveToPrefs(0); }
+        // 플레이어 위치 저장
+        const string PLAYERPOS = "PlayerPosition";
+        Save.OnSaveToPref += (SaveManager save) =>
+        {
+            if (PlayerManager.Instance().IsRiding) return; // 말을 타는 중에는 위치 저장 안 함
+            var player = PlayerManager.InstanceOrigin();
+            save.SaveValue(PLAYERPOS, player.localPosition);
+        };
+        // 플레이어 위치 불러오기
+        PlayerManager.InstanceOrigin().localPosition = Save.LoadValue(PLAYERPOS, Vector3.zero);
+
+        void AutoSave() { if (GameSettings.Values.doAutoSave) Save.SaveToPrefs(0); }
     }
 
 

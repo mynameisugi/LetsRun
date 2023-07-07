@@ -495,7 +495,7 @@ public class HorseController : MonoBehaviour
 
     private void SendHapticFeedback(float amplitude, float duration = 0.5f)
     {
-        if (!isPlayerRiding || !GameSettings.Settings.Rumble) return;
+        if (!isPlayerRiding || !GameSettings.Values.rumble) return;
         playerAction.GetDevice(0).SendHapticImpulse(0, amplitude, duration);
         playerAction.GetDevice(1).SendHapticImpulse(0, amplitude, duration);
     }
