@@ -1,5 +1,4 @@
 using UnityEngine;
-using static RaceManager;
 
 public class GameManager : MonoBehaviour
 {
@@ -49,7 +48,7 @@ public class GameManager : MonoBehaviour
         for (int i = 180; i < TimeManager.LOOP; i += 180)
             Time.RegisterEvent(i, AutoSave); // 3분마다 자동 저장
 
-        void AutoSave() { if (Settings.DoAutoSave) Save.SaveToPrefs(0); }
+        void AutoSave() { if (GameSettings.Values.doAutoSave) Save.SaveToPrefs(0); }
     }
 
 
