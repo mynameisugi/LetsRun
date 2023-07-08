@@ -10,19 +10,60 @@ public class FoodItem : MonoBehaviour
     [SerializeField] private float stamina = 0f;
     [SerializeField] private float steer = 0f;
 
+    private PlayerInventory targetInventory = null;
+    private HorseController targetHorse = null;
+
     private void OnTriggerEnter(Collider other)
     {
-        var horse = other.transform.root.GetComponent<HorseController>();
-        if (!horse) return;
-        if (!horse.playerRidable) return;
+        var otherRoot = other.transform.root;
+        if (otherRoot.CompareTag("Player"))
+            targetInventory = otherRoot.GetComponent<PlayerManager>().Inventory();
+        else if (other.gameObject.name == "FoodFeed")
+            targetHorse = otherRoot.GetComponent<HorseController>();
+    }
 
-        horse.stats.SpeedWalk += speedWalk;
-        horse.stats.SpeedTrot += speedTrot;
-        horse.stats.SpeedCanter += speedCanter;
-        horse.stats.SpeedGallop += speedGallop;
-        horse.stats.GallopAmount += stamina;
-        horse.stats.SteerStrength += steer;
+    private void OnTriggerExit(Collider other)
+    {
+        var otherRoot = other.transform.root;
+        if (otherRoot.CompareTag("Player"))
+            targetInventory = null;
+        else if (other.gameObject.name == "FoodFeed")
+            targetHorse = null;
+    }
+
+    public void OnUseAttempt()
+    {
+        if (targetHorse)
+        {
+            TryUseOnHorse();
+            return;
+        }
+        if (targetInventory != null)
+        {
+            TryStore();
+            return;
+        }
+    }
+
+    private void TryUseOnHorse()
+    {
+        if (!targetHorse.playerRidable) return; // 플레이어가 탈 수 없는 말에는 못 먹임
+
+        targetHorse.stats.SpeedWalk += speedWalk;
+        targetHorse.stats.SpeedTrot += speedTrot;
+        targetHorse.stats.SpeedCanter += speedCanter;
+        targetHorse.stats.SpeedGallop += speedGallop;
+        targetHorse.stats.GallopAmount += stamina;
+        targetHorse.stats.SteerStrength += steer;
+        Debug.Log($"{targetHorse.gameObject.name} ate {gameObject.name}");
 
         Destroy(gameObject);
+    }
+
+    private void TryStore()
+    {
+        // TODO: 인벤토리에 아이템 보관
+
+        // Destroy(gameObject);
     }
 }
