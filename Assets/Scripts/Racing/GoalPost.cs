@@ -2,6 +2,9 @@ using UnityEngine;
 
 public class GoalPost : MonoBehaviour
 {
+    [SerializeField]
+    private GameObject goalEffect;
+
     private void Start()
     {
         var renderer = GetComponent<MeshRenderer>();
@@ -14,6 +17,20 @@ public class GoalPost : MonoBehaviour
         if (!sphere) return;
 
         if (GameManager.Instance().Race.CurrentRace)
-            GameManager.Instance().Race.CurrentRace.HorseGoal(sphere.horse);
+        {
+            int rating = GameManager.Instance().Race.CurrentRace.HorseGoal(sphere.horse);
+            if (rating == 1)
+            {
+                goalEffect.SetActive(true);
+                foreach(var ge in goalEffect.GetComponentsInChildren<ParticleSystem>())
+                    ge.Play();
+                Invoke(nameof(StopEffect), 30f);
+            }
+        }
+    }
+
+    private void StopEffect()
+    {
+        goalEffect.SetActive(false);
     }
 }

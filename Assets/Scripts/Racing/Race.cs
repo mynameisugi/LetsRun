@@ -22,6 +22,8 @@ public class Race : MonoBehaviour
         info.end.playerRank = -1; // 플레이어 기록 리셋
         info.end.SetPrice(info.price);
 
+        info.start.CloseGate();
+
         // 참가자 생성
         entries = new HorseController[8];
         entryFilled = 0;
@@ -63,6 +65,7 @@ public class Race : MonoBehaviour
     private void StartRace()
     {
         GameManager.Instance().Time.UnregisterEvent(TimeManager.LOOP, StartRace);
+        info.start.OpenGate();
         Debug.Log($"Race Start! {info.type}");
         Status = RaceStage.Racing;
         foreach (var entry in entries) if (entry) entry.StartRace();
@@ -140,14 +143,15 @@ public class Race : MonoBehaviour
         }
     }
 
-    public void HorseGoal(HorseController horse)
+    public int HorseGoal(HorseController horse)
     {
         int num = GetHorseEntryIndex(horse);
-        if (num < 0) return; // 경주에 참가한 말이 아님
+        if (num < 0) return -1; // 경주에 참가한 말이 아님
 
         goalInfos.Add(new(horse, num, GameManager.Instance().Time.Now));
         if (horse.isPlayerRiding) info.end.playerRank = goalInfos.Count; // 플레이어 등수 저장
         if (goalInfos.Count == 8) Status = RaceStage.Clean;
+        return goalInfos.Count;
         // Debug.Log($"Goal! {horse.gameObject.name} at {GameManager.Instance().Time.Now:0.00}");
     }
 
