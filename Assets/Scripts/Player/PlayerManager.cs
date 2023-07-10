@@ -65,13 +65,13 @@ public class PlayerManager : MonoBehaviour
             horseObj.transform.position = transform.position - transform.right * 2f;
             horse = horseObj.GetComponent<HorseController>();
             horse.playerRidable = true;
-            horse.stats = (HorseStats)JsonConvert.DeserializeObject(data); // TODO: °íÄ¡±â
+            horse.stats = HorseStats.FromSaveString(data);
         }
         // Save Horse
         GameManager.Instance().Save.OnSaveToPref += (save) =>
         {
             if (!horse) return;
-            var horseData = JsonConvert.SerializeObject(horse.stats);
+            var horseData = horse.stats.ToSaveString();
             GameManager.Instance().Save.SaveValue(HorseKey, horseData);
         };
     }
