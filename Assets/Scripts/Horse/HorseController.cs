@@ -80,7 +80,9 @@ public class HorseController : MonoBehaviour
     private float curStamina = 0f;
     private float displayStamina = 0f;
 
+    [HideInInspector]
     public float wantToJump = 0f;
+    [HideInInspector]
     public float Jumping { get; private set; } = 0f;
 
     private void Update()

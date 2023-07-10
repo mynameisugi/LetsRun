@@ -69,8 +69,10 @@ public struct HorseStats
         return Mathf.Lerp(speeds[intMode], speeds[intMode + 1], offset);
     }
 
+    [SerializeField]
     private float gallopAmount;
 
+    [SerializeField]
     private float steerStrength;
 
     /// <summary>
