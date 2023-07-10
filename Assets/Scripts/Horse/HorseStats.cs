@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Data;
+using System.Text;
 using UnityEngine;
 
 [Serializable]
@@ -90,4 +92,48 @@ public struct HorseStats
 
     private static Material[] skinLibrary;
 
+
+    public string ToSaveString()
+    {
+        StringBuilder SB = new();
+        SB.Append($"{nameof(SpeedWalk)},{SpeedWalk}|");
+        SB.Append($"{nameof(SpeedTrot)},{SpeedTrot}|");
+        SB.Append($"{nameof(SpeedCanter)},{SpeedCanter}|");
+        SB.Append($"{nameof(SpeedGallop)},{SpeedGallop}|");
+        SB.Append($"{nameof(GallopAmount)},{GallopAmount}|");
+        SB.Append($"{nameof(SteerStrength)},{SteerStrength}|");
+        SB.Append($"{nameof(skin)},{skin}|");
+        return SB.ToString();
+    }
+
+    public static HorseStats FromSaveString(string saveString)
+    {
+        HorseStats res = new(2.1f);
+
+        if (string.IsNullOrEmpty(saveString)) goto END;
+        var array = saveString.Split('|');
+        foreach (var item in array)
+        {
+            var a = item.Split(',');
+            switch (a[0])
+            {
+                case nameof(SpeedWalk):
+                    res.SpeedWalk = float.Parse(a[1]); break;
+                case nameof(SpeedTrot):
+                    res.SpeedTrot = float.Parse(a[1]); break;
+                case nameof(SpeedCanter):
+                    res.SpeedCanter = float.Parse(a[1]); break;
+                case nameof(SpeedGallop):
+                    res.SpeedGallop = float.Parse(a[1]); break;
+                case nameof(GallopAmount):
+                    res.GallopAmount = float.Parse(a[1]); break;
+                case nameof(SteerStrength):
+                    res.SteerStrength = float.Parse(a[1]); break;
+                case nameof(skin):
+                    res.skin = int.Parse(a[1]); break;
+            }
+        }
+    END:
+        return res;
+    }
 }
