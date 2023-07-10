@@ -66,18 +66,18 @@ MonoBehaviour:
     end: {fileID: 0}
     obstacles: []
     obstacleRate: 0.5
-    price: 05000000030000000200000001000000
+    prize: 05000000030000000200000001000000
   - type: 1
     start: {fileID: 0}
     trackNodes: []
     end: {fileID: 0}
     obstacles: []
     obstacleRate: 0.5
-    price: 0f0000000a0000000500000002000000
+    prize: 140000000a0000000500000002000000
   - type: 2
     start: {fileID: 0}
     trackNodes: []
     end: {fileID: 0}
     obstacles: []
     obstacleRate: 0.8
-    price: 1e000000140000000a00000003000000
+    prize: 320000001e0000001400000003000000

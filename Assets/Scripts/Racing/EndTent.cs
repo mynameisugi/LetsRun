@@ -6,10 +6,10 @@ public class EndTent : MonoBehaviour
 
     public int playerRank = -1;
 
-    public void SetPrice(int[] newPrice)
-        => price = newPrice;
+    public void SetPrize(int[] newPrice)
+        => prize = newPrice;
 
-    private int[] price = new int[] { 0 };
+    private int[] prize = new int[] { 0 };
 
     private void Start()
     {

@@ -20,7 +20,7 @@ public class Race : MonoBehaviour
         Status = RaceStage.Prepare; // 준비
 
         info.end.playerRank = -1; // 플레이어 기록 리셋
-        info.end.SetPrice(info.price);
+        info.end.SetPrize(info.prize);
 
         info.start.CloseGate();
 
@@ -92,7 +92,7 @@ public class Race : MonoBehaviour
     public void AddPlayer(int num)
     {
         playerNum = num;
-        if (entries[playerNum]) // 이미 NPC가 있으면 삭제
+        if (entries != null && entries[playerNum]) // 이미 NPC가 있으면 삭제
         {
             Destroy(entries[playerNum].gameObject);
             entries[playerNum] = null;
@@ -217,7 +217,7 @@ public class Race : MonoBehaviour
         /// <summary>
         /// 상금
         /// </summary>
-        [SerializeField] public int[] price;
+        [SerializeField] public int[] prize;
 
         public Transform GetStartPos(int i) => start.GetStartPos(i);
 
