@@ -14,7 +14,8 @@ public class RegisterTent : MonoBehaviour
     public void OnNewTicketGrabbed(XRSimpleInteractable pile)
     {
         if (ticket) Destroy(ticket.gameObject);
-        var newObj = Instantiate(ticketPrefab, transform);
+        var newObj = Instantiate(ticketPrefab);
+        newObj.transform.SetParent(transform);
         ticket = newObj.GetComponent<RegisterTicket>();
         var ticketGrab = ticket.GetComponent<XRGrabInteractable>();
         pile.interactionManager.SelectEnter(pile.firstInteractorSelecting, ticketGrab);

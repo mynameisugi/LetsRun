@@ -366,14 +366,16 @@ public class HorseController : MonoBehaviour
 
     public void Teleport(Vector3 position, Quaternion rotation)
     {
+        agent.enabled = false;
         transform.rotation = rotation;
         sphere.transform.position = position;
         sphere.transform.rotation = rotation;
         sphere.velocity = Vector3.zero;
-        agent.ResetPath();
         CurMode = 0f; targetMode = 0;
         curSpeed = 0f; curRotate = 0;
         Update();
+        agent.enabled = true;
+        agent.ResetPath();
     }
 
     #endregion PlayerControl
