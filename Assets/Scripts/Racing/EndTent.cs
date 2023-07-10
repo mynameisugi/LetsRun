@@ -6,6 +6,11 @@ public class EndTent : MonoBehaviour
 
     public int playerRank = -1;
 
+    public void SetPrice(int[] newPrice)
+        => price = newPrice;
+
+    private int[] price = new int[] { 0 };
+
     private void Start()
     {
         foreach (var box in NPCWaypoints)
@@ -15,4 +20,6 @@ public class EndTent : MonoBehaviour
                 if (r) r.enabled = false;
             }
     }
+
+
 }

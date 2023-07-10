@@ -49,15 +49,21 @@ public class GameManager : MonoBehaviour
             Time.RegisterEvent(i, AutoSave); // 3분마다 자동 저장
 
         // 플레이어 위치 저장
-        const string PLAYERPOS = "PlayerPosition";
+        const string PLAYERPOSX = "PlayerPositionX",
+            PLAYERPOSY = "PlayerPositionY", PLAYERPOSZ = "PlayerPositionZ";
         Save.OnSaveToPref += (SaveManager save) =>
         {
             if (PlayerManager.Instance().IsRiding) return; // 말을 타는 중에는 위치 저장 안 함
             var player = PlayerManager.InstanceOrigin();
-            save.SaveValue(PLAYERPOS, player.localPosition);
+            save.SaveValue(PLAYERPOSX, player.localPosition.x);
+            save.SaveValue(PLAYERPOSY, player.localPosition.y);
+            save.SaveValue(PLAYERPOSZ, player.localPosition.z);
         };
         // 플레이어 위치 불러오기
-        PlayerManager.InstanceOrigin().localPosition = Save.LoadValue(PLAYERPOS, Vector3.zero);
+        PlayerManager.InstanceOrigin().localPosition =
+            new Vector3(Save.LoadValue(PLAYERPOSX, 0f),
+                Save.LoadValue(PLAYERPOSY, 0f),
+                Save.LoadValue(PLAYERPOSZ, 0f));
 
         void AutoSave() { if (GameSettings.Values.doAutoSave) Save.SaveToPrefs(0); }
     }

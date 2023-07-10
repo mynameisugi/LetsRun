@@ -20,6 +20,7 @@ public class Race : MonoBehaviour
         Status = RaceStage.Prepare; // 준비
 
         info.end.playerRank = -1; // 플레이어 기록 리셋
+        info.end.SetPrice(info.price);
 
         // 참가자 생성
         entries = new HorseController[8];
@@ -208,6 +209,11 @@ public class Race : MonoBehaviour
         /// 장애물 확률
         /// </summary>
         [SerializeField, Range(0f, 1f)] public float obstacleRate;
+
+        /// <summary>
+        /// 상금
+        /// </summary>
+        [SerializeField] public int[] price;
 
         public Transform GetStartPos(int i) => start.GetStartPos(i);
 

@@ -1,5 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
+using Newtonsoft.Json;
 using UnityEngine;
 
 /// <summary>
@@ -9,7 +8,8 @@ public class PlayerManager : MonoBehaviour
 {
     public Transform xrOrigin = null;
 
-    public bool IsRiding {
+    public bool IsRiding
+    {
         get => isRiding;
         set
         {
@@ -56,6 +56,24 @@ public class PlayerManager : MonoBehaviour
     private void Start()
     {
         inventory = new PlayerInventory(this);
+        // Load Horse
+        const string HorseKey = "PlayerHorseStats";
+        var data = GameManager.Instance().Save.LoadValue(HorseKey, "");
+        if (!string.IsNullOrEmpty(data))
+        {
+            GameObject horseObj = Instantiate((GameObject)Resources.Load("Prefabs/Horse"));
+            horseObj.transform.position = transform.position - transform.right * 2f;
+            horse = horseObj.GetComponent<HorseController>();
+            horse.playerRidable = true;
+            horse.stats = (HorseStats)JsonConvert.DeserializeObject(data);
+        }
+        // Save Horse
+        GameManager.Instance().Save.OnSaveToPref += (save) =>
+        {
+            if (!horse) return;
+            var horseData = JsonConvert.SerializeObject(horse.stats);
+            GameManager.Instance().Save.SaveValue(HorseKey, horseData);
+        };
     }
 
 
