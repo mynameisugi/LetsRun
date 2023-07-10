@@ -444,7 +444,7 @@ public class HorseController : MonoBehaviour
 
     private void OnDestroy()
     {
-        Destroy(sphere.gameObject);
+        if (sphere) Destroy(sphere.gameObject);
     }
 
     #region XREvents
