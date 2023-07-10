@@ -1004,18 +1004,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df41adbaa109e4a4eac346623d000ee5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &487319323 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7165307040119345587, guid: 369f3c382463e3b45a77c88c80b083f0,
-    type: 3}
-  m_PrefabInstance: {fileID: 7165307040605189800}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4756ab3d82e70114996c6659e84a5b85, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &537965509
 GameObject:
   m_ObjectHideFlags: 0
@@ -2261,18 +2249,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1228571397 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7165307041527510445, guid: 369f3c382463e3b45a77c88c80b083f0,
-    type: 3}
-  m_PrefabInstance: {fileID: 7165307040605189800}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8a35f6cfbfba9b548aaa00d52cfe8a50, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &1246237136
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7902,41 +7878,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7165307041527510445, guid: 369f3c382463e3b45a77c88c80b083f0,
-        type: 3}
-      propertyPath: m_InteractionManager
-      value: 
-      objectReference: {fileID: 649734941}
-    - target: {fileID: 7165307041527510445, guid: 369f3c382463e3b45a77c88c80b083f0,
-        type: 3}
-      propertyPath: m_SelectEntered.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 7165307041527510445, guid: 369f3c382463e3b45a77c88c80b083f0,
-        type: 3}
-      propertyPath: m_SelectEntered.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 487319323}
-    - target: {fileID: 7165307041527510445, guid: 369f3c382463e3b45a77c88c80b083f0,
-        type: 3}
-      propertyPath: m_SelectEntered.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: OnNewTicketGrabbed
-      objectReference: {fileID: 0}
-    - target: {fileID: 7165307041527510445, guid: 369f3c382463e3b45a77c88c80b083f0,
-        type: 3}
-      propertyPath: m_SelectEntered.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: RegisterTent, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 7165307041527510445, guid: 369f3c382463e3b45a77c88c80b083f0,
-        type: 3}
-      propertyPath: m_SelectEntered.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
-      value: 
-      objectReference: {fileID: 1228571397}
-    - target: {fileID: 7165307041527510445, guid: 369f3c382463e3b45a77c88c80b083f0,
-        type: 3}
-      propertyPath: m_SelectEntered.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.XR.Interaction.Toolkit.XRSimpleInteractable, Unity.XR.Interaction.Toolkit
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 369f3c382463e3b45a77c88c80b083f0, type: 3}
