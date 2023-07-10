@@ -90,7 +90,7 @@ public class HorseController : MonoBehaviour
         CurMode = Mathf.SmoothStep(CurMode, targetMode, Time.deltaTime * 12f);
         curSpeed = stats.GetSpeed(CurMode);
 
-        const float JUMPTIME = 2f;
+        const float JUMPTIME = 1.5f;
         if (wantToJump > 0f)
         {
             wantToJump -= Time.deltaTime;
