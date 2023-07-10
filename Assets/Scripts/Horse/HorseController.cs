@@ -442,6 +442,11 @@ public class HorseController : MonoBehaviour
 
     // public TMP_Text testText;
 
+    private void OnDestroy()
+    {
+        Destroy(sphere.gameObject);
+    }
+
     #region XREvents
     public void OnPlayerRideRequest()
     {
