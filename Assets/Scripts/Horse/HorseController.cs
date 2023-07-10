@@ -368,8 +368,7 @@ public class HorseController : MonoBehaviour
     {
         agent.enabled = false;
         transform.rotation = rotation;
-        sphere.transform.position = position;
-        sphere.transform.rotation = rotation;
+        sphere.transform.SetPositionAndRotation(position, rotation);
         sphere.velocity = Vector3.zero;
         CurMode = 0f; targetMode = 0;
         curSpeed = 0f; curRotate = 0;

@@ -20,7 +20,7 @@ public class Race : MonoBehaviour
         Status = RaceStage.Prepare; // 준비
 
         info.end.playerRank = -1; // 플레이어 기록 리셋
-        info.end.SetPrice(info.price);
+        info.end.SetPrize(info.prize);
 
         info.start.CloseGate();
 
@@ -217,7 +217,7 @@ public class Race : MonoBehaviour
         /// <summary>
         /// 상금
         /// </summary>
-        [SerializeField] public int[] price;
+        [SerializeField] public int[] prize;
 
         public Transform GetStartPos(int i) => start.GetStartPos(i);
 
