@@ -92,7 +92,7 @@ public class Race : MonoBehaviour
     public void AddPlayer(int num)
     {
         playerNum = num;
-        if (entries[playerNum]) // 이미 NPC가 있으면 삭제
+        if (entries != null && entries[playerNum]) // 이미 NPC가 있으면 삭제
         {
             Destroy(entries[playerNum].gameObject);
             entries[playerNum] = null;
