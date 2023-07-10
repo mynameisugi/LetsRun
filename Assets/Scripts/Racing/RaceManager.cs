@@ -49,7 +49,11 @@ public class RaceManager : MonoBehaviour
         CurrentRace = raceObj.GetComponent<Race>();
         CurrentRace.info = infos[(int)NextRace];
         if (!obstacle) CurrentRace.info.obstacleRate = 0f;
-        if (playerNum > 0) { CurrentRace.AddPlayer(playerNum); playerNum = -1; }
+        if (playerNum > 0)
+        {
+            CurrentRace.AddPlayer(playerNum); playerNum = -1;
+            CurrentRace.JoinPlayer();
+        }
 
         NextRace = (RaceType)Random.Range(0, 3); // 그 다음 경기 랜덤 선택
         nextObstacle = Random.value > 0.3f;
