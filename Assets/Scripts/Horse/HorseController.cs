@@ -306,7 +306,7 @@ public class HorseController : MonoBehaviour
         curRotate = 0f;
         float handOffset = Vector3.Dot(lHand.position - rHand.position, transform.forward);
         // if (testText) testText.text = $"Stamina: {curStamina:0.0}\nMode: {curMode:0.00} Speed: {curSpeed:0.00}";
-        if (Mathf.Abs(handOffset) > PUSHPULL * 1.5f)
+        if (Mathf.Abs(handOffset) > PUSHPULL * 1.2f)
         {
             float rotate = Mathf.Abs(handOffset) - 0.2f;
             rotate = Mathf.Clamp01(rotate * 2.5f) * Mathf.Sign(handOffset);
