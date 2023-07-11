@@ -33,20 +33,32 @@ public class HorseSoundMaker : MonoBehaviour
     private static AudioClip GetFootsound(AudioSource source)
     {
         AudioClip clip;
-        clip = Resources.Load("Sounds/Horse/Walksound" + Random.Range(1, 5).ToString()) as AudioClip;
 
-        // 이건 땅 아래의 재질에 따라 다른 발소리를 내는 예시인데,
-        // 이걸 빼고 그냥 랜덤한 발소리를 재생하는 걸로 일단 해도 됨.
-        /*
         if (Physics.Raycast(source.transform.position + Vector3.up * 0.5f, Vector3.down,
-                        out RaycastHit info, 1f, LayerMask.GetMask("Ground"))) // 발 아래의 땅을 확인
+                        out RaycastHit info, 1f, LayerMask.GetMask("Ground")))
         {
             // info를 사용해 아래 땅의 재질에 맞는 발소리 재생
-            clip = Resources.Load("땅에 맞는 발소리") as AudioClip;
+            if (info.collider.CompareTag("Stone"))
+            {
+                clip = Resources.Load("Sounds/Horse/StoneFootstep" + Random.Range(1, 3).ToString()) as AudioClip;
+            }
+            else if (info.collider.CompareTag("Grass"))
+            {
+                clip = Resources.Load("Sounds/Horse/GrassFootstep" + Random.Range(1, 3).ToString()) as AudioClip;
+            }
+            else if (info.collider.CompareTag("Dirt"))
+            {
+                clip = Resources.Load("Sounds/Horse/DirtFootstep" + Random.Range(1, 4).ToString()) as AudioClip;
+            }
+            else // 정보를 못 구하면 그냥 기본 발소리 재생
+            {
+                clip = Resources.Load("Sounds/Horse/Walksound" + Random.Range(1, 5).ToString()) as AudioClip;
+            }
         }
-        else // 정보를 못 구하면 그냥 기본 발소리 재생
-            clip = Resources.Load("기본 발소리") as AudioClip;
-        */
+        else
+        {
+            clip = Resources.Load("Sounds/Horse/Walksound" + Random.Range(1, 5).ToString()) as AudioClip;
+        }
         return clip;
     }
 
