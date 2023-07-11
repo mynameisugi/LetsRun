@@ -167,6 +167,7 @@ public class HorseController : MonoBehaviour
     private Race.RaceInfo raceInfo;
     private int nextNodeIndex = -1;
     private bool RaceEnded => nextNodeIndex > raceInfo.trackNodes.Length;
+    public bool slowDown = false;
 
     private void TargetNextNode()
     {
@@ -214,7 +215,22 @@ public class HorseController : MonoBehaviour
             return;
         }
 
-        if (CurMode < 3)
+        if (slowDown)
+        {
+            pulledTime -= Time.deltaTime; brakeTime = 0f;
+            if (pulledTime < 0f)
+            {
+                if (targetMode > 2) RequestModeDecrease();
+                else if (targetMode < 2) RequestModeIncrease();
+                pulledTime = raceInfo.type switch
+                {
+                    RaceManager.RaceType.Easy => Random.Range(1f, 2f),
+                    RaceManager.RaceType.Normal => Random.Range(0.5f, 1.5f),
+                    _ => Random.Range(0.3f, 0.6f),
+                };
+            }
+        }
+        else if (targetMode < 3)
         {
             pulledTime -= Time.deltaTime; brakeTime = 0f;
             if (pulledTime < 0f)
