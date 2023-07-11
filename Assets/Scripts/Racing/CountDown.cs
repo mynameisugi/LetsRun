@@ -8,6 +8,14 @@ public class CountDown : MonoBehaviour{
     [SerializeField] private Material matOff;
     [SerializeField] private MeshRenderer[] meshRen;
 
+    [Header("SoundEffects")]
+    [SerializeField] private AudioSource source;
+    [SerializeField] private AudioClip clipCount;
+    [SerializeField] private AudioClip clipEnd;
+    [SerializeField] private AudioClip clipGun;
+    [SerializeField] private AudioSource[] sourceGuns;
+
+
     private void Awake()
     {
         animator = GetComponent<Animator>();
@@ -39,6 +47,22 @@ public class CountDown : MonoBehaviour{
             //불이 양쪽으로 불 켜짐
             meshRen[i].material = matOn;
             meshRen[^(i + 1)].material = matOn;
+            //소리 재생
+            if (i < 4)
+            {
+                source.clip = clipCount;
+                source.volume = GameSettings.Values.SE;
+                source.Play();
+            }
+        }
+        source.clip = clipEnd;
+        source.volume = GameSettings.Values.SE;
+        source.Play();
+        foreach(var sg in sourceGuns)
+        {
+            sg.clip = clipGun;
+            sg.volume = GameSettings.Values.SE;
+            sg.Play();
         }
 
         animator.SetBool(UP, false);
