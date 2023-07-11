@@ -75,6 +75,7 @@ public class Race : MonoBehaviour
     private void DestroyRace()
     {
         Debug.Log($"Destroy Race! {info.type}");
+        if (GameManager.Instance().BGM.IsRaceBGM) GameManager.Instance().BGM.PlayNormalBGM();
         GameManager.Instance().Time.UnregisterEvent(TimeManager.LOOP - 90, DestroyRace);
         Destroy(gameObject);
     }
@@ -105,6 +106,8 @@ public class Race : MonoBehaviour
         playerHorse.OnPlayerRideRequest();
         var start = info.GetStartPos(playerNum);
         playerHorse.Teleport(start.position, start.rotation);
+
+        GameManager.Instance().BGM.PlayRaceBGM();
     }
 
     public RaceInfo info;
@@ -149,7 +152,11 @@ public class Race : MonoBehaviour
         if (num < 0) return -1; // 경주에 참가한 말이 아님
 
         goalInfos.Add(new(horse, num, GameManager.Instance().Time.Now));
-        if (horse.isPlayerRiding) info.end.playerRank = goalInfos.Count; // 플레이어 등수 저장
+        if (horse.isPlayerRiding)
+        {
+            info.end.playerRank = goalInfos.Count; // 플레이어 등수 저장
+            GameManager.Instance().BGM.PlayNormalBGM();
+        }
         if (goalInfos.Count == 8) Status = RaceStage.Clean;
         return goalInfos.Count;
         // Debug.Log($"Goal! {horse.gameObject.name} at {GameManager.Instance().Time.Now:0.00}");

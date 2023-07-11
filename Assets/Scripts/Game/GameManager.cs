@@ -33,6 +33,11 @@ public class GameManager : MonoBehaviour
     public RaceManager Race => GetComponent<RaceManager>();
 
     /// <summary>
+    /// BGM 包府
+    /// </summary>
+    public BGMManager BGM => GetComponent<BGMManager>();
+
+    /// <summary>
     /// 汲沥 包府
     /// </summary>
     public GameSettings Settings { get; private set; }
