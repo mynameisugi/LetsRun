@@ -139,7 +139,7 @@ public class HorseController : MonoBehaviour
         }
         else if (playerOrigin && playerAction) PlayerControlUpdate();
 
-        myAnimator.SetData(new(CurMode, curRotate / Time.deltaTime, displayStamina));
+        myAnimator.SetData(new(CurMode, curRotate / Time.deltaTime, displayStamina, curStamina < 1f));
 
         transform.Rotate(transform.up, curRotate);
     }

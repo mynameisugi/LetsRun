@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-using UnityEngine.Rendering;
+using UnityEngine.UI;
 
 [RequireComponent(typeof(HorseController))]
 public class HorseAnimator : MonoBehaviour
@@ -9,6 +9,9 @@ public class HorseAnimator : MonoBehaviour
 
     [SerializeField]
     private ParticleSystem speedEffect = null;
+
+    [SerializeField]
+    private Image staminaGauge = null;
 
     [Header("Bones")]
     [SerializeField]
@@ -55,21 +58,23 @@ public class HorseAnimator : MonoBehaviour
         speedEffect.gameObject.SetActive(false);
     }
 
-    public struct AnimData
+    public readonly struct AnimData
     {
-        public AnimData(float curMode, float curRotate, float displayStamina)
+        public AnimData(float curMode, float curRotate, float displayStamina, bool staminaLow)
         {
             this.curMode = curMode;
             this.curRotate = curRotate;
             this.displayStamina = displayStamina;
+            this.staminaLow = staminaLow;
         }
 
-        public float curMode;
-        public float curRotate;
-        public float displayStamina;
+        public readonly float curMode;
+        public readonly float curRotate;
+        public readonly float displayStamina;
+        public readonly bool staminaLow;
     }
 
-    private AnimData data = new(0f, 0f, 1f);
+    private AnimData data = new(0f, 0f, 1f, false);
 
     public void SetData(AnimData data)
     {
@@ -83,7 +88,7 @@ public class HorseAnimator : MonoBehaviour
 
     private void Update()
     {
-        if (!active) { animCtrler.SetFloat("mode", 0f); return; }
+        if (!active) { animCtrler.SetFloat("mode", 0f); staminaGauge.canvas.gameObject.SetActive(false); return; }
 
         breath += Time.deltaTime * (Mathf.Lerp(1f, 3f, data.curMode / 4f));
         float breathSin = Mathf.Sin(breath);
@@ -94,17 +99,30 @@ public class HorseAnimator : MonoBehaviour
         float earRot = (1f - data.displayStamina) * 60f;
         for (int i = 0; i < 2; ++i)
         {
-            var rot = ears[i].root.localRotation.eulerAngles;
-            ears[i].localRotation = Quaternion.Euler(breathSin * 8f, earRot * (i == 0 ? 1f : -1f) + breathSin * 8f, rot.z);
+            //var rot = ears[i].root.localRotation.eulerAngles;
+            ears[i].localRotation = Quaternion.Euler(breathSin * 8f * 0f, (earRot + breathSin * 8f) * (i == 0 ? 1f : -1f) * 0f, breathSin * 8f);
         }
 
         for (int i = 0; i < necks.Length; ++i)
         {
-            necks[i].localRotation = Quaternion.Euler(neckRotOrigins[i].x,
-                neckRotOrigins[i].y + displayRot,
-                neckRotOrigins[i].z + breathSin * 3f - data.curMode * 6f);
+            necks[i].localRotation = Quaternion.Euler(0f,
+                displayRot,
+                breathSin * 3f - data.curMode * 6f);
         }
         rope.Update();
+
+        if (horse.isPlayerRiding)
+        {
+            staminaGauge.canvas.gameObject.SetActive(true);
+            if (data.displayStamina < .99f) staminaAlpha = Mathf.MoveTowards(staminaAlpha, 1f, Time.deltaTime * 12f);
+            else staminaAlpha = Mathf.MoveTowards(staminaAlpha, 0f, Time.deltaTime * 2f);
+            Color c = Color.blue;
+            if (data.staminaLow) c = Color.Lerp(c, Color.red, Mathf.Sin(Time.time * 10f));
+            c.a = staminaAlpha;
+            staminaGauge.color = c;
+            staminaGauge.fillAmount = Mathf.Lerp(.10f, .91f, data.displayStamina);
+        }
+        else if (staminaGauge.canvas) staminaGauge.canvas.gameObject.SetActive(false);
 
         if (horse.isPlayerRiding && data.curMode > 3f)
         {
@@ -119,6 +137,7 @@ public class HorseAnimator : MonoBehaviour
     }
 
     private bool active = true;
+    private float staminaAlpha = 0f;
 
     private void FixedUpdate()
     {
