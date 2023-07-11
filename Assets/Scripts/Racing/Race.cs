@@ -150,6 +150,7 @@ public class Race : MonoBehaviour
     {
         int num = GetHorseEntryIndex(horse);
         if (num < 0) return -1; // 경주에 참가한 말이 아님
+        foreach (var info in goalInfos) if (info.index == num) return -1; // 이미 도착한 말
 
         goalInfos.Add(new(horse, num, GameManager.Instance().Time.Now));
         if (horse.isPlayerRiding)
