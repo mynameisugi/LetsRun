@@ -21,5 +21,12 @@ public class EndTent : MonoBehaviour
             }
     }
 
-
+    public void OnPrizeAccept()
+    {
+        if (playerRank < 0) return; // 참가 안 했거나 이미 받음
+        int reward = prize[Mathf.Clamp(playerRank - 1, 0, prize.Length)];
+        PlayerManager.Instance().Inventory().AddMoney(reward);
+        Debug.Log($"플레이어 {playerRank}등 상금 [{reward}] 받음");
+        playerRank = -1;
+    }
 }

@@ -16,7 +16,7 @@ public class HorseSphere : MonoBehaviour
         Vector3 rnd = new Vector3(Random.value - 0.5f, 0f, Random.value - 0.5f).normalized;
         GetComponent<Rigidbody>().AddForce(rnd * agent.speed, ForceMode.Impulse);
         horse.Penalty(0);
-        Debug.Log($"{horse.gameObject.name} SlowPenalty");
+        //Debug.Log($"{horse.gameObject.name} SlowPenalty");
     }
 
     private void ReenableAgent() => GetComponent<NavMeshAgent>().enabled = true;
