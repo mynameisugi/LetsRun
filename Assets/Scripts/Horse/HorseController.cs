@@ -80,7 +80,9 @@ public class HorseController : MonoBehaviour
     private float curStamina = 0f;
     private float displayStamina = 0f;
 
+    [HideInInspector]
     public float wantToJump = 0f;
+    [HideInInspector]
     public float Jumping { get; private set; } = 0f;
 
     private void Update()
@@ -455,6 +457,7 @@ public class HorseController : MonoBehaviour
         // 말 NPC AI 제거
         pulledTime = 0f; brakeTime = 0f;
         agent.ResetPath();
+        agent.enabled = false;
         // 플레이어 탑승 상태 변경
         PlayerManager.Instance().IsRiding = true;
         // 플레이어 추적
@@ -496,6 +499,7 @@ public class HorseController : MonoBehaviour
         // 말 서서히 정지
         targetMode = 0;
         // NPC AI 초기화
+        agent.enabled = true;
         agent.ResetPath();
     }
 
