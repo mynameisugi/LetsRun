@@ -435,7 +435,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7165307041687220137}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Model
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -520,11 +520,36 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -8035869543159289290, guid: 8df8d2a17a58d6445bbf4b350baf75cf,
+        type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: -5783388576688073060, guid: 8df8d2a17a58d6445bbf4b350baf75cf,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 5f35ae9530edec84085e28d4c3302e29, type: 2}
+    - target: {fileID: -4819223349682164798, guid: 8df8d2a17a58d6445bbf4b350baf75cf,
+        type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: -2394318314897415572, guid: 8df8d2a17a58d6445bbf4b350baf75cf,
+        type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: -2328411686548971133, guid: 8df8d2a17a58d6445bbf4b350baf75cf,
+        type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: -2268493968148393607, guid: 8df8d2a17a58d6445bbf4b350baf75cf,
+        type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 440171426890026895, guid: 8df8d2a17a58d6445bbf4b350baf75cf,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -534,6 +559,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: tent1(6x6x2,5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 8df8d2a17a58d6445bbf4b350baf75cf,
+        type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 2372880781423700881, guid: 8df8d2a17a58d6445bbf4b350baf75cf,
         type: 3}

@@ -65,7 +65,7 @@ public class HorseSoundMaker : MonoBehaviour
     public void OnHorseNeigh()
     {
         headAudio.clip = Resources.Load("Sounds/Horse/horsevoice3") as AudioClip;
-        headAudio.volume = GameSettings.Values.SE;
+        headAudio.volume = 0.7f * GameSettings.Values.SE;
         headAudio.Play();
         SendHapticFeedback(0.3f, 0.3f);
     }
@@ -73,7 +73,7 @@ public class HorseSoundMaker : MonoBehaviour
     public void OnHorseDistress()
     {
         headAudio.clip = Resources.Load("Sounds/Horse/horsevoice" + Random.Range(1, 3).ToString()) as AudioClip;
-        headAudio.volume = GameSettings.Values.SE;
+        headAudio.volume = 0.8f * GameSettings.Values.SE;
         headAudio.Play();
         SendHapticFeedback(0.8f, 0.8f);
     }
@@ -81,7 +81,7 @@ public class HorseSoundMaker : MonoBehaviour
     public void OnHorsePurr()
     {
         headAudio.clip = Resources.Load("Sounds/Horse/horsevoice4") as AudioClip;
-        headAudio.volume = GameSettings.Values.SE;
+        headAudio.volume = 0.9f * GameSettings.Values.SE;
         headAudio.Play();
         SendHapticFeedback(0.2f, 0.2f);
     }

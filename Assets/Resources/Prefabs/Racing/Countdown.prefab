@@ -80,6 +80,10 @@ MonoBehaviour:
   - {fileID: 9123842598372750562}
   - {fileID: 2785689569120868301}
   - {fileID: 4060267582172292689}
+  source: {fileID: 0}
+  clipCount: {fileID: 8300000, guid: f634a82d86b90f94b84a09963fc3c6fe, type: 3}
+  clipEnd: {fileID: 8300000, guid: f454ec16a25e6224e9f5128801eea50a, type: 3}
+  clipGun: {fileID: 8300000, guid: 513160c0f8406cd409ef83899b7708bd, type: 3}
 --- !u!1001 &6339671470693044291
 PrefabInstance:
   m_ObjectHideFlags: 0

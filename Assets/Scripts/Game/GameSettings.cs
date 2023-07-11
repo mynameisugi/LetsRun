@@ -91,7 +91,7 @@ public class GameSettings
 
         public static Settings FromSaveString(string saveString)
         {
-            bool d = true, t = true, s = true, r = true; int b = 10, e = 100;
+            bool d = true, t = true, s = true, r = true; int b = 8, e = 10;
 
             if (string.IsNullOrEmpty(saveString)) goto END;
             var array = saveString.Split('|');
