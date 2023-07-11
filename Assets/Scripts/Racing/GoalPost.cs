@@ -22,8 +22,13 @@ public class GoalPost : MonoBehaviour
             if (rating == 1)
             {
                 goalEffect.SetActive(true);
-                foreach(var ge in goalEffect.GetComponentsInChildren<ParticleSystem>())
+                foreach (var ge in goalEffect.GetComponentsInChildren<ParticleSystem>())
                     ge.Play();
+                foreach (var ad in goalEffect.GetComponentsInChildren<AudioSource>())
+                {
+                    ad.volume = GameSettings.Values.SE;
+                    ad.Play();
+                }
                 Invoke(nameof(StopEffect), 30f);
             }
         }
