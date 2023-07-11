@@ -11,6 +11,13 @@ public class RegisterTicket : MonoBehaviour
     [SerializeField]
     private Toggle toggleObstacle;
 
+    public bool Initialized { get; private set; } = false;
+
+    private void Start()
+    {
+        Initialized = true;
+    }
+
     public RaceType ParseTicket()
     {
         RaceType type;

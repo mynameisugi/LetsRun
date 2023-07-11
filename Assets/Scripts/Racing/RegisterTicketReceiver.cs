@@ -14,6 +14,6 @@ public class RegisterTicketReceiver : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         var ticket = other.GetComponentInParent<RegisterTicket>();
-        if (ticket && ticket == owner.ticket) owner.ReceiveTicket();
+        if (ticket && ticket.Initialized && ticket == owner.ticket) owner.ReceiveTicket();
     }
 }
