@@ -426,7 +426,7 @@ GameObject:
   - component: {fileID: 5086007431262823196}
   - component: {fileID: 685846055431035061}
   - component: {fileID: 4923069806317436328}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: StartBlock
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1489,6 +1489,11 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: b348d49ec78b0c64fb8a0e8101d06db8, type: 2}
+    - target: {fileID: 4860884733252827142, guid: 486380c2b7bb097469036c39b5d2955f,
+        type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 5117269737276333718, guid: 486380c2b7bb097469036c39b5d2955f,
         type: 3}
       propertyPath: m_Materials.Array.data[0]

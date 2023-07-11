@@ -88,7 +88,7 @@ public class HorseAnimator : MonoBehaviour
 
     private void Update()
     {
-        if (!active) { animCtrler.SetFloat("mode", 0f); staminaGauge.canvas.gameObject.SetActive(false); return; }
+        if (!active) { animCtrler.SetFloat("mode", 0f); staminaGauge.gameObject.SetActive(false); return; }
 
         breath += Time.deltaTime * (Mathf.Lerp(1f, 3f, data.curMode / 4f));
         float breathSin = Mathf.Sin(breath);
