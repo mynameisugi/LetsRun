@@ -57,6 +57,8 @@ public class FoodItem : MonoBehaviour
         targetHorse.stats.SteerStrength += steer;
         Debug.Log($"{targetHorse.gameObject.name} ate {gameObject.name}");
 
+        targetHorse.MySoundMaker.OnHorseNeigh();
+
         Destroy(gameObject);
     }
 

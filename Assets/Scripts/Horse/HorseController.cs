@@ -33,8 +33,8 @@ public class HorseController : MonoBehaviour
     private Rigidbody sphere;
     private NavMeshAgent agent;
 
-    private HorseAnimator myAnimator;
-    private HorseSoundMaker mySoundMaker;
+    internal HorseAnimator MyAnimator { get; private set; }
+    internal HorseSoundMaker MySoundMaker { get; private set; }
 
     private void Awake()
     {
@@ -60,8 +60,8 @@ public class HorseController : MonoBehaviour
         //obstacle.radius = 1f; obstacle.height = 2f;
 
 
-        myAnimator = GetComponent<HorseAnimator>();
-        mySoundMaker = GetComponentInChildren<HorseSoundMaker>();
+        MyAnimator = GetComponent<HorseAnimator>();
+        MySoundMaker = GetComponentInChildren<HorseSoundMaker>();
 
         curStamina = stats.GallopAmount;
 
@@ -101,7 +101,7 @@ public class HorseController : MonoBehaviour
             if (CurMode > 3.5f && Jumping <= 0f)
             {
                 Jumping = JUMPTIME;
-                myAnimator.PlayJump();
+                MyAnimator.PlayJump();
             }
         }
         if (Jumping > 0f) Jumping -= Time.deltaTime;
@@ -139,7 +139,7 @@ public class HorseController : MonoBehaviour
         }
         else if (playerOrigin && playerAction) PlayerControlUpdate();
 
-        myAnimator.SetData(new(CurMode, curRotate / Time.deltaTime, displayStamina, curStamina < 1f));
+        MyAnimator.SetData(new(CurMode, curRotate / Time.deltaTime, displayStamina, curStamina < 1f));
 
         transform.Rotate(transform.up, curRotate);
     }
@@ -292,8 +292,8 @@ public class HorseController : MonoBehaviour
                 //Debug.Log($"{gameObject.name} wanders off to {offset}");
                 agent.SetDestination(transform.position + offset);
                 targetMode = Random.value > 0.2f ? 1 : 2;
-                if (targetMode == 1) mySoundMaker.OnHorsePurr();
-                else mySoundMaker.OnHorseNeigh();
+                if (targetMode == 1) MySoundMaker.OnHorsePurr();
+                else MySoundMaker.OnHorseNeigh();
             }
         }
         else
@@ -408,14 +408,14 @@ public class HorseController : MonoBehaviour
         {
             ++targetMode; // 가속
             SendHapticFeedback(0.2f, 0.3f);
-            mySoundMaker.OnHorsePurr();
+            MySoundMaker.OnHorsePurr();
         }
         else // 습보
         {
             if (curStamina >= 1f) // 스태미너 확인
             {
                 SendHapticFeedback(0.4f, 0.5f);
-                mySoundMaker.OnHorsePurr();
+                MySoundMaker.OnHorsePurr();
                 curStamina -= 1f; // 스태미너 소모
                 targetMode = 4; // 습보로 전환/유지
                 gallopTimer = 4f; // 습보 타이머 리셋
@@ -424,7 +424,7 @@ public class HorseController : MonoBehaviour
             {
                 SendHapticFeedback(0.7f, 0.8f);
                 targetMode = 1; // 말 저항, 속도 평보로 늦춤
-                mySoundMaker.OnHorseDistress();
+                MySoundMaker.OnHorseDistress();
                 // TODO: 말이 거부하는 애니메이션 플레이
                 staminaRecoveryTimer += 1f; // 스태미너 회복 딜레이 추가
             }
@@ -436,8 +436,8 @@ public class HorseController : MonoBehaviour
         if (targetMode > 0)
         {
             --targetMode;
-            if (targetMode > 0) mySoundMaker.OnHorsePurr();
-            else mySoundMaker.OnHorseNeigh();
+            if (targetMode > 0) MySoundMaker.OnHorsePurr();
+            else MySoundMaker.OnHorseNeigh();
             SendHapticFeedback(0.3f, 0.3f);
         }
 
@@ -447,7 +447,7 @@ public class HorseController : MonoBehaviour
     {
         CurMode = type;
         targetMode = type;
-        mySoundMaker.OnHorseDistress();
+        MySoundMaker.OnHorseDistress();
     }
 
     private void FixedUpdate()
