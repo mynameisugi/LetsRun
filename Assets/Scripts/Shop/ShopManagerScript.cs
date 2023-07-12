@@ -1,14 +1,31 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
 
 public class ShopManagerScript : MonoBehaviour
 {
+    [Header("Goods")]
     [SerializeField]
     private int price = 1;
     [SerializeField]
     private GameObject itemPrefab = null;
     [SerializeField]
     private Transform itemSpawn = null;
+
+    [Header("NPC")]
+    [SerializeField]
+    private TextReader NPC = null;
+    [SerializeField]
+    private string purchaseDialogue = "FoodBuyMultteock";
+
+    [Header("Scanner")]
+    [SerializeField]
+    private TMP_Text textPrice;
+
+    private void Start()
+    {
+        if (textPrice) textPrice.text = $"∞°∞› {price}";
+    }
 
     private IXRHoverInteractor interactor = null;
 
@@ -50,10 +67,15 @@ public class ShopManagerScript : MonoBehaviour
             PlayerManager.Instance().Action().GetDevice(0).SendHapticImpulse(0, 0.2f, 0.5f);
         
         var player = PlayerManager.Instance();
-        if (!player.Inventory().TryReduceMoney(price)) return; // µ∑ ∫Œ¡∑
+        if (!player.Inventory().TryReduceMoney(price)) // µ∑ ∫Œ¡∑
+        {
+            if (NPC) NPC.PlayConversation("FoodBuyFail");
+            return;
+        }
 
         var item = Instantiate(itemPrefab); // π∞∞«¿ª ªı∑Œ ∏∏µÈæÓº≠ ¡„æÓ¡‹
         item.transform.SetPositionAndRotation(itemSpawn.position, itemSpawn.rotation);
+        if (NPC) NPC.PlayConversation(purchaseDialogue);
         //var itemGrab = item.GetComponent<XRGrabInteractable>();
         //itemGrab.interactionManager.SelectEnter(pile.firstInteractorSelecting, itemGrab);
     }

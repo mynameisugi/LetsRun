@@ -1160,6 +1160,11 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[3]
       value: 
       objectReference: {fileID: 2100000, guid: 4ea8e2de4ac6b564c98a36f67a2ad64f, type: 2}
+    - target: {fileID: 2992172728686768708, guid: 40f626e2e2dc9924a858f26cd7944143,
+        type: 3}
+      propertyPath: file
+      value: RaceEndTentChat
+      objectReference: {fileID: 0}
     - target: {fileID: 3156539004751286894, guid: 40f626e2e2dc9924a858f26cd7944143,
         type: 3}
       propertyPath: m_LocalScale.z
