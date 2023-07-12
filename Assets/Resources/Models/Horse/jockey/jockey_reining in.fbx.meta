@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 4f47e3cc81a538d4a86b87b7343ea2ee
+guid: aa407d4058b0a2e46bc8726509b2ec43
 ModelImporter:
   serializedVersion: 21300
   internalIDToNameTable: []
@@ -33,11 +33,11 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: J_Whip
+      name: J_reining in
       takeName: Take 001
       internalID: 1827226128182048838
       firstFrame: 0
-      lastFrame: 25
+      lastFrame: 20
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
