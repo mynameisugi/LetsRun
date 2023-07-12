@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
 
@@ -8,12 +6,16 @@ public class RegisterTent : MonoBehaviour
     [SerializeField]
     private GameObject ticketPrefab;
 
+    [SerializeField]
+    private TextReader NPC;
+
     internal RegisterTicket ticket;
 
 
     public void OnNewTicketGrabbed(XRSimpleInteractable pile)
     {
         if (ticket) Destroy(ticket.gameObject);
+        else NPC.PlayConversation("RegisterTentPickup");
         var newObj = Instantiate(ticketPrefab);
         newObj.transform.SetParent(transform);
         ticket = newObj.GetComponent<RegisterTicket>();
@@ -25,7 +27,16 @@ public class RegisterTent : MonoBehaviour
 
     public void ReceiveTicket()
     {
-        GameManager.Instance().Race.RegisterPlayer(ticket.ParseTicket(), ticket.ObstacleTicket());
+        var ticketType = ticket.ParseTicket();
+        GameManager.Instance().Race.RegisterPlayer(ticketType, ticket.ObstacleTicket());
         Destroy(ticket.gameObject); ticket = null;
+
+        string dialogue = ticketType switch
+        {
+            RaceManager.RaceType.Easy => "RegisterTentReceiveEasy",
+            RaceManager.RaceType.Normal => "RegisterTentReceiveNormal",
+            _ => "RegisterTentReceiveHard"
+        };
+        NPC.PlayConversation(dialogue);
     }
 }

@@ -3,6 +3,9 @@ using TMPro;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
+/// <summary>
+/// NPC 컨트롤러
+/// </summary>
 public class TextReader : MonoBehaviour
 {
     [SerializeField]
