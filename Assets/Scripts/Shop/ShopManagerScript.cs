@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
 
@@ -16,6 +17,15 @@ public class ShopManagerScript : MonoBehaviour
     private TextReader NPC = null;
     [SerializeField]
     private string purchaseDialogue = "FoodBuyMultteock";
+
+    [Header("Scanner")]
+    [SerializeField]
+    private TMP_Text textPrice;
+
+    private void Start()
+    {
+        if (textPrice) textPrice.text = $"АЁАн {price}";
+    }
 
     private IXRHoverInteractor interactor = null;
 
