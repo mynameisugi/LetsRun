@@ -62,6 +62,7 @@ public class PlayerManager : MonoBehaviour
         if (!string.IsNullOrEmpty(data))
         {
             GameObject horseObj = Instantiate((GameObject)Resources.Load("Prefabs/Horse"));
+            horseObj.name = $"PlayerHorse";
             horseObj.transform.position = transform.position - transform.right * 2f;
             horse = horseObj.GetComponent<HorseController>();
             horse.playerRidable = true;

@@ -7,15 +7,55 @@ public class ShopManagerScript : MonoBehaviour
     private int price = 1;
     [SerializeField]
     private GameObject itemPrefab = null;
+    [SerializeField]
+    private Transform itemSpawn = null;
 
-    public void TryBuy(XRSimpleInteractable pile)
+    private IXRHoverInteractor interactor = null;
+
+    private bool hovering = false;
+
+    private float purchase = 0f;
+
+    public void OnHoverStart(HoverEnterEventArgs eventArgs)
     {
+        interactor = eventArgs.interactorObject;
+        if (interactor != null) hovering = true;
+    }
+
+    public void OnHoverEnd()
+    {
+        interactor = null;
+        hovering = false;
+    }
+
+    private void Update()
+    {
+        if (!hovering) return;
+
+        if (Vector3.Dot(interactor.transform.up, interactor.transform.position - transform.position) > 0f)
+        {
+            purchase += Time.deltaTime;
+            if (purchase > 1f)
+            {
+                hovering = false;
+                TryBuy();
+            }
+        }
+        else purchase = Mathf.Max(0f, purchase - Time.deltaTime * 2f);
+    }
+
+    public void TryBuy()
+    {
+        if (GameSettings.Values.rumble)
+            PlayerManager.Instance().Action().GetDevice(0).SendHapticImpulse(0, 0.2f, 0.5f);
+        
         var player = PlayerManager.Instance();
         if (!player.Inventory().TryReduceMoney(price)) return; // µ∑ ∫Œ¡∑
 
         var item = Instantiate(itemPrefab); // π∞∞«¿ª ªı∑Œ ∏∏µÈæÓº≠ ¡„æÓ¡‹
-        var itemGrab = item.GetComponent<XRGrabInteractable>();
-        itemGrab.interactionManager.SelectEnter(pile.firstInteractorSelecting, itemGrab);
+        item.transform.SetPositionAndRotation(itemSpawn.position, itemSpawn.rotation);
+        //var itemGrab = item.GetComponent<XRGrabInteractable>();
+        //itemGrab.interactionManager.SelectEnter(pile.firstInteractorSelecting, itemGrab);
     }
 
 }

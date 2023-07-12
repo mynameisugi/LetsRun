@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: a40ee66568431ac4788fc9751455991b
+guid: aa407d4058b0a2e46bc8726509b2ec43
 ModelImporter:
   serializedVersion: 21300
   internalIDToNameTable: []
@@ -33,19 +33,19 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: J_Base
+      name: J_reining in
       takeName: Take 001
       internalID: 1827226128182048838
       firstFrame: 0
-      lastFrame: 17
+      lastFrame: 20
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
       cycleOffset: 0
       loop: 0
       hasAdditiveReferencePose: 0
-      loopTime: 1
-      loopBlend: 1
+      loopTime: 0
+      loopBlend: 0
       loopBlendOrientation: 0
       loopBlendPositionY: 0
       loopBlendPositionXZ: 0
