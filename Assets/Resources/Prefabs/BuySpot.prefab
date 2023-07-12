@@ -52,6 +52,8 @@ MonoBehaviour:
   itemPrefab: {fileID: 9090869945020917701, guid: 3887a7a3099c1794f9dda9a58384b005,
     type: 3}
   itemSpawn: {fileID: 1648911547353601982}
+  NPC: {fileID: 0}
+  purchaseDialogue: FoodBuyMultteock
 --- !u!114 &343058514597113082
 MonoBehaviour:
   m_ObjectHideFlags: 0
