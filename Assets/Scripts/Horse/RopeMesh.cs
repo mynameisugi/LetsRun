@@ -95,7 +95,7 @@ public class RopeMesh
         Vector2[] uvs = Enumerable.Repeat(new Vector2(0.03f, 0.17f), verts.Length).ToArray();
 
         const float halfWidth = 0.01f;
-        const float halfHeight = 0.03f;
+        const float halfHeight = 0.02f;
         for (int i = 0; i < segCount; ++i)
         {
             Vector3 segStart = segs[i];
