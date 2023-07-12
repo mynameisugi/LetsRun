@@ -1,69 +1,46 @@
+using System;
 using UnityEngine;
 using UnityEngine.UI;
-using System.IO;
-using System;
+using Random = UnityEngine.Random;
 
 public class TextReader : MonoBehaviour
 {
-    public Text textComponent;
-    public string filePath = "/Text/TestText.txt";
-    public GameObject conversationWindow;
-    private bool isPlayerInRange = false;
-    private string[] words;
+    [SerializeField]
+    private Text textComponent;
+    [SerializeField]
+    private string file = "TestText";
+    [SerializeField]
+    private GameObject conversationWindow;
 
-    void Start()
+    private const string PATHFOLDER = "Texts/";
+
+    private static string LoadLine(string fileName)
     {
-        string fullPath = Application.dataPath + filePath;
-
-        if (File.Exists(fullPath))
-        {
-            string fileContents = File.ReadAllText(fullPath);
-            words = fileContents.Split(new char[] { ' ', '\n', '\r' }, StringSplitOptions.RemoveEmptyEntries);
-        }
-        else
-        {
-            Debug.LogError("파일을 찾을 수 없습니다: " + fullPath);
-        }
+        var asset = Resources.Load(PATHFOLDER + fileName) as TextAsset;
+        var content = asset.text.Split(new char[] { '\n', '\r' }, StringSplitOptions.RemoveEmptyEntries);
+        return content[Random.Range(0, content.Length)];
     }
 
-    void Update()
+    private void ShowDialogue(string text)
     {
-        if (isPlayerInRange && Input.GetMouseButtonDown(0))
-        {
-            conversationWindow.SetActive(false);
-        }
+        conversationWindow.SetActive(true);
+        textComponent.text = text;
+        CancelInvoke(nameof(HideDialogue));
+        Invoke(nameof(HideDialogue), Mathf.Clamp(text.Length * 0.5f, 4f, 15f));
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void HideDialogue()
     {
-        if (other.CompareTag("Player"))
-        {
-            isPlayerInRange = true;
-            conversationWindow.SetActive(true);
-            UpdateConversationText();
-        }
+        conversationWindow.SetActive(false);
     }
 
-    private void OnTriggerExit(Collider other)
+    public void OnPlayerTrigger()
     {
-        if (other.CompareTag("Player"))
-        {
-            isPlayerInRange = false;
-            conversationWindow.SetActive(false);
-        }
+        ShowDialogue(LoadLine(file));
     }
 
-    private void UpdateConversationText()
+    public void PlayConversation(string customFile = "")
     {
-        if (words != null && words.Length > 0)
-        {
-            int randomIndex = UnityEngine.Random.Range(0, words.Length);
-            string randomWord = words[randomIndex];
-            textComponent.text = randomWord;
-        }
-        else
-        {
-            Debug.LogError("대화 내용 배열이 비어 있습니다.");
-        }
+        ShowDialogue(LoadLine(string.IsNullOrEmpty(customFile) ? file : customFile));
     }
 }
