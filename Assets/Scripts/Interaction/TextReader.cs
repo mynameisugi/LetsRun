@@ -1,69 +1,67 @@
-using UnityEngine;
-using UnityEngine.UI;
-using System.IO;
 using System;
+using TMPro;
+using UnityEngine;
+using Random = UnityEngine.Random;
 
+/// <summary>
+/// NPC 컨트롤러
+/// </summary>
 public class TextReader : MonoBehaviour
 {
-    public Text textComponent;
-    public string filePath = "/Text/TestText.txt";
-    public GameObject conversationWindow;
-    private bool isPlayerInRange = false;
-    private string[] words;
+    [SerializeField]
+    private TMP_Text textUI;
+    [SerializeField]
+    private string file = "TestText";
+    [SerializeField]
+    private GameObject textCanvas;
 
-    void Start()
+    private const string PATHFOLDER = "Texts/";
+
+    private void Start()
     {
-        string fullPath = Application.dataPath + filePath;
-
-        if (File.Exists(fullPath))
-        {
-            string fileContents = File.ReadAllText(fullPath);
-            words = fileContents.Split(new char[] { ' ', '\n', '\r' }, StringSplitOptions.RemoveEmptyEntries);
-        }
-        else
-        {
-            Debug.LogError("파일을 찾을 수 없습니다: " + fullPath);
-        }
+        textCanvas.SetActive(false);
     }
 
-    void Update()
+    private static string LoadLine(string fileName)
     {
-        if (isPlayerInRange && Input.GetMouseButtonDown(0))
-        {
-            conversationWindow.SetActive(false);
-        }
+        var asset = Resources.Load(PATHFOLDER + fileName) as TextAsset;
+        var content = asset.text.Split(new char[] { '\n', '\r' }, StringSplitOptions.RemoveEmptyEntries);
+        return content[Random.Range(0, content.Length)];
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void ShowDialogue(string text)
     {
-        if (other.CompareTag("Player"))
-        {
-            isPlayerInRange = true;
-            conversationWindow.SetActive(true);
-            UpdateConversationText();
-        }
+        textCanvas.SetActive(true);
+        textUI.text = text;
+        CancelInvoke(nameof(HideDialogue));
+        Invoke(nameof(HideDialogue), Mathf.Clamp(text.Length * 0.5f, 4f, 15f));
     }
 
-    private void OnTriggerExit(Collider other)
+    private void HideDialogue()
     {
-        if (other.CompareTag("Player"))
-        {
-            isPlayerInRange = false;
-            conversationWindow.SetActive(false);
-        }
+        textCanvas.SetActive(false);
     }
 
-    private void UpdateConversationText()
+    public void OnPlayerTrigger()
     {
-        if (words != null && words.Length > 0)
-        {
-            int randomIndex = UnityEngine.Random.Range(0, words.Length);
-            string randomWord = words[randomIndex];
-            textComponent.text = randomWord;
-        }
-        else
-        {
-            Debug.LogError("대화 내용 배열이 비어 있습니다.");
-        }
+        ShowDialogue(LoadLine(file));
+    }
+
+    /// <summary>
+    /// 지정하는 파일에서 랜덤한 대사를 하나 출력
+    /// </summary>
+    /// <param name="customFile">파일명 (비우면 기본 대사)</param>
+    public void PlayConversation(string customFile = "")
+    {
+        ShowDialogue(LoadLine(string.IsNullOrEmpty(customFile) ? file : customFile));
+    }
+
+    /// <summary>
+    /// 원하는 대사를 출력
+    /// </summary>
+    /// <param name="customText">출력하고자하는 대사</param>
+    public void PlayText(string customText)
+    {
+        ShowDialogue(customText);
     }
 }

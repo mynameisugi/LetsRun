@@ -7,6 +7,8 @@ public class ShopManagerScript : MonoBehaviour
     private int price = 1;
     [SerializeField]
     private GameObject itemPrefab = null;
+    [SerializeField]
+    private Transform itemSpawn = null;
 
     private IXRHoverInteractor interactor = null;
 
@@ -20,7 +22,7 @@ public class ShopManagerScript : MonoBehaviour
         if (interactor != null) hovering = true;
     }
 
-    public void OnHoverEnd(XRSimpleInteractable self)
+    public void OnHoverEnd()
     {
         interactor = null;
         hovering = false;
@@ -51,6 +53,7 @@ public class ShopManagerScript : MonoBehaviour
         if (!player.Inventory().TryReduceMoney(price)) return; // µ∑ ∫Œ¡∑
 
         var item = Instantiate(itemPrefab); // π∞∞«¿ª ªı∑Œ ∏∏µÈæÓº≠ ¡„æÓ¡‹
+        item.transform.SetPositionAndRotation(itemSpawn.position, itemSpawn.rotation);
         //var itemGrab = item.GetComponent<XRGrabInteractable>();
         //itemGrab.interactionManager.SelectEnter(pile.firstInteractorSelecting, itemGrab);
     }
