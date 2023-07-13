@@ -458,6 +458,7 @@ public class HorseController : MonoBehaviour
 
     public void Penalty(int type)
     {
+        if (isPlayerRiding) GameManager.Instance().PlayVignetteEffect(0.5f, Color.red);
         CurMode = type;
         targetMode = type;
         MySoundMaker.OnHorseDistress();
