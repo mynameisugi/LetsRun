@@ -202,6 +202,25 @@ public class HorseController : MonoBehaviour
         }
     }
 
+    public void AddMidwaypoint(BoxCollider box)
+    {
+        Vector3 point = new(
+            Random.Range(box.bounds.min.x + 1f, box.bounds.max.x - 1f),
+            box.bounds.max.y,
+            Random.Range(box.bounds.min.z + 1f, box.bounds.max.z - 1f)
+        );
+
+        if (Physics.Raycast(point, Vector3.down, out var info, 10f, LayerMask.GetMask("Ground")))
+            point = info.point;
+
+        if (Vector3.Distance(transform.position, agent.destination) > // 중간 포인트가 더 가까우면 기존 노드 유지
+            Vector3.Distance(transform.position, point)) --nextNodeIndex;
+
+        agent.SetDestination(point);
+
+        // Debug.Log($"{gameObject.name} Midwaypoint: {point}");
+    }
+
     private void NPCRaceUpdate()
     {
         if (myJockey)
@@ -403,14 +422,14 @@ public class HorseController : MonoBehaviour
 
     public void Teleport(Vector3 position, Quaternion rotation)
     {
-        agent.enabled = false;
+        //agent.enabled = false;
         transform.rotation = rotation;
         sphere.transform.SetPositionAndRotation(position, rotation);
         sphere.velocity = Vector3.zero;
         CurMode = 0f; targetMode = 0;
         curSpeed = 0f; curRotate = 0;
         Update();
-        agent.enabled = true;
+        //agent.enabled = true;
         agent.ResetPath();
     }
 
@@ -447,6 +466,7 @@ public class HorseController : MonoBehaviour
 
     private void RequestModeDecrease()
     {
+        if (myJockey) myJockey.PlayHalt();
         if (targetMode > 0)
         {
             --targetMode;
@@ -459,6 +479,7 @@ public class HorseController : MonoBehaviour
 
     public void Penalty(int type)
     {
+        if (myJockey) myJockey.PlayWhip();
         if (isPlayerRiding) GameManager.Instance().PlayVignetteEffect(0.5f, Color.red);
         CurMode = type;
         targetMode = type;

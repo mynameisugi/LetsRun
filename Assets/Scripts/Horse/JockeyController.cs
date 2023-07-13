@@ -41,4 +41,7 @@ public class JockeyController : MonoBehaviour
         gameObject.SetLayerRecursively(8);
     }
 
+    public void PlayWhip() => myAnim.SetTrigger("Whip");
+    public void PlayHalt() => myAnim.SetTrigger("Halt");
+
 }

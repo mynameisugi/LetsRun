@@ -13,6 +13,14 @@ public class Race : MonoBehaviour
     [SerializeField]
     private GameObject horsePrefab;
 
+    public RaceInfo info;
+
+    [SerializeField]
+    private AudioSource audienceBGM;
+    [SerializeField]
+    private AudioSource audienceSE;
+
+
     private void Start()
     {
         Debug.Log($"Race Ready: {info.type}");
@@ -31,6 +39,7 @@ public class Race : MonoBehaviour
 
         // 경기 시작 대기
         GameManager.Instance().Time.RegisterEvent(TimeManager.LOOP, StartRace);
+        audienceBGM.volume = GameSettings.Values.BGM * 0.1f;
 
         // 장애물 랜덤 켜기
         for (int i = 0; i < info.obstacles.Length; ++i)
@@ -112,8 +121,6 @@ public class Race : MonoBehaviour
         }, null);
     }
 
-    public RaceInfo info;
-
     internal RaceStage Status { get; private set; }
 
     public enum RaceStage
@@ -132,13 +139,36 @@ public class Race : MonoBehaviour
         return entries[i];
     }
 
+    private float wow = 0f;
+    private float curWow = 0f;
+
+    public void AddWow(float wow) => this.wow += wow;
+
     private void Update()
     {
         if (Status == RaceStage.Clean)
         {
+            audienceBGM.volume = Mathf.MoveTowards(audienceBGM.volume, 0f, Time.deltaTime * 0.1f);
+            audienceSE.volume = Mathf.MoveTowards(audienceBGM.volume, 0f, Time.deltaTime * 0.3f);
             int alive = entries.Count(x => x);
             if (alive == 0) DestroyRace();
             return;
+        }
+        if (Status == RaceStage.Racing)
+        {
+            audienceBGM.volume = Mathf.MoveTowards(audienceBGM.volume, GameSettings.Values.BGM * 0.3f, Time.deltaTime);
+            if (wow > 0f)
+            {
+                curWow += Time.deltaTime;
+                wow -= Time.deltaTime;
+                if (wow < 0f) wow = 0f;
+            }
+            else
+            {
+                curWow -= Time.deltaTime;
+                if (curWow < 0f) curWow = 0f;
+            }
+            audienceSE.volume = (Mathf.Clamp01(curWow) * 0.8f + 0.2f) * audienceSE.volume;
         }
 
         if (Status == RaceStage.Prepare && Input.GetKeyDown(KeyCode.P))
