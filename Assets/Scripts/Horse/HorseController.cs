@@ -107,6 +107,7 @@ public class HorseController : MonoBehaviour
             {
                 Jumping = JUMPTIME;
                 MyAnimator.PlayJump();
+                MySoundMaker.OnHorseJump();
             }
         }
         if (Jumping > 0f) Jumping -= Time.deltaTime;
