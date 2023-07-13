@@ -202,6 +202,25 @@ public class HorseController : MonoBehaviour
         }
     }
 
+    public void AddMidwaypoint(BoxCollider box)
+    {
+        Vector3 point = new(
+            Random.Range(box.bounds.min.x + 1f, box.bounds.max.x - 1f),
+            box.bounds.max.y,
+            Random.Range(box.bounds.min.z + 1f, box.bounds.max.z - 1f)
+        );
+
+        if (Physics.Raycast(point, Vector3.down, out var info, 10f, LayerMask.GetMask("Ground")))
+            point = info.point;
+
+        if (Vector3.Distance(transform.position, agent.destination) > // 중간 포인트가 더 가까우면 기존 노드 유지
+            Vector3.Distance(transform.position, point)) --nextNodeIndex;
+
+        agent.SetDestination(point);
+
+        // Debug.Log($"{gameObject.name} Midwaypoint: {point}");
+    }
+
     private void NPCRaceUpdate()
     {
         if (myJockey)
