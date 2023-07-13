@@ -1,4 +1,8 @@
+using System;
+using System.Collections;
 using UnityEngine;
+using UnityEngine.Rendering;
+using UnityEngine.Rendering.Universal;
 
 public class GameManager : MonoBehaviour
 {
@@ -73,10 +77,51 @@ public class GameManager : MonoBehaviour
         void AutoSave() { if (GameSettings.Values.doAutoSave) Save.SaveToPrefs(0); }
     }
 
-
     private void Update()
     {
         Time.Update();
     }
+
+    #region Fade
+    private LiftGammaGain gamma = null;
+
+    /// <summary>
+    /// 게임이 어두워졌다 밝아지는 애니메이션 실행
+    /// </summary>
+    public void PlayFadeInAndOut(Action OnFaded, Action OnFadeEnded)
+    {
+        if (gamma == null)
+        {
+            var volume = FindAnyObjectByType<Volume>();
+            foreach (var c in volume.profile.components)
+                if (c is LiftGammaGain lgg) { gamma = lgg; break; }
+            if (gamma == null) return;
+        }
+        StartCoroutine(FadeCoroutine(OnFaded, OnFadeEnded));
+    }
+
+    private IEnumerator FadeCoroutine(Action OnFaded, Action OnFadeEnded)
+    {
+        float fade = 1f, delta;
+        while (fade > 0f)
+        {
+            delta = UnityEngine.Time.unscaledDeltaTime;
+            yield return new WaitForSecondsRealtime(UnityEngine.Time.unscaledDeltaTime);
+            fade -= delta; if (fade < 0f) fade = 0f;
+            gamma.gamma.value = Vector4.one * fade;
+        }
+        OnFaded?.Invoke();
+
+        while (fade < 1f)
+        {
+            delta = UnityEngine.Time.unscaledDeltaTime;
+            yield return new WaitForSecondsRealtime(UnityEngine.Time.unscaledDeltaTime);
+            fade += delta; if (fade > 1f) fade = 1f;
+            gamma.gamma.value = Vector4.one * fade;
+        }
+        OnFadeEnded?.Invoke();
+    } 
+
+    #endregion Fade
 
 }

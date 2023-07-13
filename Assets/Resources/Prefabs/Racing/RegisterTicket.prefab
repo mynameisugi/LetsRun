@@ -1512,8 +1512,8 @@ GameObject:
   m_Component:
   - component: {fileID: 6630509432365979137}
   - component: {fileID: 396811142657692745}
-  - component: {fileID: 7306847059247497438}
   - component: {fileID: 8048483072941084179}
+  - component: {fileID: 7306847059247497438}
   m_Layer: 0
   m_Name: RegisterTicket
   m_TagString: Untagged
@@ -1554,6 +1554,23 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &8048483072941084179
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6630509432365979143}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 46d18b13de1708641a4c65ad774501e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  toggleLength:
+  - {fileID: 1519298269141015601}
+  - {fileID: 770504977179806908}
+  - {fileID: 8531087314375247504}
+  toggleObstacle: {fileID: 6528764410512451436}
 --- !u!114 &7306847059247497438
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1604,10 +1621,34 @@ MonoBehaviour:
       m_Calls: []
   m_SelectEntered:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 8048483072941084179}
+        m_TargetAssemblyTypeName: RegisterTicket, Assembly-CSharp
+        m_MethodName: OnGrabbed
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_SelectExited:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 8048483072941084179}
+        m_TargetAssemblyTypeName: RegisterTicket, Assembly-CSharp
+        m_MethodName: OnGrabEnded
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_Activated:
     m_PersistentCalls:
       m_Calls: []
@@ -1690,23 +1731,6 @@ MonoBehaviour:
   m_StartingSingleGrabTransformers: []
   m_StartingMultipleGrabTransformers: []
   m_AddDefaultGrabTransformers: 1
---- !u!114 &8048483072941084179
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6630509432365979143}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 46d18b13de1708641a4c65ad774501e8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  toggleLength:
-  - {fileID: 1519298269141015601}
-  - {fileID: 770504977179806908}
-  - {fileID: 8531087314375247504}
-  toggleObstacle: {fileID: 6528764410512451436}
 --- !u!1 &6630509432513649879
 GameObject:
   m_ObjectHideFlags: 0
