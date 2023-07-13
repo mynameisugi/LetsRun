@@ -18,5 +18,7 @@ public class OSlowPenalty : MonoBehaviour
         // 느리지 않은 말 페널티
         var horse = sphere.horse;
         if (horse.CurMode > 2.5f) sphere.SlowPenalty();
+        else if (sphere.horse.isPlayerRiding && GameManager.Instance().Race.CurrentRace)
+            GameManager.Instance().Race.CurrentRace.AddWow(1.5f);
     }
 }
