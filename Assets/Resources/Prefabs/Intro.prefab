@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 461586620875435238}
+  - component: {fileID: 5677048623767029902}
   - component: {fileID: 2300895337712574430}
   m_Layer: 0
   m_Name: TriggerJump
@@ -32,6 +33,20 @@ Transform:
   m_Father: {fileID: 7679396282166477050}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5677048623767029902
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 568083888444624494}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 616f0cec146c3d14d9cfb1097c2271b0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tutorialText: "\uB9D0\uC740 \uC2B5\uBCF4(\uCD5C\uACE0 \uC18D\uB3C4) \uC911\uC5D0
+    \uC54C\uC544\uC11C \uC810\uD504\uD569\uB2C8\uB2E4."
 --- !u!65 &2300895337712574430
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -200,6 +215,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7709300169951192054}
+  - component: {fileID: 6885949421463447684}
   - component: {fileID: 1495347332334690230}
   m_Layer: 0
   m_Name: TriggerAvoid
@@ -223,6 +239,19 @@ Transform:
   m_Father: {fileID: 7679396282166477050}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6885949421463447684
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2328535835341979496}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 616f0cec146c3d14d9cfb1097c2271b0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tutorialText: "\uBCBD\uC5D0 \uBD80\uB51B\uD788\uC9C0 \uB9D0\uACE0 \uC9C0\uB098\uAC00\uBD05\uC2DC\uB2E4."
 --- !u!65 &1495347332334690230
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -427,6 +456,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2732457822229434902}
+  - component: {fileID: 3932253643543393319}
   - component: {fileID: 2204700536741837001}
   m_Layer: 0
   m_Name: TriggerSlow
@@ -450,6 +480,20 @@ Transform:
   m_Father: {fileID: 7679396282166477050}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3932253643543393319
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4594814301222857453}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 616f0cec146c3d14d9cfb1097c2271b0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tutorialText: "\uB9D0\uC774 \uB2EC\uB9AC\uACE0 \uC788\uC73C\uBA74 \uC5BC\uC74C
+    \uC704\uC5D0\uC11C \uBBF8\uB044\uB7EC\uC9D1\uB2C8\uB2E4. \uC18D\uB3C4\uB97C \uB0AE\uCD94\uC138\uC694."
 --- !u!65 &2204700536741837001
 BoxCollider:
   m_ObjectHideFlags: 0

@@ -12,12 +12,25 @@ public class IntroController : MonoBehaviour
 
     private enum Status
     {
-        Horseselect,
-        Obstacletutorial,
-        Endtutorial
+        /// <summary>
+        /// 말 선택 이전
+        /// </summary>
+        HorseSelect,
+        /// <summary>
+        /// 말 탑승 직후, 가속 방법 설명
+        /// </summary>
+        HorseJustRode,
+        /// <summary>
+        /// 말 가속해봄. 말 감속/회전 설명
+        /// </summary>
+        HorseRan,
+        /// <summary>
+        /// 말 선택 확정
+        /// </summary>
+        Obstacletutorial
     }
 
-    private Status curStatus = Status.Horseselect;
+    private Status curStatus = Status.HorseSelect;
 
     private HorseController[] horses; 
 
@@ -43,16 +56,44 @@ public class IntroController : MonoBehaviour
 
             horses[i] = horse;
         }
-
-        // 장애물 생성
-
-        
-        // 지하도 막기
     }
+
+    private PlayerManager player = null;
 
     private void Update()
     {
-      
+        if (!player)
+        {
+            player = PlayerManager.Instance();
+            if (!player) return;
+        }
+        switch (curStatus)
+        {
+            case Status.HorseSelect:
+                if (player.IsRiding)
+                {
+                    curStatus = Status.HorseJustRode;
+                    player.GUI.SetMessageBoxText("가속하려면 양손을 뒤로 당겼다 빠르게 앞으로 내리쳐 채찍질한다.");
+                }
+                break;
+
+            case Status.HorseJustRode:
+                foreach (var horse in horses)
+                {
+                    if (horse.isPlayerRiding) {
+                        if(horse.CurMode > 2f)
+                        {
+                            curStatus = Status.HorseRan;
+                            player.GUI.SetMessageBoxText("감속하려면 양손을 쥐고 뒤로 당긴다.\n옆으로 틀려면 한 손만 뒤로 당긴다.");
+                        }
+                        break;
+                    }
+                }
+                break;
+
+            case Status.HorseRan:
+                break;
+        }
     }
 
     public void OnSpawnExited()
@@ -64,6 +105,7 @@ public class IntroController : MonoBehaviour
         }
         
         curStatus = Status.Obstacletutorial;
+        player.GUI.SetMessageBoxText(string.Empty);
 
         //if (GameSettings.Values.doAutoSave) GameManager.Instance().Save.SaveToPrefs(0);
     }
