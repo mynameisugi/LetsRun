@@ -1201,6 +1201,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   offset: {fileID: 1680501587}
+  rotRange: 40
 --- !u!1001 &553018692727262454
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2424,7 +2425,7 @@ PrefabInstance:
     - target: {fileID: 6802461053095448766, guid: 1f273576cb8debd48b62dc72e36f77f8,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.4
+      value: 0.4
       objectReference: {fileID: 0}
     - target: {fileID: 6802461053095448766, guid: 1f273576cb8debd48b62dc72e36f77f8,
         type: 3}
