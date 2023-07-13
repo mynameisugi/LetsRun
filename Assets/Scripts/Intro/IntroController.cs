@@ -19,8 +19,11 @@ public class IntroController : MonoBehaviour
 
     private Status curStatus = Status.Horseselect;
 
+    private HorseController[] horses; 
+
     private void Start()
     {
+        horses = new HorseController[10];
         // 富 积己
         for(int i = 0; i< 10; i++) 
         {
@@ -35,7 +38,10 @@ public class IntroController : MonoBehaviour
 
             // 胶挪 汲沥
             var horse = horseObject.GetComponent<HorseController>();
+            horse.playerRidable = true;
             horse.stats.skin = i;
+
+            horses[i] = horse;
         }
 
         // 厘局拱 积己
@@ -47,5 +53,18 @@ public class IntroController : MonoBehaviour
     private void Update()
     {
       
+    }
+
+    public void OnSpawnExited()
+    {
+        foreach (var horse in horses)
+        {
+            if (!horse.isPlayerRiding) Destroy(horse.gameObject);
+            else PlayerManager.Instance().horse = horse;
+        }
+        
+        curStatus = Status.Obstacletutorial;
+
+        //if (GameSettings.Values.doAutoSave) GameManager.Instance().Save.SaveToPrefs(0);
     }
 }
