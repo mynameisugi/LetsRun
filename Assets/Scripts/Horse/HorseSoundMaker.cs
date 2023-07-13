@@ -88,6 +88,7 @@ public class HorseSoundMaker : MonoBehaviour
 
     public void OnFootWalkStep(int i)
     {
+        if (horse.CurMode < 0.5f) return; // 안 걷는 중
         Foot foot = i switch
         {
             0 => FrontLeft,

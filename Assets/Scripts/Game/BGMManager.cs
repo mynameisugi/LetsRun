@@ -22,7 +22,7 @@ public class BGMManager : MonoBehaviour
 
     private void Update()
     {
-        audioSource.volume = fade * (IsRaceBGM ? 0.2f : 0.5f) * GameSettings.Values.BGM;
+        audioSource.volume = fade * 0.5f * GameSettings.Values.BGM;
         if (queuedClip != null) fade -= Time.deltaTime;
         if (fade <= 0f)
         {
