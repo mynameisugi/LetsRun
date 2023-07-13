@@ -58,7 +58,6 @@ public class TimeManager
             if (nextEvent == now) InvokeEvents();
         }
         Now = now;
-        Time.timeScale = 1f;
         if (GameSettings.Values.doAutoSave) // 자동 저장
             GameManager.Instance().Save.SaveToPrefs(0);
     }
