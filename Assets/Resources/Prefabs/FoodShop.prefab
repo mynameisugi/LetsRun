@@ -1407,6 +1407,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7584787802516860056}
     m_Modifications:
+    - target: {fileID: 2768503165466023458, guid: 40f626e2e2dc9924a858f26cd7944143,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 4ea8e2de4ac6b564c98a36f67a2ad64f, type: 2}
+    - target: {fileID: 2768503165466023458, guid: 40f626e2e2dc9924a858f26cd7944143,
+        type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: 1d41f8c57e738e44f9f12fc053be388c, type: 2}
     - target: {fileID: 2830571512995143473, guid: 40f626e2e2dc9924a858f26cd7944143,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -1427,6 +1437,11 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5926269328262983051, guid: 40f626e2e2dc9924a858f26cd7944143,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 1d41f8c57e738e44f9f12fc053be388c, type: 2}
     - target: {fileID: 7720206955179640712, guid: 40f626e2e2dc9924a858f26cd7944143,
         type: 3}
       propertyPath: m_RootOrder
@@ -1440,7 +1455,7 @@ PrefabInstance:
     - target: {fileID: 7720206955179640712, guid: 40f626e2e2dc9924a858f26cd7944143,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 0.16
       objectReference: {fileID: 0}
     - target: {fileID: 7720206955179640712, guid: 40f626e2e2dc9924a858f26cd7944143,
         type: 3}
@@ -1486,6 +1501,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: NPCTalker
+      objectReference: {fileID: 0}
+    - target: {fileID: 7720206955916931344, guid: 40f626e2e2dc9924a858f26cd7944143,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7720206955916931344, guid: 40f626e2e2dc9924a858f26cd7944143,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 1.8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 40f626e2e2dc9924a858f26cd7944143, type: 3}
