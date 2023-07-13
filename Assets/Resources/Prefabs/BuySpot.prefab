@@ -56,7 +56,7 @@ MonoBehaviour:
   itemSpawn: {fileID: 1648911547353601982}
   NPC: {fileID: 0}
   purchaseDialogue: FoodBuyMultteock
-  textPrice: {fileID: 0}
+  textPrice: {fileID: 7401673973662777238}
 --- !u!114 &343058514597113082
 MonoBehaviour:
   m_ObjectHideFlags: 0
