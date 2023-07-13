@@ -68,9 +68,16 @@ public class HWClock : MonoBehaviour
         popup.OpenPopup("시간을 넘기겠습니까?",
             $"{offsetText} 뒤로\r\n시간을 넘깁니다.",
             () => {
-                dragMode = 0;
-                GameManager.Instance().Time.RequestSkipForward(offset);
-                transform.parent.GetComponent<HandWatchController>().RequestModeSwitch(HandWatchController.Mode.Main);
+                GameManager.Instance().PlayFadeInAndOut(() =>
+                {
+                    GameManager.Instance().Time.RequestSkipForward(offset);
+                    dragMode = 0;
+                    transform.parent.GetComponent<HandWatchController>().RequestModeSwitch(HandWatchController.Mode.Main);
+                },
+                () =>
+                {
+                    Time.timeScale = 1f;
+                });
             },
             () => { Time.timeScale = 1f; dragMode = 0; });
     }

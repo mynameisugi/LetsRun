@@ -105,9 +105,11 @@ public class Race : MonoBehaviour
         var playerHorse = PlayerManager.Instance().horse;
         playerHorse.OnPlayerRideRequest();
         var start = info.GetStartPos(playerNum);
-        playerHorse.Teleport(start.position, start.rotation);
-
         GameManager.Instance().BGM.PlayRaceBGM();
+        GameManager.Instance().PlayFadeInAndOut(() =>
+        {
+            playerHorse.Teleport(start.position, start.rotation);
+        }, null);
     }
 
     public RaceInfo info;
