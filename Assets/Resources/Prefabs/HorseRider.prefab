@@ -69,6 +69,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   myRenderer: {fileID: 7598739485918755588}
   hatRenderer: {fileID: 2099171341782876333}
+  hands:
+  - {fileID: 8564744156584979067}
+  - {fileID: 240160906568400236}
 --- !u!1001 &9176165863917181450
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -163,6 +166,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a40ee66568431ac4788fc9751455991b, type: 3}
+--- !u!4 &240160906568400236 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8938927477513299814, guid: a40ee66568431ac4788fc9751455991b,
+    type: 3}
+  m_PrefabInstance: {fileID: 9176165863917181450}
+  m_PrefabAsset: {fileID: 0}
 --- !u!23 &2099171341782876333 stripped
 MeshRenderer:
   m_CorrespondingSourceObject: {fileID: -2127516469670487385, guid: a40ee66568431ac4788fc9751455991b,
@@ -172,6 +181,12 @@ MeshRenderer:
 --- !u!137 &7598739485918755588 stripped
 SkinnedMeshRenderer:
   m_CorrespondingSourceObject: {fileID: -7625597537248698098, guid: a40ee66568431ac4788fc9751455991b,
+    type: 3}
+  m_PrefabInstance: {fileID: 9176165863917181450}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &8564744156584979067 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8537594183844564879, guid: a40ee66568431ac4788fc9751455991b,
     type: 3}
   m_PrefabInstance: {fileID: 9176165863917181450}
   m_PrefabAsset: {fileID: 0}

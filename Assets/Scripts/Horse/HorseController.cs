@@ -203,6 +203,12 @@ public class HorseController : MonoBehaviour
 
     private void NPCRaceUpdate()
     {
+        if (myJockey)
+        {
+            ropeHinges[0].transform.position = myJockey.hands[0].position;
+            ropeHinges[1].transform.position = myJockey.hands[1].position;
+        }
+
         if (nextNodeIndex < 0) return; // ´ë±âÁß
 
         agent.speed = curSpeed;

@@ -10,6 +10,9 @@ public class JockeyController : MonoBehaviour
     [SerializeField]
     private MeshRenderer hatRenderer;
 
+    [SerializeField]
+    internal Transform[] hands = new Transform[2];
+
     private HorseController horse;
 
     private void Start()
