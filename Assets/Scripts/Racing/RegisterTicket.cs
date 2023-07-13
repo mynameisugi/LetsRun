@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.XR.Interaction.Toolkit;
 using static RaceManager;
 
 public class RegisterTicket : MonoBehaviour
@@ -31,4 +32,14 @@ public class RegisterTicket : MonoBehaviour
     public bool ObstacleTicket()
         => toggleObstacle.isOn;
 
+
+    public void OnGrabbed(SelectEnterEventArgs eventArgs)
+    {
+        HandAnimator.RequestAnimation(eventArgs.interactorObject, HandAnimator.SpecialAnimation.GripTicket);
+    }
+
+    public void OnGrabEnded(SelectExitEventArgs eventArgs)
+    {
+        HandAnimator.RequestAnimation(eventArgs.interactorObject, HandAnimator.SpecialAnimation.None);
+    }
 }

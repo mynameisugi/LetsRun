@@ -502,6 +502,9 @@ public class HorseController : MonoBehaviour
         float handOffset = GetHandsOffset();
         pulledOffset = handOffset - PUSHPULL * 0.5f;
         pushedOffset = handOffset + PUSHPULL * 0.5f;
+        // 손 애니메이션 재생
+        playerAction.RequestHandAnimation(0, HandAnimator.SpecialAnimation.GripHalter);
+        playerAction.RequestHandAnimation(1, HandAnimator.SpecialAnimation.GripHalter);
     }
 
     public void OnPlayerLeaveRequest()
@@ -515,6 +518,9 @@ public class HorseController : MonoBehaviour
         playerOrigin.GetComponent<ActionBasedContinuousTurnProvider>().enabled = true;
         // 플레이어 탑승 상태 변경
         PlayerManager.Instance().IsRiding = false;
+        // 손 애니메이션 중단
+        playerAction.RequestHandAnimation(0, HandAnimator.SpecialAnimation.None);
+        playerAction.RequestHandAnimation(1, HandAnimator.SpecialAnimation.None);
         // 플레이어 추적 중단
         playerOrigin.SetParent(PlayerManager.Instance().transform);
         playerOrigin = null;
