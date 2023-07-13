@@ -84,6 +84,8 @@ public class Race : MonoBehaviour
     private void DestroyRace()
     {
         Debug.Log($"Destroy Race! {info.type}");
+        audienceBGM.volume = 0f;
+        audienceSE.volume = 0f;
         if (GameManager.Instance().BGM.IsRaceBGM) GameManager.Instance().BGM.PlayNormalBGM();
         GameManager.Instance().Time.UnregisterEvent(TimeManager.LOOP - 90, DestroyRace);
         Destroy(gameObject);
@@ -149,26 +151,34 @@ public class Race : MonoBehaviour
         if (Status == RaceStage.Clean)
         {
             audienceBGM.volume = Mathf.MoveTowards(audienceBGM.volume, 0f, Time.deltaTime * 0.1f);
-            audienceSE.volume = Mathf.MoveTowards(audienceBGM.volume, 0f, Time.deltaTime * 0.3f);
+            audienceSE.volume = Mathf.MoveTowards(audienceSE.volume, 0f, Time.deltaTime * 0.3f);
             int alive = entries.Count(x => x);
             if (alive == 0) DestroyRace();
             return;
         }
         if (Status == RaceStage.Racing)
         {
-            audienceBGM.volume = Mathf.MoveTowards(audienceBGM.volume, GameSettings.Values.BGM * 0.3f, Time.deltaTime);
-            if (wow > 0f)
+            if (wow == 0f && goalInfos.Count > 0)
             {
-                curWow += Time.deltaTime;
-                wow -= Time.deltaTime;
-                if (wow < 0f) wow = 0f;
+                audienceBGM.volume = Mathf.MoveTowards(audienceBGM.volume, 0f, Time.deltaTime * 0.1f);
+                audienceSE.volume = Mathf.MoveTowards(audienceSE.volume, 0f, Time.deltaTime * 0.3f);
             }
             else
             {
-                curWow -= Time.deltaTime;
-                if (curWow < 0f) curWow = 0f;
+                audienceBGM.volume = Mathf.MoveTowards(audienceBGM.volume, GameSettings.Values.BGM * 0.3f, Time.deltaTime);
+                if (wow > 0f)
+                {
+                    curWow += Time.deltaTime;
+                    wow -= Time.deltaTime;
+                    if (wow < 0f) wow = 0f;
+                }
+                else
+                {
+                    curWow -= Time.deltaTime;
+                    if (curWow < 0f) curWow = 0f;
+                }
+                audienceSE.volume = (Mathf.Clamp01(curWow) * 0.8f + 0.2f) * audienceSE.volume;
             }
-            audienceSE.volume = (Mathf.Clamp01(curWow) * 0.8f + 0.2f) * audienceSE.volume;
         }
 
         if (Status == RaceStage.Prepare && Input.GetKeyDown(KeyCode.P))
@@ -185,6 +195,7 @@ public class Race : MonoBehaviour
         foreach (var info in goalInfos) if (info.index == num) return -1; // 이미 도착한 말
 
         goalInfos.Add(new(horse, num, GameManager.Instance().Time.Now));
+        if (goalInfos.Count == 1) AddWow(6f);
         if (horse.isPlayerRiding)
         {
             info.end.playerRank = goalInfos.Count; // 플레이어 등수 저장
