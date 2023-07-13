@@ -940,7 +940,6 @@ MonoBehaviour:
   playerRidable: 0
   myJockey: {fileID: 2692233788273181046}
   wantToJump: 0
-  slowDown: 0
 --- !u!114 &5446949823519519328
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7725,12 +7724,12 @@ PrefabInstance:
     - target: {fileID: 1667314424266347103, guid: 1854a5f8da289f5419d714775f445a78,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.012876742
+      value: -0.013
       objectReference: {fileID: 0}
     - target: {fileID: 1667314424266347103, guid: 1854a5f8da289f5419d714775f445a78,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.1930877
+      value: 1.35
       objectReference: {fileID: 0}
     - target: {fileID: 1667314424266347103, guid: 1854a5f8da289f5419d714775f445a78,
         type: 3}
