@@ -76,8 +76,12 @@ public class PlayerManager : MonoBehaviour
             var horseData = horse.stats.ToSaveString();
             GameManager.Instance().Save.SaveValue(HorseKey, horseData);
         };
+
+        GUI = GetComponentInChildren<GUIController>();
     }
 
 
     public GameObject mapCamera;
+
+    public GUIController GUI { get; private set; }
 }
