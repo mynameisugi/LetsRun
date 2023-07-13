@@ -26,11 +26,16 @@ public class IntroController : MonoBehaviour
         {
             var horseObject = Instantiate(horsePrefab);
 
-            Vector3 randomPosition = new Vector3(Random.Range(-10f, 10f), 0f, Random.Range(-10f, 10f));
+            float spawnSize = horseSpawn.localScale.x * 0.5f;
+            Vector3 randomPosition = horseSpawn.position + new Vector3(Random.Range(-spawnSize, spawnSize), 0f, Random.Range(-spawnSize, spawnSize));
             horseObject.transform.position = randomPosition;
 
             Quaternion randomRotation = Quaternion.Euler(0f, Random.Range(0f, 360f), 0f);
-            horseObject.transform.rotation = randomRotation;    
+            horseObject.transform.rotation = randomRotation;
+
+            // 스킨 설정
+            var horse = horseObject.GetComponent<HorseController>();
+            horse.stats.skin = i;
         }
 
         // 장애물 생성
