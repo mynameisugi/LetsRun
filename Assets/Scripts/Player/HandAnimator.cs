@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.XR;
+using UnityEngine.XR.Interaction.Toolkit;
 
 /// <summary>
 /// 컨트롤러 조작에 맞게 손의 애니메이션을 구현
@@ -62,4 +63,7 @@ public class HandAnimator : MonoBehaviour
         GripRice,
         GripHalter,
     }
+
+    public static void RequestAnimation(IXRSelectInteractor interactor, SpecialAnimation anim)
+        => interactor.transform.parent.GetComponentInChildren<HandAnimator>().SetSpecialAnimation(anim);
 }

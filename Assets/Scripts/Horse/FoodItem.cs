@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.XR.Interaction.Toolkit;
 
 public class FoodItem : MonoBehaviour
 {
@@ -67,5 +68,15 @@ public class FoodItem : MonoBehaviour
         // TODO: 인벤토리에 아이템 보관
 
         // Destroy(gameObject);
+    }
+
+    public void OnGrabbed(SelectEnterEventArgs eventArgs)
+    {
+        HandAnimator.RequestAnimation(eventArgs.interactorObject, HandAnimator.SpecialAnimation.GripRice);
+    }
+
+    public void OnGrabEnded(SelectExitEventArgs eventArgs)
+    {
+        HandAnimator.RequestAnimation(eventArgs.interactorObject, HandAnimator.SpecialAnimation.None);
     }
 }
