@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -79,4 +80,12 @@ public class GameManager : MonoBehaviour
         Time.Update();
     }
 
+    [SerializeField]
+    private GameObject introPrefab;
+
+    public void StartIntro()
+    {
+        SceneManager.LoadScene(0);
+        Instantiate(introPrefab);
+    }
 }

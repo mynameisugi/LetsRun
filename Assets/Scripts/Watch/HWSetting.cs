@@ -61,9 +61,8 @@ public class HWSetting : MonoBehaviour
             () =>
             {
                 PopupEnabled = false;
-                GameManager.Instance().Save.Reset();
                 SaveOptions();
-                SceneManager.LoadScene(0);
+                GameManager.Instance().Save.Reset();
             },
             () => { PopupEnabled = false; });
         PopupEnabled = true;
