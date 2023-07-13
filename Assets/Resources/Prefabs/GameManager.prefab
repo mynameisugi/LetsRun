@@ -193,8 +193,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   normalBGMs:
   - {fileID: 8300000, guid: 3c1390ddf83b9d443a4e75497c145ad6, type: 3}
+  - {fileID: 8300000, guid: b845e903b9f8d9f4f954e8bf3f6c9068, type: 3}
   raceBGMs:
-  - {fileID: 8300000, guid: 7accf7f437b4a484db4d866f719bc51b, type: 3}
-  - {fileID: 8300000, guid: e04536ff4b0af9c4fa6779a7f0559598, type: 3}
-  - {fileID: 8300000, guid: d3505b982d50f5641b8bd85f9e5c99ff, type: 3}
-  - {fileID: 8300000, guid: d74971fb6c3e0824598d768d268f355e, type: 3}
+  - {fileID: 8300000, guid: ac250f4e6efd24b498e08474e8e66c6e, type: 3}
+  - {fileID: 8300000, guid: be7f711bd74e2ef4faa4593317e9b851, type: 3}

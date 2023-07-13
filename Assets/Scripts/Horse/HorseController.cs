@@ -35,6 +35,8 @@ public class HorseController : MonoBehaviour
 
     internal HorseAnimator MyAnimator { get; private set; }
     internal HorseSoundMaker MySoundMaker { get; private set; }
+    [SerializeField]
+    public JockeyController myJockey;
 
     private void Awake()
     {
@@ -62,6 +64,9 @@ public class HorseController : MonoBehaviour
 
         MyAnimator = GetComponent<HorseAnimator>();
         MySoundMaker = GetComponentInChildren<HorseSoundMaker>();
+        myJockey = GetComponentInChildren<JockeyController>();
+        if (playerRidable) myJockey.SetPlayer();
+        if (!isRacing) myJockey.gameObject.SetActive(false);
 
         curStamina = stats.GallopAmount;
 
@@ -102,6 +107,7 @@ public class HorseController : MonoBehaviour
             {
                 Jumping = JUMPTIME;
                 MyAnimator.PlayJump();
+                MySoundMaker.OnHorseJump();
             }
         }
         if (Jumping > 0f) Jumping -= Time.deltaTime;
@@ -150,13 +156,15 @@ public class HorseController : MonoBehaviour
 
     #region NPCControl
 
-    public void NPCJoinRace(Race race)
+    public void NPCJoinRace(Race race, int number)
     {
         isRacing = true; CurMode = 0f; targetMode = 0;
         this.race = race;
         raceInfo = this.race.info;
         nextNodeIndex = -1;
         pulledTime = 0f; brakeTime = 0f;
+        myJockey.gameObject.SetActive(true);
+        myJockey.SetNumber(number);
     }
 
     public void StartRace()
@@ -169,7 +177,7 @@ public class HorseController : MonoBehaviour
     private Race.RaceInfo raceInfo;
     private int nextNodeIndex = -1;
     private bool RaceEnded => nextNodeIndex > raceInfo.trackNodes.Length;
-    public bool slowDown = false;
+    internal bool slowDown = false;
 
     private void TargetNextNode()
     {
@@ -196,6 +204,12 @@ public class HorseController : MonoBehaviour
 
     private void NPCRaceUpdate()
     {
+        if (myJockey)
+        {
+            ropeHinges[0].transform.position = myJockey.hands[0].position;
+            ropeHinges[1].transform.position = myJockey.hands[1].position;
+        }
+
         if (nextNodeIndex < 0) return; // 대기중
 
         agent.speed = curSpeed;
@@ -445,6 +459,7 @@ public class HorseController : MonoBehaviour
 
     public void Penalty(int type)
     {
+        if (isPlayerRiding) GameManager.Instance().PlayVignetteEffect(0.5f, Color.red);
         CurMode = type;
         targetMode = type;
         MySoundMaker.OnHorseDistress();
@@ -481,6 +496,8 @@ public class HorseController : MonoBehaviour
     public void OnPlayerRideRequest()
     {
         if (!playerRidable || isPlayerRiding) return;
+        // 카메라용 가짜 플레이어 표시
+        myJockey.gameObject.SetActive(true);
         // 말 NPC AI 제거
         pulledTime = 0f; brakeTime = 0f;
         agent.ResetPath();
@@ -510,6 +527,8 @@ public class HorseController : MonoBehaviour
     public void OnPlayerLeaveRequest()
     {
         if (!isPlayerRiding) return;
+        // 카메라용 가짜 플레이어 숨김
+        myJockey.gameObject.SetActive(false);
         // 플레이어를 말 오른쪽으로 이동
         playerOrigin.transform.position = playerSnap.position + playerSnap.right * 2f - playerSnap.up;
         // 플레이어 이동 허용

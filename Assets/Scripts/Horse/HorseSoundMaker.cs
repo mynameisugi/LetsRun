@@ -62,12 +62,20 @@ public class HorseSoundMaker : MonoBehaviour
         return clip;
     }
 
+    public void OnHorseJump()
+    {
+        headAudio.clip = Resources.Load("Sounds/Wind/windsound" + Random.Range(1, 4).ToString()) as AudioClip;
+        headAudio.volume = 0.7f * GameSettings.Values.SE;
+        headAudio.Play();
+        SendHapticFeedback(0.6f, 0.6f, 1.0f);
+    }
+
     public void OnHorseNeigh()
     {
         headAudio.clip = Resources.Load("Sounds/Horse/horsevoice3") as AudioClip;
         headAudio.volume = 0.7f * GameSettings.Values.SE;
         headAudio.Play();
-        SendHapticFeedback(0.3f, 0.3f);
+        SendHapticFeedback(0.3f, 0.3f, 0.3f);
     }
 
     public void OnHorseDistress()
@@ -75,7 +83,7 @@ public class HorseSoundMaker : MonoBehaviour
         headAudio.clip = Resources.Load("Sounds/Horse/horsevoice" + Random.Range(1, 3).ToString()) as AudioClip;
         headAudio.volume = 0.8f * GameSettings.Values.SE;
         headAudio.Play();
-        SendHapticFeedback(0.8f, 0.8f);
+        SendHapticFeedback(0.8f, 0.8f, 0.4f);
     }
 
     public void OnHorsePurr()
@@ -83,11 +91,12 @@ public class HorseSoundMaker : MonoBehaviour
         headAudio.clip = Resources.Load("Sounds/Horse/horsevoice4") as AudioClip;
         headAudio.volume = 0.9f * GameSettings.Values.SE;
         headAudio.Play();
-        SendHapticFeedback(0.2f, 0.2f);
+        SendHapticFeedback(0.2f, 0.2f, 0.2f);
     }
 
     public void OnFootWalkStep(int i)
     {
+        if (horse.CurMode < 0.5f) return; // 안 걷는 중
         Foot foot = i switch
         {
             0 => FrontLeft,
@@ -205,10 +214,10 @@ public class HorseSoundMaker : MonoBehaviour
         SendHapticFeedback(0.08f * l, 0.08f * r);
     }
 
-    private void SendHapticFeedback(float leftAmplitude, float rightAmplitude)
+    private void SendHapticFeedback(float leftAmplitude, float rightAmplitude, float length = 0.05f)
     {
         if (!horse.isPlayerRiding || !GameSettings.Values.rumble) return;
-        if (leftAmplitude > 0f) horse.playerAction.GetDevice(0).SendHapticImpulse(0, leftAmplitude, 0.05f);
-        if (rightAmplitude > 0f) horse.playerAction.GetDevice(1).SendHapticImpulse(0, rightAmplitude, 0.05f);
+        if (leftAmplitude > 0f) horse.playerAction.GetDevice(0).SendHapticImpulse(0, leftAmplitude, length);
+        if (rightAmplitude > 0f) horse.playerAction.GetDevice(1).SendHapticImpulse(0, rightAmplitude, length);
     }
 }

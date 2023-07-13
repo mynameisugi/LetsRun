@@ -82,8 +82,17 @@ public class GameManager : MonoBehaviour
         Time.Update();
     }
 
-    #region Fade
+    #region ScreenEffects
     private LiftGammaGain gamma = null;
+    private Vignette vignette = null;
+
+    private void CollectEffects()
+    {
+        var volume = FindAnyObjectByType<Volume>();
+        foreach (var c in volume.profile.components)
+            if (c is LiftGammaGain lgg) gamma = lgg;
+            else if (c is Vignette vgn) vignette = vgn;
+    }
 
     /// <summary>
     /// 게임이 어두워졌다 밝아지는 애니메이션 실행
@@ -92,9 +101,7 @@ public class GameManager : MonoBehaviour
     {
         if (gamma == null)
         {
-            var volume = FindAnyObjectByType<Volume>();
-            foreach (var c in volume.profile.components)
-                if (c is LiftGammaGain lgg) { gamma = lgg; break; }
+            CollectEffects();
             if (gamma == null) return;
         }
         StartCoroutine(FadeCoroutine(OnFaded, OnFadeEnded));
@@ -120,8 +127,26 @@ public class GameManager : MonoBehaviour
             gamma.gamma.value = Vector4.one * fade;
         }
         OnFadeEnded?.Invoke();
-    } 
+    }
 
-    #endregion Fade
+    public void PlayVignetteEffect(float intensity, Color color)
+    {
+        vignette.color.value = color;
+        StartCoroutine(VignetteCoroutine(intensity));
+    }
+
+    private IEnumerator VignetteCoroutine(float intensity)
+    {
+        while (intensity > 0f)
+        {
+            vignette.intensity.value = intensity;
+            yield return null;
+            intensity -= UnityEngine.Time.deltaTime * 0.3f;
+        }
+        vignette.intensity.value = 0f;
+    }
+
+
+    #endregion ScreenEffects
 
 }

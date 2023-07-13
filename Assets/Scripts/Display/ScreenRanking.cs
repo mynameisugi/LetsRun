@@ -36,10 +36,10 @@ public class ScreenRanking : MonoBehaviour
 
     private string NoRaceDisplay(int time)
     {
-
-
-
-        return $"경주 {(TimeManager.LOOP - time) / 60}분 전";
+        int tMinus = TimeManager.LOOP - time;
+        string display = $"경주 {tMinus / 60}분 ";
+        if (tMinus % 60 > 0) display += $"{tMinus % 60}초 ";
+        return display + "전";
     }
 
     private string RaceDisplay(Race race, float time)

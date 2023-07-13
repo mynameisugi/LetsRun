@@ -56,7 +56,7 @@ public class Race : MonoBehaviour
         entryObj.transform.position = info.GetStartPos(entryFilled).position;
         entryObj.transform.rotation = info.GetStartPos(entryFilled).rotation;
         // 말에게 경기 정보 전달
-        entries[entryFilled].NPCJoinRace(this);
+        entries[entryFilled].NPCJoinRace(this, entryFilled + 1);
     Skip: ++entryFilled;
         // 다음 참가자 0.1초 뒤 생성
         if (entryFilled < entries.Length) Invoke(nameof(CreateEntry), 0.1f);
