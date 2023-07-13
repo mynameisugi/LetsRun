@@ -56,8 +56,8 @@ MonoBehaviour:
     obstacles: []
     obstacleRate: 0
     prize: 
-  audienceBGM: {fileID: 0}
-  audienceSE: {fileID: 0}
+  audienceBGM: {fileID: 7319104325889556450}
+  audienceSE: {fileID: 1359822923457026056}
 --- !u!82 &7319104325889556450
 AudioSource:
   m_ObjectHideFlags: 0

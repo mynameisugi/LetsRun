@@ -447,6 +447,7 @@ public class HorseController : MonoBehaviour
 
     private void RequestModeDecrease()
     {
+        if (myJockey) myJockey.PlayHalt();
         if (targetMode > 0)
         {
             --targetMode;
@@ -459,6 +460,7 @@ public class HorseController : MonoBehaviour
 
     public void Penalty(int type)
     {
+        if (myJockey) myJockey.PlayWhip();
         if (isPlayerRiding) GameManager.Instance().PlayVignetteEffect(0.5f, Color.red);
         CurMode = type;
         targetMode = type;

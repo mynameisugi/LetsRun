@@ -65,7 +65,7 @@ public class HorseSoundMaker : MonoBehaviour
     public void OnHorseJump()
     {
         headAudio.clip = Resources.Load("Sounds/Wind/windsound" + Random.Range(1, 4).ToString()) as AudioClip;
-        headAudio.volume = 0.7f * GameSettings.Values.SE;
+        headAudio.volume = GameSettings.Values.SE;
         headAudio.Play();
         SendHapticFeedback(0.6f, 0.6f, 1.0f);
     }
