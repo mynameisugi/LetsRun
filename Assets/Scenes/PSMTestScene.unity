@@ -29901,25 +29901,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1019822335115747743, guid: 05fec7f5dd5307141a896394e17e6845,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1019822335115747743, guid: 05fec7f5dd5307141a896394e17e6845,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 3816409924855919659, guid: 05fec7f5dd5307141a896394e17e6845,
         type: 3}
       propertyPath: m_Name
       value: Intro
-      objectReference: {fileID: 0}
-    - target: {fileID: 3816409924855919659, guid: 05fec7f5dd5307141a896394e17e6845,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6378359670653577744, guid: 05fec7f5dd5307141a896394e17e6845,
         type: 3}
