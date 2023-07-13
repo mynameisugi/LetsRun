@@ -145,6 +145,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7158153673e2fa0418f057d587aaa5ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gripAnimation: 0
   speedWalk: 0
   speedTrot: 0
   speedCanter: 0
