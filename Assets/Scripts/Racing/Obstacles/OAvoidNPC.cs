@@ -3,7 +3,7 @@ using UnityEngine;
 public class OAvoidNPC : MonoBehaviour
 {
     [SerializeField]
-    private BoxCollider safeBox;
+    private BoxCollider[] safeBoxes = new BoxCollider[1];
 
     private void Start()
     {
@@ -17,6 +17,6 @@ public class OAvoidNPC : MonoBehaviour
         if (!sphere) return;
 
         if (sphere.horse.isPlayerRiding) return;
-        sphere.horse.AddMidwaypoint(safeBox);
+        sphere.horse.AddMidwaypoint(safeBoxes[Random.Range(0, safeBoxes.Length)]);
     }
 }

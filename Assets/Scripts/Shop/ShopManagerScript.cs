@@ -4,6 +4,9 @@ using UnityEngine.XR.Interaction.Toolkit;
 
 public class ShopManagerScript : MonoBehaviour
 {
+    [SerializeField]
+    private AudioSource aSource = null;
+
     [Header("Goods")]
     [SerializeField]
     private int price = 1;
@@ -65,7 +68,8 @@ public class ShopManagerScript : MonoBehaviour
     {
         if (GameSettings.Values.rumble)
             PlayerManager.Instance().Action().GetDevice(0).SendHapticImpulse(0, 0.2f, 0.5f);
-        
+        aSource.Play();
+
         var player = PlayerManager.Instance();
         if (!player.Inventory().TryReduceMoney(price)) // µ∑ ∫Œ¡∑
         {
