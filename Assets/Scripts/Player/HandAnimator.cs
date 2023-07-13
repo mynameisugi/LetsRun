@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.XR;
@@ -59,9 +58,8 @@ public class HandAnimator : MonoBehaviour
     public enum SpecialAnimation
     {
         None = -1,
-        GripPhone,
-        GripMap,
-        GripPen,
-        GripKey
+        GripTicket,
+        GripRice,
+        GripHalter,
     }
 }
