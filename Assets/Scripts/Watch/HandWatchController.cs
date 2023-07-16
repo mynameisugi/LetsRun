@@ -78,10 +78,11 @@ public class HandWatchController : MonoBehaviour
     }
     */
 
-    public void PlayUISound(AudioClip clip, float volume)
+    public void PlayUISound(AudioClip clip, float volume, float pitch = 1f)
     {
         audioSource.clip = clip;
         audioSource.volume = GameSettings.Values.SE * volume;
+        audioSource.pitch = pitch
         audioSource.Play();
     }
 }

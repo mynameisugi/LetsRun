@@ -38,7 +38,7 @@ public class HWClock : MonoBehaviour
                 if (dragAngle < 0f) dragAngle += 360f;
                 dragAngle = Mathf.Clamp(dragAngle, SKIPLIMIT * 360f / TimeManager.LOOP, rot); // 10ÃÊ Á¦ÇÑ
                 if (Mathf.DeltaAngle(dragAngle, tickDragAngle) > 5f)
-                { owner.PlayUISound(tickSound, 0.3f); tickDragAngle = dragAngle; }
+                { owner.PlayUISound(tickSound, 0.3f, Random.Range(0.9f, 1.1f)); tickDragAngle = dragAngle; }
                 arm.localRotation = Quaternion.Euler(0f, 0f, dragAngle);
             }
             return;
