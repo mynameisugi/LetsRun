@@ -7,6 +7,7 @@ public class CountDown : MonoBehaviour{
     [SerializeField] private Material matOn;
     [SerializeField] private Material matOff;
     [SerializeField] private MeshRenderer[] meshRen;
+    [SerializeField] private GameObject[] lights;
 
     [Header("SoundEffects")]
     [SerializeField] private AudioSource source;
@@ -36,6 +37,7 @@ public class CountDown : MonoBehaviour{
         const string UP = "up";
         // 꺼져있는 머테리얼로 변경
         foreach (MeshRenderer mr in meshRen) mr.material = matOff;
+        foreach (var obj in lights) obj.SetActive(false);
         // 펼치는 애니메이션 실행
         animator.SetBool(UP, true);
         yield return new WaitForSeconds (5f);
@@ -47,6 +49,8 @@ public class CountDown : MonoBehaviour{
             //불이 양쪽으로 불 켜짐
             meshRen[i].material = matOn;
             meshRen[^(i + 1)].material = matOn;
+            lights[i].SetActive(true);
+            lights[^(i + 1)].SetActive(true);
             //소리 재생
             if (i < 4)
             {
