@@ -13,10 +13,15 @@ public class HWClock : MonoBehaviour
     [SerializeField]
     private HWPopup popup;
 
+    [SerializeField]
+    private AudioClip tickSound;
+
+    private HandWatchController owner;
     private TimeManager time;
 
     private void Start()
     {
+        owner = GetComponentInParent<HandWatchController>();
         time = GameManager.Instance().Time;
     }
 
@@ -32,6 +37,8 @@ public class HWClock : MonoBehaviour
                 dragAngle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg - 90f;
                 if (dragAngle < 0f) dragAngle += 360f;
                 dragAngle = Mathf.Clamp(dragAngle, SKIPLIMIT * 360f / TimeManager.LOOP, rot); // 10ÃÊ Á¦ÇÑ
+                if (Mathf.DeltaAngle(dragAngle, tickDragAngle) > 5f)
+                { owner.PlayUISound(tickSound, 0.3f); tickDragAngle = dragAngle; }
                 arm.localRotation = Quaternion.Euler(0f, 0f, dragAngle);
             }
             return;
@@ -42,7 +49,7 @@ public class HWClock : MonoBehaviour
     }
 
     private const int SKIPLIMIT = 10;
-    private float dragAngle;
+    private float dragAngle, tickDragAngle;
     private Transform dragger = null;
     private byte dragMode = 0;
 
@@ -53,12 +60,14 @@ public class HWClock : MonoBehaviour
         Time.timeScale = 0f;
         var pokers = PlayerManager.Instance().GetComponentsInChildren<XRPokeInteractor>();
         dragger = pokers[1].attachTransform;
+        owner.PlayUISound(tickSound, 0.5f);
     }
 
     public void OnArmDragEnd()
     {
         dragMode = 2;
         int offset = Mathf.FloorToInt((TimeManager.LOOP - time.Now) - dragAngle / 360f * TimeManager.LOOP);
+        owner.PlayUISound(tickSound, 0.5f);
         //Debug.Log($"offset {offset}: dragAngle {dragAngle} rot {(TimeManager.LOOP - time.Now) * 360f / TimeManager.LOOP}");
         if (offset < 10) { dragMode = 0; return; }
         string offsetText = "";
