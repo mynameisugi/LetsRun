@@ -82,7 +82,7 @@ public class HandWatchController : MonoBehaviour
     {
         audioSource.clip = clip;
         audioSource.volume = GameSettings.Values.SE * volume;
-        audioSource.pitch = pitch
+        audioSource.pitch = pitch;
         audioSource.Play();
     }
 }

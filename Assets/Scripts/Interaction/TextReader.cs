@@ -8,12 +8,19 @@ using Random = UnityEngine.Random;
 /// </summary>
 public class TextReader : MonoBehaviour
 {
+    [Header("SpeechBubble")]
     [SerializeField]
     private TMP_Text textUI;
     [SerializeField]
     private string file = "TestText";
     [SerializeField]
     private GameObject textCanvas;
+
+    [Header("SoundEffect")]
+    [SerializeField]
+    private AudioSource audioSource;
+    [SerializeField]
+    private AudioClip[] talkClips;
 
     private const string PATHFOLDER = "Texts/";
 
@@ -35,6 +42,11 @@ public class TextReader : MonoBehaviour
         textUI.text = text;
         CancelInvoke(nameof(HideDialogue));
         Invoke(nameof(HideDialogue), Mathf.Clamp(text.Length * 0.5f, 4f, 15f));
+
+        audioSource.volume = GameSettings.Values.SE;
+        audioSource.clip = talkClips[Random.Range(0, talkClips.Length)];
+        audioSource.pitch = Random.Range(0.9f, 1.1f);
+        audioSource.Play();
     }
 
     private void HideDialogue()
@@ -44,6 +56,7 @@ public class TextReader : MonoBehaviour
 
     public void OnPlayerTrigger()
     {
+        if (string.IsNullOrEmpty(file)) return;
         ShowDialogue(LoadLine(file));
     }
 
