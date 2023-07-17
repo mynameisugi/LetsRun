@@ -5,6 +5,9 @@ using UnityEngine.XR;
 public class HandWatchController : MonoBehaviour
 {
     [SerializeField]
+    private AudioSource audioSource = null;
+
+    [SerializeField]
     private GameObject[] canvases = new GameObject[5];
 
     //private PlayerActionHandler action = null;
@@ -75,4 +78,11 @@ public class HandWatchController : MonoBehaviour
     }
     */
 
+    public void PlayUISound(AudioClip clip, float volume, float pitch = 1f)
+    {
+        audioSource.clip = clip;
+        audioSource.volume = GameSettings.Values.SE * volume;
+        audioSource.pitch = pitch;
+        audioSource.Play();
+    }
 }

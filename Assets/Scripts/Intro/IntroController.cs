@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class IntroController : MonoBehaviour
@@ -32,13 +30,13 @@ public class IntroController : MonoBehaviour
 
     private Status curStatus = Status.HorseSelect;
 
-    private HorseController[] horses; 
+    private HorseController[] horses;
 
     private void Start()
     {
         horses = new HorseController[10];
         // 말 생성
-        for(int i = 0; i< 10; i++) 
+        for (int i = 0; i < 10; i++)
         {
             var horseObject = Instantiate(horsePrefab);
 
@@ -73,18 +71,19 @@ public class IntroController : MonoBehaviour
                 if (player.IsRiding)
                 {
                     curStatus = Status.HorseJustRode;
-                    player.GUI.SetMessageBoxText("가속하려면 양손을 뒤로 당겼다 빠르게 앞으로 내리쳐 채찍질한다.");
+                    player.GUI.SetMessageBoxText("가속하려면 양손을 뒤로 당겼다 빠르게 앞으로 내리쳐 채찍질합니다.");
                 }
                 break;
 
             case Status.HorseJustRode:
                 foreach (var horse in horses)
                 {
-                    if (horse.isPlayerRiding) {
-                        if(horse.CurMode > 2f)
+                    if (horse.isPlayerRiding)
+                    {
+                        if (horse.CurMode > 2f)
                         {
                             curStatus = Status.HorseRan;
-                            player.GUI.SetMessageBoxText("감속하려면 양손을 쥐고 뒤로 당긴다.\n옆으로 틀려면 한 손만 뒤로 당긴다.");
+                            player.GUI.SetMessageBoxText("감속하려면 양손을 쥐고 뒤로 당깁니다.\n옆으로 틀려면 한 손만 뒤로 당깁니다.");
                         }
                         break;
                     }
@@ -92,6 +91,7 @@ public class IntroController : MonoBehaviour
                 break;
 
             case Status.HorseRan:
+                player.GUI.SetMessageBoxText("오른손 잡기 트리거를 누르고\n왼손의 손목시계를 조작해 메뉴를 사용할 수 있습니다.");
                 break;
         }
     }
@@ -103,10 +103,15 @@ public class IntroController : MonoBehaviour
             if (!horse.isPlayerRiding) Destroy(horse.gameObject);
             else PlayerManager.Instance().horse = horse;
         }
-        
+
         curStatus = Status.Obstacletutorial;
         player.GUI.SetMessageBoxText(string.Empty);
+    }
 
-        //if (GameSettings.Values.doAutoSave) GameManager.Instance().Save.SaveToPrefs(0);
+    public void EndTutorial()
+    {
+        player.GUI.SetMessageBoxText(string.Empty);
+        if (GameSettings.Values.doAutoSave) GameManager.Instance().Save.SaveToPrefs(0);
+        Destroy(gameObject);
     }
 }

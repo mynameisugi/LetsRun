@@ -4175,7 +4175,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.z
-    path: R_Wrist
+    path: R_Wrist/R_ThumbMetacarpal/R_ThumbProximal/R_ThumbDistal/R_ThumbTip
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -4185,7 +4185,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.y
-    path: R_Wrist
+    path: R_Wrist/R_ThumbMetacarpal/R_ThumbProximal/R_ThumbDistal/R_ThumbTip
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -4195,7 +4195,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.x
-    path: R_Wrist
+    path: R_Wrist/R_ThumbMetacarpal/R_ThumbProximal/R_ThumbDistal/R_ThumbTip
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -4265,7 +4265,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.z
-    path: R_Wrist/R_IndexMetacarpal
+    path: R_Wrist
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -4275,7 +4275,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.y
-    path: R_Wrist/R_IndexMetacarpal
+    path: R_Wrist
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -4285,7 +4285,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.x
-    path: R_Wrist/R_IndexMetacarpal
+    path: R_Wrist
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -4775,7 +4775,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.x
-    path: R_Wrist/R_ThumbMetacarpal/R_ThumbProximal/R_ThumbDistal/R_ThumbTip
+    path: R_Wrist/R_IndexMetacarpal
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -4785,7 +4785,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.y
-    path: R_Wrist/R_ThumbMetacarpal/R_ThumbProximal/R_ThumbDistal/R_ThumbTip
+    path: R_Wrist/R_IndexMetacarpal
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -4795,7 +4795,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.z
-    path: R_Wrist/R_ThumbMetacarpal/R_ThumbProximal/R_ThumbDistal/R_ThumbTip
+    path: R_Wrist/R_IndexMetacarpal
     classID: 4
     script: {fileID: 0}
   m_HasGenericRootTransform: 0

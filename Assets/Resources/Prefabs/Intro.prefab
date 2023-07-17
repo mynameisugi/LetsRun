@@ -140,6 +140,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52f67a2ce28fad94a82b43cb3d3985fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  owner: {fileID: 1326783499502939738}
 --- !u!65 &6916976035573465637
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -148,7 +149,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1637136067048791642}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
@@ -309,7 +310,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 616f0cec146c3d14d9cfb1097c2271b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tutorialText: "\uBCBD\uC5D0 \uBD80\uB51B\uD788\uC9C0 \uB9D0\uACE0 \uC9C0\uB098\uAC00\uBD05\uC2DC\uB2E4."
+  tutorialText: "\uBCBD\uC5D0 \uBD80\uB51B\uD788\uC9C0 \uB9D0\uACE0 \uC798 \uD53C\uD574\uC11C
+    \uC9C0\uB098\uAC00\uBD05\uC2DC\uB2E4."
 --- !u!65 &1495347332334690230
 BoxCollider:
   m_ObjectHideFlags: 0

@@ -202,6 +202,13 @@ public class HorseController : MonoBehaviour
         }
     }
 
+    public void ArriveNode(BoxCollider node)
+    {
+        if (!node) return;
+        if (node.bounds.Contains(agent.destination + Vector3.up))
+            TargetNextNode();
+    }
+
     public void AddMidwaypoint(BoxCollider box)
     {
         Vector3 point = new(
