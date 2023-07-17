@@ -9,5 +9,6 @@ public class NPCHorseWaypoint : MonoBehaviour
         if (sphere.horse.playerRidable) return;
         if (!sphere.horse.isRacing) return;
 
+        sphere.horse.ArriveNode(GetComponent<BoxCollider>());
     }
 }
