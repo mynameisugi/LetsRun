@@ -5,6 +5,8 @@ using UnityEngine;
 public class ScreenRanking : MonoBehaviour
 {
     [SerializeField]
+    private TMP_Text[] bigTexts;
+    [SerializeField]
     private TMP_Text[] texts;
 
     private HorseController[] entries = new HorseController[8];
@@ -25,12 +27,19 @@ public class ScreenRanking : MonoBehaviour
 
     private void Update()
     {
-        string displayText;
+        string displayBigText;
+        string displayText = "";
         float time = GameManager.Instance().Time.Now;
         var race = GameManager.Instance().Race.CurrentRace;
-        if (!race) displayText = NoRaceDisplay(Mathf.FloorToInt(time));
-        else displayText = RaceDisplay(race, time);
+        if (!race) displayBigText = NoRaceDisplay(Mathf.FloorToInt(time));
+        else
+        {
+            displayText = RaceDisplay(race, time);
+            displayBigText = displayText.Split('\n')[0];
+            displayText = displayText[(displayText.IndexOf('\n') + 1)..];
+        }
 
+        foreach (var tmp in bigTexts) tmp.text = displayBigText;
         foreach (var tmp in texts) tmp.text = displayText;
     }
 
@@ -53,7 +62,7 @@ public class ScreenRanking : MonoBehaviour
                 if (!entry) { entries[i] = null; break; }
                 if (entries[i] != entry) { entries[i] = entry; CalculateEntryScore(i); }
                 statText += $"{i + 1}번마 {ScoreToStars(entryScores[i])}"
-                    + (i % 2 == 0 ? "\t\t\t\t" : "\r\n");
+                    + (i % 2 == 0 ? "\t\t\t" : "\r\n");
             }
 
             return $"경주 {TimeManager.LOOP - time:0.0}초 전\r\n" + statText;
@@ -82,7 +91,7 @@ public class ScreenRanking : MonoBehaviour
             return $"경주 시간: {Mathf.FloorToInt(time / 60f)}:{time % 60f:00.00}\r\n" + resultText;
         }
 
-        return "경주 정리 중";
+        return "경주 정리 중\n ";
     }
 
 

@@ -1043,7 +1043,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 3852b8b903cc1c746a2b8883216beaef,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -38.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 3852b8b903cc1c746a2b8883216beaef,
         type: 3}
@@ -1053,7 +1053,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 3852b8b903cc1c746a2b8883216beaef,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.75
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 3852b8b903cc1c746a2b8883216beaef,
         type: 3}
@@ -1130,6 +1130,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: tent2-2
       objectReference: {fileID: 0}
+    - target: {fileID: 4278200481962586376, guid: 3852b8b903cc1c746a2b8883216beaef,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 4ea8e2de4ac6b564c98a36f67a2ad64f, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3852b8b903cc1c746a2b8883216beaef, type: 3}
 --- !u!4 &2041074398399202938 stripped
