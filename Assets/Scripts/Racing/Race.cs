@@ -25,6 +25,7 @@ public class Race : MonoBehaviour
     {
         Debug.Log($"Race Ready: {info.type}");
 
+        entries = new HorseController[8];
         Status = RaceStage.Prepare; // 준비
 
         info.end.playerRank = -1; // 플레이어 기록 리셋
@@ -34,7 +35,6 @@ public class Race : MonoBehaviour
         info.start.CloseGate();
 
         // 참가자 생성
-        entries = new HorseController[8];
         entryFilled = 0;
         Invoke(nameof(CreateEntry), 0.1f);
 
@@ -45,7 +45,7 @@ public class Race : MonoBehaviour
         // 장애물 랜덤 켜기
         for (int i = 0; i < info.obstacles.Length; ++i)
         {
-            if (Random.value < info.obstacleRate)
+            if (info.obstacles[i] && Random.value < info.obstacleRate)
             {
                 info.obstacles[i].SetActive(true);
                 //++i;
@@ -207,6 +207,7 @@ public class Race : MonoBehaviour
         {
             info.end.playerRank = goalInfos.Count; // 플레이어 등수 저장
             GameManager.Instance().BGM.PlayNormalBGM();
+            PlayerManager.Instance().GUI.HideRaceMap();
         }
         if (goalInfos.Count == 8) Status = RaceStage.Clean;
         return goalInfos.Count;
