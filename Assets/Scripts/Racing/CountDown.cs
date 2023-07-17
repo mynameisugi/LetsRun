@@ -29,6 +29,7 @@ public class CountDown : MonoBehaviour{
 
     private void StartCountDown()
     {
+        if (!gameObject) return;
         StartCoroutine(CountDownCoroutine());
     }
 
