@@ -121,6 +121,8 @@ public class Race : MonoBehaviour
         {
             playerHorse.Teleport(start.position, start.rotation);
         }, null);
+
+        PlayerManager.Instance().GUI.ShowRaceMap(this);
     }
 
     internal RaceStage Status { get; private set; }
