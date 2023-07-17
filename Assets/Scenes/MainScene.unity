@@ -97,7 +97,8 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
-  m_LightingDataAsset: {fileID: 0}
+  m_LightingDataAsset: {fileID: 112000000, guid: 474f0bae88ba7374d80f8459e170cc2f,
+    type: 2}
   m_LightingSettings: {fileID: 183954554}
 --- !u!196 &4
 NavMeshSettings:
@@ -978,8 +979,8 @@ LightingSettings:
   m_PrefabAsset: {fileID: 0}
   m_Name: New Lighting Settings
   serializedVersion: 4
-  m_GIWorkflowMode: 0
-  m_EnableBakedLightmaps: 0
+  m_GIWorkflowMode: 1
+  m_EnableBakedLightmaps: 1
   m_EnableRealtimeLightmaps: 0
   m_RealtimeEnvironmentLighting: 1
   m_BounceScale: 1
@@ -9531,7 +9532,7 @@ Light:
     serializedVersion: 2
     m_Bits: 4294967295
   m_RenderingLayerMask: 1
-  m_Lightmapping: 4
+  m_Lightmapping: 2
   m_LightShadowCasterMode: 0
   m_AreaSize: {x: 1, y: 1}
   m_BounceIntensity: 1
@@ -9590,7 +9591,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_LensFlareData: {fileID: 11400000, guid: 1bb78d141d4bf254f803f66a1665a4c7, type: 2}
-  intensity: 0.1
+  intensity: 0.03
   maxAttenuationDistance: 100
   maxAttenuationScale: 100
   distanceAttenuationCurve:
@@ -11492,7 +11493,7 @@ Camera:
   m_Depth: 10
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 209
+    m_Bits: 465
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 8400000, guid: a06b0670efa9c8144afca2662ad94692, type: 2}
   m_TargetDisplay: 0
