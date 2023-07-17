@@ -901,7 +901,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1855081934762353249}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 3}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -940,7 +940,6 @@ MonoBehaviour:
   playerRidable: 0
   myJockey: {fileID: 2692233788273181046}
   wantToJump: 0
-  slowDown: 0
 --- !u!114 &5446949823519519328
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7725,12 +7724,12 @@ PrefabInstance:
     - target: {fileID: 1667314424266347103, guid: 1854a5f8da289f5419d714775f445a78,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.012876742
+      value: -0.013
       objectReference: {fileID: 0}
     - target: {fileID: 1667314424266347103, guid: 1854a5f8da289f5419d714775f445a78,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.1930877
+      value: 1.35
       objectReference: {fileID: 0}
     - target: {fileID: 1667314424266347103, guid: 1854a5f8da289f5419d714775f445a78,
         type: 3}

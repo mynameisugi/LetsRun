@@ -202,6 +202,13 @@ public class HorseController : MonoBehaviour
         }
     }
 
+    public void ArriveNode(BoxCollider node)
+    {
+        if (!node) return;
+        if (node.bounds.Contains(agent.destination + Vector3.up))
+            TargetNextNode();
+    }
+
     public void AddMidwaypoint(BoxCollider box)
     {
         Vector3 point = new(
@@ -356,8 +363,8 @@ public class HorseController : MonoBehaviour
         Transform lHand = playerAction.directInteractors[0].transform;
         Transform rHand = playerAction.directInteractors[1].transform;
 
-        ropeHinges[0].position = lHand.position + lHand.up * -0.3f;
-        ropeHinges[1].position = rHand.position + lHand.up * -0.3f;
+        ropeHinges[0].position = lHand.position;// + lHand.up * -0.3f;
+        ropeHinges[1].position = rHand.position;// + lHand.up * -0.3f;
 
         curRotate = 0f;
         float handOffset = Vector3.Dot(lHand.position - rHand.position, transform.forward);

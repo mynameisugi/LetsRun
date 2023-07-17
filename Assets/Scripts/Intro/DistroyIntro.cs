@@ -4,16 +4,15 @@ using UnityEngine;
 
 public class DistroyIntro : MonoBehaviour
 {
-    GameObject ForDestroy;
-    private void OnTriggerEnter(Collider other)
+    [SerializeField]
+    private IntroController owner;
+
+    private void OnCollisionEnter(Collision collision)
     {
-        var player = other.GetComponentInParent<PlayerManager>();
+        var player = collision.gameObject.GetComponentInParent<PlayerManager>();
         if (!player) return;
+        if (!player.IsRiding) return;
 
-        if (GameSettings.Values.doAutoSave) GameManager.Instance().Save.SaveToPrefs(0);
-
-        ForDestroy = GameObject.Find("Intro");
-
-        Destroy(ForDestroy);
+        owner.EndTutorial();
     }
 }

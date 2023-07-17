@@ -3,6 +3,9 @@ using UnityEngine.XR.Interaction.Toolkit;
 
 public class FoodItem : MonoBehaviour
 {
+    [SerializeField]
+    private HandAnimator.SpecialAnimation gripAnimation = HandAnimator.SpecialAnimation.GripRice;
+
     [Header("StatBoost")]
     [SerializeField] private float speedWalk = 0f;
     [SerializeField] private float speedTrot = 0f;
@@ -72,7 +75,7 @@ public class FoodItem : MonoBehaviour
 
     public void OnGrabbed(SelectEnterEventArgs eventArgs)
     {
-        HandAnimator.RequestAnimation(eventArgs.interactorObject, HandAnimator.SpecialAnimation.GripRice);
+        HandAnimator.RequestAnimation(eventArgs.interactorObject, gripAnimation);
     }
 
     public void OnGrabEnded(SelectExitEventArgs eventArgs)
