@@ -128,8 +128,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc4d76f733087744991913c9d19d5274, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_LensFlareData: {fileID: 11400000, guid: 4498c662fa870fa40bd2206a7e080a11, type: 2}
-  intensity: 0.3
+  m_LensFlareData: {fileID: 11400000, guid: cf0149057ca51e14c88ebde3013aabb4, type: 2}
+  intensity: 1
   maxAttenuationDistance: 100
   maxAttenuationScale: 100
   distanceAttenuationCurve:
@@ -209,7 +209,7 @@ MonoBehaviour:
   occlusionRadius: 0.1
   sampleCount: 32
   occlusionOffset: 0.05
-  scale: 0.5
+  scale: 1
   allowOffScreen: 0
 --- !u!1 &2923027713995708870
 GameObject:
@@ -339,8 +339,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc4d76f733087744991913c9d19d5274, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_LensFlareData: {fileID: 11400000, guid: 4498c662fa870fa40bd2206a7e080a11, type: 2}
-  intensity: 0.3
+  m_LensFlareData: {fileID: 11400000, guid: cf0149057ca51e14c88ebde3013aabb4, type: 2}
+  intensity: 1
   maxAttenuationDistance: 100
   maxAttenuationScale: 100
   distanceAttenuationCurve:
@@ -420,7 +420,7 @@ MonoBehaviour:
   occlusionRadius: 0.1
   sampleCount: 32
   occlusionOffset: 0.05
-  scale: 0.5
+  scale: 1
   allowOffScreen: 0
 --- !u!1 &3382715289137185265
 GameObject:
@@ -550,8 +550,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc4d76f733087744991913c9d19d5274, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_LensFlareData: {fileID: 11400000, guid: 4498c662fa870fa40bd2206a7e080a11, type: 2}
-  intensity: 0.3
+  m_LensFlareData: {fileID: 11400000, guid: cf0149057ca51e14c88ebde3013aabb4, type: 2}
+  intensity: 1
   maxAttenuationDistance: 100
   maxAttenuationScale: 100
   distanceAttenuationCurve:
@@ -631,7 +631,7 @@ MonoBehaviour:
   occlusionRadius: 0.1
   sampleCount: 32
   occlusionOffset: 0.05
-  scale: 0.5
+  scale: 1
   allowOffScreen: 0
 --- !u!1 &4582776587213197077
 GameObject:
@@ -761,8 +761,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc4d76f733087744991913c9d19d5274, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_LensFlareData: {fileID: 11400000, guid: 4498c662fa870fa40bd2206a7e080a11, type: 2}
-  intensity: 0.3
+  m_LensFlareData: {fileID: 11400000, guid: cf0149057ca51e14c88ebde3013aabb4, type: 2}
+  intensity: 1
   maxAttenuationDistance: 100
   maxAttenuationScale: 100
   distanceAttenuationCurve:
@@ -842,7 +842,7 @@ MonoBehaviour:
   occlusionRadius: 0.1
   sampleCount: 32
   occlusionOffset: 0.05
-  scale: 0.5
+  scale: 1
   allowOffScreen: 0
 --- !u!1 &4767002828208150777
 GameObject:
@@ -972,8 +972,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc4d76f733087744991913c9d19d5274, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_LensFlareData: {fileID: 11400000, guid: 4498c662fa870fa40bd2206a7e080a11, type: 2}
-  intensity: 0.3
+  m_LensFlareData: {fileID: 11400000, guid: cf0149057ca51e14c88ebde3013aabb4, type: 2}
+  intensity: 1
   maxAttenuationDistance: 100
   maxAttenuationScale: 100
   distanceAttenuationCurve:
@@ -1053,7 +1053,7 @@ MonoBehaviour:
   occlusionRadius: 0.1
   sampleCount: 32
   occlusionOffset: 0.05
-  scale: 0.5
+  scale: 1
   allowOffScreen: 0
 --- !u!1 &5910356411062111711
 GameObject:
@@ -1279,8 +1279,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc4d76f733087744991913c9d19d5274, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_LensFlareData: {fileID: 11400000, guid: 4498c662fa870fa40bd2206a7e080a11, type: 2}
-  intensity: 0.3
+  m_LensFlareData: {fileID: 11400000, guid: cf0149057ca51e14c88ebde3013aabb4, type: 2}
+  intensity: 1
   maxAttenuationDistance: 100
   maxAttenuationScale: 100
   distanceAttenuationCurve:
@@ -1360,7 +1360,7 @@ MonoBehaviour:
   occlusionRadius: 0.1
   sampleCount: 32
   occlusionOffset: 0.05
-  scale: 0.5
+  scale: 1
   allowOffScreen: 0
 --- !u!1 &6446533133911017172
 GameObject:
@@ -1490,8 +1490,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc4d76f733087744991913c9d19d5274, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_LensFlareData: {fileID: 11400000, guid: 4498c662fa870fa40bd2206a7e080a11, type: 2}
-  intensity: 0.3
+  m_LensFlareData: {fileID: 11400000, guid: cf0149057ca51e14c88ebde3013aabb4, type: 2}
+  intensity: 1
   maxAttenuationDistance: 100
   maxAttenuationScale: 100
   distanceAttenuationCurve:
@@ -1571,7 +1571,7 @@ MonoBehaviour:
   occlusionRadius: 0.1
   sampleCount: 32
   occlusionOffset: 0.05
-  scale: 0.5
+  scale: 1
   allowOffScreen: 0
 --- !u!1 &6761702063685504417
 GameObject:
@@ -1701,8 +1701,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc4d76f733087744991913c9d19d5274, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_LensFlareData: {fileID: 11400000, guid: 4498c662fa870fa40bd2206a7e080a11, type: 2}
-  intensity: 0.3
+  m_LensFlareData: {fileID: 11400000, guid: cf0149057ca51e14c88ebde3013aabb4, type: 2}
+  intensity: 1
   maxAttenuationDistance: 100
   maxAttenuationScale: 100
   distanceAttenuationCurve:
@@ -1782,7 +1782,7 @@ MonoBehaviour:
   occlusionRadius: 0.1
   sampleCount: 32
   occlusionOffset: 0.05
-  scale: 0.5
+  scale: 1
   allowOffScreen: 0
 --- !u!1 &6873213609775587958
 GameObject:
@@ -1912,8 +1912,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc4d76f733087744991913c9d19d5274, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_LensFlareData: {fileID: 11400000, guid: 4498c662fa870fa40bd2206a7e080a11, type: 2}
-  intensity: 0.3
+  m_LensFlareData: {fileID: 11400000, guid: cf0149057ca51e14c88ebde3013aabb4, type: 2}
+  intensity: 1
   maxAttenuationDistance: 100
   maxAttenuationScale: 100
   distanceAttenuationCurve:
@@ -1993,7 +1993,7 @@ MonoBehaviour:
   occlusionRadius: 0.1
   sampleCount: 32
   occlusionOffset: 0.05
-  scale: 0.5
+  scale: 1
   allowOffScreen: 0
 --- !u!1 &8676224002512175884
 GameObject:
@@ -2123,8 +2123,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc4d76f733087744991913c9d19d5274, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_LensFlareData: {fileID: 11400000, guid: 4498c662fa870fa40bd2206a7e080a11, type: 2}
-  intensity: 0.3
+  m_LensFlareData: {fileID: 11400000, guid: cf0149057ca51e14c88ebde3013aabb4, type: 2}
+  intensity: 1
   maxAttenuationDistance: 100
   maxAttenuationScale: 100
   distanceAttenuationCurve:
@@ -2204,7 +2204,7 @@ MonoBehaviour:
   occlusionRadius: 0.1
   sampleCount: 32
   occlusionOffset: 0.05
-  scale: 0.5
+  scale: 1
   allowOffScreen: 0
 --- !u!1001 &6339671470693044291
 PrefabInstance:

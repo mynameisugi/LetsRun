@@ -1,30 +1,46 @@
-using System.Collections;
-using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class GUIRaceMap : MonoBehaviour
 {
+    [Header("Texts")]
+    [SerializeField]
+    private TMP_Text textTime = null;
+    [SerializeField]
+    private TMP_Text textType = null;
+
+    [Header("Dots")]
     [SerializeField]
     private float scale = 1f;
-
     [SerializeField]
     private Transform offset = null;
-
     [SerializeField]
     private RectTransform[] dots = new RectTransform[8];
 
     public void AssignRace(Race newRace)
     {
         race = newRace;
+        time = GameManager.Instance().Time;
+        textType.text = race.info.type switch
+        {
+            RaceManager.RaceType.Easy => "500m",
+            RaceManager.RaceType.Normal => "1000m",
+            _ => "1500m"
+        };
         // TODO: 시작선 켜고 끄기
         Update();
     }
 
     private Race race = null;
+    private TimeManager time = null;
+    private float curTime = 0f;
 
     private void Update()
     {
         if (!offset || !race) { gameObject.SetActive(false); return; }
+        if (race.Status == Race.RaceStage.Racing) curTime = time.Now;
+        textTime.text = $"{Mathf.FloorToInt(curTime) / 60:0}:{Mathf.FloorToInt(curTime) % 60:00}:{Mathf.RoundToInt(curTime * 10f) % 10}";
+
         for (int i = 0; i < 8; ++i)
         {
             var entry = race.GetEntry(i);
