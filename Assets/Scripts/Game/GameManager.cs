@@ -116,7 +116,7 @@ public class GameManager : MonoBehaviour
             delta = UnityEngine.Time.unscaledDeltaTime;
             yield return new WaitForSecondsRealtime(UnityEngine.Time.unscaledDeltaTime);
             fade -= delta; if (fade < 0f) fade = 0f;
-            gamma.gamma.value = Vector4.one * fade;
+            gamma.gamma.value = Vector4.one * (fade - 1f);
         }
         OnFaded?.Invoke();
 
@@ -125,7 +125,7 @@ public class GameManager : MonoBehaviour
             delta = UnityEngine.Time.unscaledDeltaTime;
             yield return new WaitForSecondsRealtime(UnityEngine.Time.unscaledDeltaTime);
             fade += delta; if (fade > 1f) fade = 1f;
-            gamma.gamma.value = Vector4.one * fade;
+            gamma.gamma.value = Vector4.one * (fade - 1f);
         }
         OnFadeEnded?.Invoke();
     }
@@ -140,7 +140,7 @@ public class GameManager : MonoBehaviour
     {
         while (intensity > 0f)
         {
-            vignette.intensity.value = intensity;
+            vignette.intensity.value = intensity * 2f;
             yield return null;
             intensity -= UnityEngine.Time.deltaTime * 0.3f;
         }
