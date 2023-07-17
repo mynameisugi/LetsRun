@@ -4,27 +4,29 @@ using UnityEngine.UI;
 
 public class TrophyController : MonoBehaviour
 {
-    [SerializeField] private float rotationSpeed = 50f; // 회전 속도
-    [SerializeField] private float scaleSpeed = 0.1f; // 크기 변경 속도
-    [SerializeField] private float maxScale = 3f; // 최대 크기
-    [SerializeField] private float rotationTransitionSpeed = 2f; // 회전 전환 속도
+    [SerializeField] private float rotationSpeed = 50f; // Rotation speed
+    [SerializeField] private float scaleSpeed = 0.1f; // Size change rate
+    [SerializeField] private float maxScale = 3f; // Max size
+    [SerializeField] private float rotationTransitionSpeed = 2f; // Rotation conversion rate
+    [SerializeField] private float movementSpeed = 5f; // Speed at which the trophy moves towards target position
 
-    [SerializeField] private Text gameTypeText; // 게임 유형을 표시하는 Text UI
-    [SerializeField] private Text matchInfoText; // 매치 정보를 표시하는 Text UI
-    [SerializeField] private string gameType; // 게임 유형
-    [SerializeField] private string matchInfo; // 매치 정보
+    [SerializeField] private Text gameTypeText; // Text UI to display the game type
+    [SerializeField] private Text matchInfoText; // Text UI to display match information
+    [SerializeField] private string gameType; // Game type
+    [SerializeField] private string matchInfo; // Match information
 
-    [SerializeField] private float textCharacterDelay = 0.3f; // 한 글자씩 텍스트를 표시하는 딜레이 시간
+    [SerializeField] private float transitionDuration = 3f; // Transition duration for moving text to X = 0
 
-    [SerializeField] private ParticleSystem fireworksParticleSystem; // 불꽃놀이 효과를 재생하는 파티클 시스템
-    [SerializeField] private float fireworksDuration = 10f; // 불꽃놀이 효과 지속 시간
+    [SerializeField] private ParticleSystem fireworksParticleSystem; // Particle system to play fireworks effect
+    [SerializeField] private float fireworksDuration = 10f; // Fireworks effect duration
 
-    [SerializeField] private CanvasGroup canvasGroup; // 페이드아웃 효과를 적용할 캔버스의 CanvasGroup 컴포넌트
-    [SerializeField] private float fadeOutDuration = 2f; // 페이드아웃 지속 시간
+    [SerializeField] private CanvasGroup canvasGroup; // CanvasGroup component of the canvas to apply the fadeout effect to
+    [SerializeField] private float fadeOutDuration = 2f; // Fadeout duration
 
     private RectTransform rectTransform;
     private bool shouldRotateAndScale = true;
     private Quaternion targetRotation;
+    private Vector3 targetPosition = Vector3.zero; // Target position to move towards
 
     private void Awake()
     {
@@ -36,9 +38,9 @@ public class TrophyController : MonoBehaviour
     {
         if (shouldRotateAndScale)
         {
-            rectTransform.Rotate(Vector3.up * rotationSpeed * Time.deltaTime); // Y축을 기준으로 이미지 회전
+            rectTransform.Rotate(Vector3.up * rotationSpeed * Time.deltaTime); // Rotate the image around the Y axis
 
-            Vector3 newScale = rectTransform.localScale + Vector3.one * scaleSpeed * Time.deltaTime; // 크기를 점차 증가
+            Vector3 newScale = rectTransform.localScale + Vector3.one * scaleSpeed * Time.deltaTime; // Incrementally increase the size
             rectTransform.localScale = newScale;
 
             if (newScale.x >= maxScale)
@@ -46,6 +48,12 @@ public class TrophyController : MonoBehaviour
                 shouldRotateAndScale = false;
                 StartCoroutine(TransitionRotation());
             }
+        }
+        else
+        {
+            rectTransform.rotation = Quaternion.RotateTowards(rectTransform.rotation, targetRotation, rotationTransitionSpeed * Time.deltaTime); // Toggle rotation
+
+            rectTransform.anchoredPosition = Vector3.MoveTowards(rectTransform.anchoredPosition, targetPosition, movementSpeed * Time.deltaTime); // Move towards target position
         }
     }
 
@@ -57,31 +65,40 @@ public class TrophyController : MonoBehaviour
         while (elapsedTime < 1f)
         {
             elapsedTime += Time.deltaTime * rotationTransitionSpeed;
-            rectTransform.rotation = Quaternion.Lerp(startRotation, targetRotation, elapsedTime); // 회전 전환
+            rectTransform.rotation = Quaternion.Lerp(startRotation, targetRotation, elapsedTime); // Toggle rotation
             yield return null;
         }
 
         rectTransform.rotation = targetRotation;
 
-        StartCoroutine(ShowTextOneByOne(gameType, gameTypeText, textCharacterDelay));
-        StartCoroutine(ShowTextOneByOne(matchInfo, matchInfoText, textCharacterDelay));
+        StartCoroutine(ShowText(gameType, gameTypeText));
+        StartCoroutine(ShowText(matchInfo, matchInfoText));
     }
 
-    private IEnumerator ShowTextOneByOne(string text, Text textComponent, float characterDelay)
+    private IEnumerator ShowText(string text, Text textComponent)
     {
-        textComponent.text = "";
-        foreach (char c in text)
+        textComponent.text = text; // Assign the entire text at once
+        Vector2 startPosition = textComponent.rectTransform.anchoredPosition;
+        Vector2 targetPosition = new Vector2(0f, startPosition.y);
+        float elapsedTime = 0f;
+
+        while (elapsedTime < transitionDuration)
         {
-            textComponent.text += c; // 한 글자씩 텍스트에 추가
-            yield return new WaitForSeconds(characterDelay);
+            elapsedTime += Time.deltaTime;
+            float t = Mathf.Clamp01(elapsedTime / transitionDuration);
+            textComponent.rectTransform.anchoredPosition = Vector2.Lerp(startPosition, targetPosition, t);
+            yield return null;
         }
 
+        textComponent.rectTransform.anchoredPosition = targetPosition;
         PlayFireworks();
     }
 
+
+
     private void PlayFireworks()
     {
-        fireworksParticleSystem.Play(); // 불꽃놀이 효과 재생
+        fireworksParticleSystem.Play(); // Play fireworks effect
 
         StartCoroutine(StopFireworks());
     }
@@ -89,7 +106,7 @@ public class TrophyController : MonoBehaviour
     private IEnumerator StopFireworks()
     {
         yield return new WaitForSeconds(fireworksDuration);
-        fireworksParticleSystem.Stop(); // 일정 시간 후 불꽃놀이 효과 정지
+        fireworksParticleSystem.Stop(); // Stop the fireworks effect after a certain amount of time
 
         StartCoroutine(FadeOutCanvas());
     }
@@ -103,7 +120,7 @@ public class TrophyController : MonoBehaviour
         {
             elapsedTime += Time.deltaTime;
             float t = elapsedTime / fadeOutDuration;
-            canvasGroup.alpha = Mathf.Lerp(startAlpha, 0f, t); // 캔버스 페이드아웃
+            canvasGroup.alpha = Mathf.Lerp(startAlpha, 0f, t); // Canvas fade out
             yield return null;
         }
 
