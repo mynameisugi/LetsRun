@@ -30,6 +30,7 @@ public class Race : MonoBehaviour
         info.end.playerRank = -1; // 플레이어 기록 리셋
         info.end.SetPrize(info.prize);
 
+        info.start.gameObject.SetActive(true);
         info.start.CloseGate();
 
         // 참가자 생성
@@ -87,6 +88,7 @@ public class Race : MonoBehaviour
         Debug.Log($"Destroy Race! {info.type}");
         audienceBGM.volume = 0f;
         audienceSE.volume = 0f;
+
         if (GameManager.Instance().BGM.IsRaceBGM) GameManager.Instance().BGM.PlayNormalBGM();
         GameManager.Instance().Time.UnregisterEvent(TimeManager.LOOP - 90, DestroyRace);
         Destroy(gameObject);
@@ -98,6 +100,7 @@ public class Race : MonoBehaviour
             if (entry) Destroy(entry.gameObject);
         foreach (var obst in info.obstacles)
             if (obst) obst.SetActive(false);
+        if (info.start) info.start.gameObject.SetActive(false);
     }
 
     private int playerNum = -1;

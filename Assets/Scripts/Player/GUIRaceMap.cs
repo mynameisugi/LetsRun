@@ -1,4 +1,5 @@
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class GUIRaceMap : MonoBehaviour
@@ -16,6 +17,8 @@ public class GUIRaceMap : MonoBehaviour
     private Transform offset = null;
     [SerializeField]
     private RectTransform[] dots = new RectTransform[8];
+    [SerializeField]
+    private RectTransform start;
 
     public void AssignRace(Race newRace)
     {
@@ -27,7 +30,10 @@ public class GUIRaceMap : MonoBehaviour
             RaceManager.RaceType.Normal => "1000m",
             _ => "1500m"
         };
-        // TODO: 시작선 켜고 끄기
+
+        var o = race.info.start.transform.position - offset.position;
+        start.SetLocalPositionAndRotation(new Vector3(scale * o.z, scale * -o.x, 0f),
+            Quaternion.Euler(0f, 0f, -race.info.start.transform.rotation.eulerAngles.y));
         Update();
     }
 
@@ -46,8 +52,8 @@ public class GUIRaceMap : MonoBehaviour
             var entry = race.GetEntry(i);
             if (!entry) { dots[i].gameObject.SetActive(false); continue; }
             dots[i].gameObject.SetActive(true);
-            var o = offset.position - entry.transform.position;
-            dots[i].localPosition = new Vector3(scale * o.x, scale * o.z, 0f);
+            var o = entry.transform.position - offset.position;
+            dots[i].localPosition = new Vector3(scale * o.z - 300f, scale * -o.x - 150f, 0f);
             if (entry.isPlayerRiding) dots[i].localScale = Vector3.one * 2f;
             else dots[i].localScale = Vector3.one;
         }
