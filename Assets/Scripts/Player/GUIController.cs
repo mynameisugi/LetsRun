@@ -21,4 +21,6 @@ public class GUIController : MonoBehaviour
         raceMap.AssignRace(race);
     }
 
+    public void HideRaceMap() => raceMap.gameObject.SetActive(false);
+
 }

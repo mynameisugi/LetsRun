@@ -29,6 +29,7 @@ public class CountDown : MonoBehaviour{
 
     private void StartCountDown()
     {
+        if (!enabled || !gameObject.activeInHierarchy) return;
         StartCoroutine(CountDownCoroutine());
     }
 

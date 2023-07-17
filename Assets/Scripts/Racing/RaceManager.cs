@@ -23,6 +23,7 @@ public class RaceManager : MonoBehaviour
     {
         foreach (var info in infos)
         {
+            info.start.gameObject.SetActive(false);
             foreach (var box in info.trackNodes)
                 if (box)
                 {
