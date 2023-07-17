@@ -51,7 +51,8 @@ public class Race : MonoBehaviour
                 //++i;
             }
         }
-        PlayerManager.Instance().GUI.ShowRaceMap(this);
+
+        // PlayerManager.Instance().GUI.ShowRaceMap(this); // test
     }
 
     private void CreateEntry()
