@@ -29,7 +29,7 @@ public class CountDown : MonoBehaviour{
 
     private void StartCountDown()
     {
-        if (!gameObject) return;
+        if (!gameObject.activeSelf) return;
         StartCoroutine(CountDownCoroutine());
     }
 
