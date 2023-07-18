@@ -29,15 +29,15 @@ public class PlayerManager : MonoBehaviour
     /// <see cref="PlayerManager"/> 인스턴스
     /// </summary>
     public static PlayerManager Instance()
-        => instance; //GameObject.FindGameObjectWithTag("Player").transform.root.GetComponent<PlayerManager>();
+        => GameObject.FindGameObjectWithTag("Player").transform.root.GetComponent<PlayerManager>();
 
-    private static PlayerManager instance = null;
+    /* private static PlayerManager instance = null;
 
     private void Awake()
     {
         if (!instance) instance = this;
         else if (instance != this) Destroy(gameObject);
-    }
+    } */
 
     /// <summary>
     /// 플레이어 실제 위치
