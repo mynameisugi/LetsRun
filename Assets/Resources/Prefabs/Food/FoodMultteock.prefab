@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 9209858815275992884}
   - component: {fileID: 1771233381905887261}
   - component: {fileID: 6805501613358644340}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Grabbable
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -109,7 +109,7 @@ GameObject:
   - component: {fileID: 8576914928287434346}
   - component: {fileID: 2057824273756122787}
   - component: {fileID: 7438755448405117661}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: FoodMultteock
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -145,6 +145,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7158153673e2fa0418f057d587aaa5ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gripAnimation: 1
   speedWalk: 0
   speedTrot: 0
   speedCanter: 0
@@ -346,6 +347,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5350426281734567033}
     m_Modifications:
+    - target: {fileID: -9064114903961122858, guid: aca9473c865d2044a84f3f61df7efcfa,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: aca9473c865d2044a84f3f61df7efcfa,
         type: 3}
       propertyPath: m_RootOrder
@@ -401,6 +407,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 134623389121824584, guid: aca9473c865d2044a84f3f61df7efcfa,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 416520510336811765, guid: aca9473c865d2044a84f3f61df7efcfa,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -410,6 +421,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: rice cake
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: aca9473c865d2044a84f3f61df7efcfa,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 9181683226690783094, guid: aca9473c865d2044a84f3f61df7efcfa,
         type: 3}

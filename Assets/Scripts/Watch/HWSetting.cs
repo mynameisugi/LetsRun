@@ -62,7 +62,7 @@ public class HWSetting : MonoBehaviour
             {
                 PopupEnabled = false;
                 SaveOptions();
-                GameManager.Instance().Save.Reset();
+                GameManager.Instance().PlayFadeInAndOut(GameManager.Instance().Save.Reset, null);
             },
             () => { PopupEnabled = false; });
         PopupEnabled = true;
