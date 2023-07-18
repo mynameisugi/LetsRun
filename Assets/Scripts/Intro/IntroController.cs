@@ -34,6 +34,8 @@ public class IntroController : MonoBehaviour
 
     private void Start()
     {
+        Debug.Log("Start Intro!");
+        
         horses = new HorseController[10];
         // ¸» »ý¼º
         for (int i = 0; i < 10; i++)
