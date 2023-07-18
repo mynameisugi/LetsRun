@@ -28,6 +28,8 @@ public class TrophyController : MonoBehaviour
     private Quaternion targetRotation;
     private Vector3 targetPosition = Vector3.zero; // 이동할 목표 위치
 
+    public GameObject objectToDestroy;
+
     private void Awake()
     {
         rectTransform = GetComponent<RectTransform>();
@@ -126,6 +128,6 @@ public class TrophyController : MonoBehaviour
 
         yield return new WaitForSeconds(3f);
 
-        Destroy(transform.root.gameObject);
+        Destroy(objectToDestroy);
     }
 }

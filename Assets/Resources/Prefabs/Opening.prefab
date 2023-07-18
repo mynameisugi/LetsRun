@@ -5024,6 +5024,7 @@ MonoBehaviour:
   fireworksDuration: 10
   canvasGroup: {fileID: 312454559642964230}
   fadeOutDuration: 1
+  objectToDestroy: {fileID: 312454559675895663}
 --- !u!1 &312454559620760504
 GameObject:
   m_ObjectHideFlags: 0
