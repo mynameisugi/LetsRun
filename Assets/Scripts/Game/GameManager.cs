@@ -83,7 +83,22 @@ public class GameManager : MonoBehaviour
     private void Update()
     {
         Time.Update();
+        if (Input.GetKey(KeyCode.Escape))
+        {
+            if (forceOff < 0f) forceOff = UnityEngine.Time.time;
+            if (UnityEngine.Time.time - forceOff > 1.5f)
+            {
+#if UNITY_EDITOR
+                UnityEditor.EditorApplication.ExitPlaymode();
+#else
+                Application.Quit();
+#endif
+            }
+        }
+        else forceOff = -1f;
     }
+
+    private float forceOff = -1f;
 
     #region ScreenEffects
     private LiftGammaGain gamma = null;
