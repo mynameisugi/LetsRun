@@ -12,6 +12,9 @@ public class RaceManager : MonoBehaviour
     [SerializeField]
     private Race.RaceInfo[] infos;
 
+    [SerializeField]
+    private GameObject[] crowds;
+
     public enum RaceType : int
     {
         Easy = 0, // 500m
@@ -33,6 +36,7 @@ public class RaceManager : MonoBehaviour
             foreach (var obst in info.obstacles)
                 if (obst) obst.SetActive(false);
         }
+        SetCrowds(false);
 
         GameManager.Instance().Time.RegisterEvent(TimeManager.LOOP - 60, () =>
         {
@@ -44,11 +48,17 @@ public class RaceManager : MonoBehaviour
             PrepareRace(nextObstacle); // 이미 1분 전 이내면 바로 준비
     }
 
+    public void SetCrowds(bool active)
+    {
+        foreach (var c in crowds) if (c) c.SetActive(active);
+    }
+
     private void PrepareRace(bool obstacle)
     {
         var raceObj = Instantiate(racePrefab, transform);
         CurrentRace = raceObj.GetComponent<Race>();
         CurrentRace.info = infos[(int)NextRace];
+        SetCrowds(true);
         if (!obstacle) CurrentRace.info.obstacleRate = 0f;
         if (playerNum > 0)
         {

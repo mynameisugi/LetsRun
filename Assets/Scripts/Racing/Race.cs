@@ -101,6 +101,7 @@ public class Race : MonoBehaviour
         foreach (var obst in info.obstacles)
             if (obst) obst.SetActive(false);
         if (info.start) info.start.gameObject.SetActive(false);
+        GameManager.Instance().Race.SetCrowds(false);
     }
 
     private int playerNum = -1;
