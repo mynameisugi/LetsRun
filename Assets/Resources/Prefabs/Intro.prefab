@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 461586620875435238}
   - component: {fileID: 5677048623767029902}
   - component: {fileID: 2300895337712574430}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: TriggerJump
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -84,7 +84,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 574366408688540028}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 81.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -106,7 +106,7 @@ GameObject:
   - component: {fileID: 8809850979473580552}
   - component: {fileID: 8647984561980255685}
   - component: {fileID: 6916976035573465637}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: TriggerExit
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -182,7 +182,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1671036691859442995}
   m_LocalRotation: {x: -0, y: -0.24998635, z: -0, w: 0.9682494}
-  m_LocalPosition: {x: -48.44, y: 2, z: -21.96}
+  m_LocalPosition: {x: -43.5, y: 2, z: 61.28}
   m_LocalScale: {x: 2, y: 4, z: 12}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -276,7 +276,7 @@ GameObject:
   - component: {fileID: 7709300169951192054}
   - component: {fileID: 6885949421463447684}
   - component: {fileID: 1495347332334690230}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: TriggerAvoid
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -351,9 +351,9 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3424887447682022020}
-  m_LocalRotation: {x: -0, y: 0.24998635, z: -0, w: 0.9682494}
-  m_LocalPosition: {x: 0, y: -0.5, z: 0}
-  m_LocalScale: {x: 13.813707, y: 0.5, z: 6.2134376}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -3.9, y: 0.5, z: 93.9}
+  m_LocalScale: {x: 40, y: 1, z: 40}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6378359670653577744}
@@ -435,7 +435,7 @@ GameObject:
   m_Layer: 0
   m_Name: Intro
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -482,7 +482,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7679396282166477050}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Triggers
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -497,7 +497,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4333446481934406384}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 81.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -519,7 +519,7 @@ GameObject:
   - component: {fileID: 2732457822229434902}
   - component: {fileID: 3932253643543393319}
   - component: {fileID: 2204700536741837001}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: TriggerSlow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
