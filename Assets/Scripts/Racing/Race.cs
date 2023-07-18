@@ -25,7 +25,6 @@ public class Race : MonoBehaviour
     {
         Debug.Log($"Race Ready: {info.type}");
 
-        entries = new HorseController[8];
         Status = RaceStage.Prepare; // 준비
 
         info.end.playerRank = -1; // 플레이어 기록 리셋
@@ -139,7 +138,7 @@ public class Race : MonoBehaviour
         Clean // 플레이어가 경주를 안 했거나 텐트 밖으로 이동하면 경쟁자 말을 삭제하고 이 레이스 종료.
     }
 
-    private HorseController[] entries;
+    private readonly HorseController[] entries = new HorseController[8];
     private int entryFilled;
 
     public HorseController GetEntry(int i)

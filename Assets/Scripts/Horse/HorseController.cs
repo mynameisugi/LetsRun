@@ -437,7 +437,7 @@ public class HorseController : MonoBehaviour
         curSpeed = 0f; curRotate = 0;
         Update();
         //agent.enabled = true;
-        agent.ResetPath();
+        //agent.ResetPath();
     }
 
     #endregion PlayerControl
