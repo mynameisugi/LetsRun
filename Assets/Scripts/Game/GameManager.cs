@@ -76,6 +76,7 @@ public class GameManager : MonoBehaviour
             new Vector3(Save.LoadValue(PLAYERPOSX, 0f),
                 Save.LoadValue(PLAYERPOSY, 0f),
                 Save.LoadValue(PLAYERPOSZ, 0f));
+        PlayerManager.Instance().LoadHorse();
 
         void AutoSave() { if (GameSettings.Values.doAutoSave) Save.SaveToPrefs(0); }
     }

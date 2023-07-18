@@ -67,7 +67,7 @@ public class HorseSoundMaker : MonoBehaviour
         headAudio.clip = Resources.Load("Sounds/Wind/windsound" + Random.Range(1, 4).ToString()) as AudioClip;
         headAudio.volume = GameSettings.Values.SE;
         headAudio.Play();
-        SendHapticFeedback(0.6f, 0.6f, 1.0f);
+        SendHapticFeedback(0.7f, 0.7f, 1.0f);
     }
 
     public void OnHorseNeigh()
@@ -75,7 +75,7 @@ public class HorseSoundMaker : MonoBehaviour
         headAudio.clip = Resources.Load("Sounds/Horse/horsevoice3") as AudioClip;
         headAudio.volume = 0.7f * GameSettings.Values.SE;
         headAudio.Play();
-        SendHapticFeedback(0.3f, 0.3f, 0.3f);
+        SendHapticFeedback(0.5f, 0.5f, 0.3f);
     }
 
     public void OnHorseDistress()
@@ -91,7 +91,7 @@ public class HorseSoundMaker : MonoBehaviour
         headAudio.clip = Resources.Load("Sounds/Horse/horsevoice4") as AudioClip;
         headAudio.volume = 0.9f * GameSettings.Values.SE;
         headAudio.Play();
-        SendHapticFeedback(0.2f, 0.2f, 0.2f);
+        SendHapticFeedback(0.5f, 0.5f, 0.2f);
     }
 
     public void OnFootWalkStep(int i)
@@ -109,7 +109,7 @@ public class HorseSoundMaker : MonoBehaviour
         AudioClip clip = GetFootsound(source);
         source.clip = clip;
         source.pitch = Random.Range(0.9f, 1.1f);
-        source.volume = 0.5f;
+        source.volume = 0.6f;
         source.volume *= GameSettings.Values.SE;
         source.Play();
 
@@ -136,7 +136,7 @@ public class HorseSoundMaker : MonoBehaviour
             AudioClip clip = GetFootsound(source);
             source.clip = clip;
             source.pitch = Random.Range(0.9f, 1.1f);
-            source.volume = 0.3f;
+            source.volume = 0.4f;
             source.volume *= GameSettings.Values.SE;
             source.Play();
             if (IsLeft(foot)) ++l; else ++r;
@@ -161,7 +161,7 @@ public class HorseSoundMaker : MonoBehaviour
             AudioClip clip = GetFootsound(source);
             source.clip = clip;
             source.pitch = Random.Range(0.9f, 1.1f);
-            source.volume = 0.7f;
+            source.volume = 0.9f;
             source.volume *= GameSettings.Values.SE;
             source.Play();
             if (IsLeft(foot)) ++l; else ++r;
@@ -183,7 +183,7 @@ public class HorseSoundMaker : MonoBehaviour
         AudioClip clip = GetFootsound(source);
         source.clip = clip;
         source.pitch = Random.Range(0.9f, 1.1f);
-        source.volume = 1.0f;
+        source.volume = 1.2f;
         source.volume *= GameSettings.Values.SE;
         source.Play();
 
@@ -206,7 +206,7 @@ public class HorseSoundMaker : MonoBehaviour
             AudioClip clip = GetFootsound(source);
             source.clip = clip;
             source.pitch = Random.Range(0.9f, 1.1f);
-            source.volume = 0.7f;
+            source.volume = 0.9f;
             source.volume *= GameSettings.Values.SE;
             source.Play();
             if (IsLeft(foot)) ++l; else ++r;
