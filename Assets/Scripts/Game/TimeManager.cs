@@ -14,7 +14,8 @@ public class TimeManager
     public TimeManager(float time)
     {
         // 저장된 시간 불러오기
-        Now = time;
+        //Now = time;
+        Now = 0f;
 
         // 저장할 때 현재 시간 저장
         GameManager.Instance().Save.OnSaveToPref += (save) =>
