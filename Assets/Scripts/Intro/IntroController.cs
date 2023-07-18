@@ -81,7 +81,7 @@ public class IntroController : MonoBehaviour
                 if (player.IsRiding)
                 {
                     curStatus = Status.HorseJustRode;
-                    player.GUI.SetMessageBoxText("가속하려면 양손을 뒤로 당겼다 빠르게 앞으로 내리쳐 채찍질합니다.");
+                    player.GUI.SetMessageBoxText("가속하려면 양손을 뒤로 당겼다 빠르게 앞으로 내리쳐 채찍질합니다. 말에서 내리려면 몸을 숙여 안장을 잡습니다.");
                 }
                 break;
 
@@ -101,7 +101,7 @@ public class IntroController : MonoBehaviour
                 break;
 
             case Status.HorseRan:
-                player.GUI.SetMessageBoxText("오른손 잡기 트리거를 누르고\n왼손의 손목시계를 조작해 메뉴를 사용할 수 있습니다.");
+                
                 break;
         }
     }
@@ -114,8 +114,7 @@ public class IntroController : MonoBehaviour
             else PlayerManager.Instance().horse = horse;
         }
 
-        curStatus = Status.Obstacletutorial;
-        player.GUI.SetMessageBoxText(string.Empty);
+        curStatus = Status.Obstacletutorial; player.GUI.SetMessageBoxText("말에서 내려서, 오른손 잡기 트리거를 누르고\n왼손의 손목시계를 조작해 메뉴를 사용할 수 있습니다.");
     }
 
     public void EndTutorial()
