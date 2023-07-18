@@ -123,5 +123,9 @@ public class TrophyController : MonoBehaviour
         }
 
         canvasGroup.alpha = 0f;
+
+        yield return new WaitForSeconds(3f);
+
+        Destroy(transform.root.gameObject);
     }
 }
