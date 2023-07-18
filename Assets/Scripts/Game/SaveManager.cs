@@ -42,6 +42,7 @@ public class SaveManager
         saveData = new Dictionary<string, object>();
         SaveValue(SAVESEED, (int)DateTime.Now.Ticks);
         SaveValue(TimeManager.SAVEKEY, 0);
+        SaveValue(PlayerInventory.KEYMONEY, 10);
         string json = JsonConvert.SerializeObject(saveData);
         PlayerPrefs.SetString(GetSlotPref(0), json);
         GameManager.Instance().StartIntro();
