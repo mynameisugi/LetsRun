@@ -69,7 +69,6 @@ public class PlayerManager : MonoBehaviour
             horse.playerRidable = true;
             horse.stats = HorseStats.FromSaveString(data);
         }
-        else { GameManager.Instance().Save.Reset(); return; } // 말이 없음: 초기화
         // Save Horse
         GameManager.Instance().Save.OnSaveToPref += (save) =>
         {
