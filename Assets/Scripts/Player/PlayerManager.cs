@@ -29,7 +29,8 @@ public class PlayerManager : MonoBehaviour
     /// <see cref="PlayerManager"/> 인스턴스
     /// </summary>
     public static PlayerManager Instance()
-        => GameObject.FindGameObjectWithTag("Player").transform.root.GetComponent<PlayerManager>();
+        => FindObjectOfType<PlayerManager>();
+        //GameObject.FindGameObjectWithTag("Player").transform.root.GetComponent<PlayerManager>();
 
     /* private static PlayerManager instance = null;
 
