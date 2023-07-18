@@ -127,6 +127,7 @@ public class Race : MonoBehaviour
         }, null);
 
         PlayerManager.Instance().GUI.ShowRaceMap(this);
+        info.start.ShowOpening();
     }
 
     internal RaceStage Status { get; private set; }

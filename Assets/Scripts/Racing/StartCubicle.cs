@@ -11,6 +11,9 @@ public class StartCubicle : MonoBehaviour
     [SerializeField]
     private GameObject startBlock;
 
+    [SerializeField]
+    private GameObject opening;
+
     public Transform GetStartPos(int i) => starts[i];
 
     public void OpenGate()
@@ -24,5 +27,10 @@ public class StartCubicle : MonoBehaviour
         if (!gameObject.activeSelf) return;
         cubicleAnim.SetBool("Open", false);
         startBlock.SetActive(true);
+    }
+
+    public void ShowOpening()
+    {
+        // opening.SetActive(true);
     }
 }

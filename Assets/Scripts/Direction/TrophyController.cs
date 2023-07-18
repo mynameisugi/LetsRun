@@ -28,10 +28,23 @@ public class TrophyController : MonoBehaviour
     private Quaternion targetRotation;
     private Vector3 targetPosition = Vector3.zero; // 이동할 목표 위치
 
+    public GameObject objectToDestroy;
+
     private void Awake()
     {
         rectTransform = GetComponent<RectTransform>();
         targetRotation = rectTransform.rotation;
+    }
+
+    private void OnEnable()
+    {
+        var race = GameManager.Instance().Race.CurrentRace;
+        if(!race) { objectToDestroy.SetActive(false); return; }
+        matchInfo = race.info.type switch {
+            RaceManager.RaceType.Easy => "500m 경기",
+            RaceManager.RaceType.Normal => "1000m 경기",
+            _ => "1500m 경기"
+        };
     }
 
     private void Update()
@@ -123,5 +136,9 @@ public class TrophyController : MonoBehaviour
         }
 
         canvasGroup.alpha = 0f;
+
+        yield return new WaitForSeconds(3f);
+
+        objectToDestroy.SetActive(false);
     }
 }
