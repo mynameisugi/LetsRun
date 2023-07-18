@@ -63,6 +63,7 @@ MonoBehaviour:
   - {fileID: 1912194393512155970}
   cubicleAnim: {fileID: 5015925884788736537}
   startBlock: {fileID: 5360228795201665183}
+  opening: {fileID: 312454559399035641}
 --- !u!1 &136193670618348430
 GameObject:
   m_ObjectHideFlags: 0
@@ -795,6 +796,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3599986140868928544}
     m_Modifications:
+    - target: {fileID: 312454559560473318, guid: dd5ffdfc1729afc4fa0b08bc0fa49a62,
+        type: 3}
+      propertyPath: gameType
+      value: "\uC608\uC77C\uD559\uC6D0\uBC30 \uAC8C\uC784 \uAC1C\uCD5C"
+      objectReference: {fileID: 0}
     - target: {fileID: 312454559675895662, guid: dd5ffdfc1729afc4fa0b08bc0fa49a62,
         type: 3}
       propertyPath: m_RootOrder
@@ -855,11 +861,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: Opening
       objectReference: {fileID: 0}
+    - target: {fileID: 312454559675895663, guid: dd5ffdfc1729afc4fa0b08bc0fa49a62,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dd5ffdfc1729afc4fa0b08bc0fa49a62, type: 3}
 --- !u!4 &312454559399035640 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 312454559675895662, guid: dd5ffdfc1729afc4fa0b08bc0fa49a62,
+    type: 3}
+  m_PrefabInstance: {fileID: 276860310}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &312454559399035641 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 312454559675895663, guid: dd5ffdfc1729afc4fa0b08bc0fa49a62,
     type: 3}
   m_PrefabInstance: {fileID: 276860310}
   m_PrefabAsset: {fileID: 0}

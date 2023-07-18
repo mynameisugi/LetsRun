@@ -36,6 +36,17 @@ public class TrophyController : MonoBehaviour
         targetRotation = rectTransform.rotation;
     }
 
+    private void OnEnable()
+    {
+        var race = GameManager.Instance().Race.CurrentRace;
+        if(!race) { objectToDestroy.SetActive(false); return; }
+        matchInfo = race.info.type switch {
+            RaceManager.RaceType.Easy => "500m 경기",
+            RaceManager.RaceType.Normal => "1000m 경기",
+            _ => "1500m 경기"
+        };
+    }
+
     private void Update()
     {
         if (shouldRotateAndScale)
@@ -128,6 +139,6 @@ public class TrophyController : MonoBehaviour
 
         yield return new WaitForSeconds(3f);
 
-        Destroy(objectToDestroy);
+        objectToDestroy.SetActive(false);
     }
 }
