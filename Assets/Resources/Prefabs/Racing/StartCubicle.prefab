@@ -799,7 +799,12 @@ PrefabInstance:
     - target: {fileID: 312454559560473318, guid: dd5ffdfc1729afc4fa0b08bc0fa49a62,
         type: 3}
       propertyPath: gameType
-      value: "\uB300\uD1B5\uB839\uBC30 \uAC8C\uC784 \uAC1C\uCD5C"
+      value: "\uC608\uC77C\uD559\uC6D0\uBC30 \uAC8C\uC784 \uAC1C\uCD5C"
+      objectReference: {fileID: 0}
+    - target: {fileID: 312454559560473318, guid: dd5ffdfc1729afc4fa0b08bc0fa49a62,
+        type: 3}
+      propertyPath: matchInfo
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 312454559675895662, guid: dd5ffdfc1729afc4fa0b08bc0fa49a62,
         type: 3}
@@ -864,7 +869,7 @@ PrefabInstance:
     - target: {fileID: 312454559675895663, guid: dd5ffdfc1729afc4fa0b08bc0fa49a62,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dd5ffdfc1729afc4fa0b08bc0fa49a62, type: 3}
