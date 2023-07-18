@@ -9,15 +9,16 @@ public class DisplayTutorial : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        var player = other.GetComponentInParent<PlayerManager>();
-        if (!player) return;
-        gui = player.GUI;
+        var sphere = other.GetComponent<HorseSphere>();
+        if (!sphere || !sphere.horse.isPlayerRiding) return;
+        gui = PlayerManager.Instance().GUI;
         gui.SetMessageBoxText(tutorialText);
     }
+
     private void OnTriggerExit(Collider other)
     {
-        var player = other.GetComponentInParent<PlayerManager>();
-        if (!player) return;
+        var sphere = other.GetComponent<HorseSphere>();
+        if (!sphere || !sphere.horse.isPlayerRiding) return;
         if (gui) gui.SetMessageBoxText(string.Empty);
     }
 }

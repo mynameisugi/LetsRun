@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class DistroyIntro : MonoBehaviour
@@ -9,9 +7,9 @@ public class DistroyIntro : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        var player = collision.gameObject.GetComponentInParent<PlayerManager>();
-        if (!player) return;
-        if (!player.IsRiding) return;
+        var sphere = collision.gameObject.GetComponent<HorseSphere>();
+        if (!sphere) return;
+        if (!sphere.horse.isPlayerRiding) return;
 
         owner.EndTutorial();
     }
