@@ -147,10 +147,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gripAnimation: 1
   speedWalk: 0
-  speedTrot: 0
-  speedCanter: 0
+  speedTrot: 0.2
+  speedCanter: 0.5
   speedGallop: 0
-  stamina: 2.5
+  stamina: 1
   steer: 0
 --- !u!54 &2057824273756122787
 Rigidbody:

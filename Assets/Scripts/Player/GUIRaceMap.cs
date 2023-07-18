@@ -30,6 +30,7 @@ public class GUIRaceMap : MonoBehaviour
             RaceManager.RaceType.Normal => "1000m",
             _ => "1500m"
         };
+        textTime.text = "0:00:0";
 
         var o = race.info.start.transform.position - offset.position;
         start.SetLocalPositionAndRotation(new Vector3(scale * o.z, scale * -o.x, 0f),
