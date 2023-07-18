@@ -4,6 +4,9 @@ public class EndTent : MonoBehaviour
 {
     public BoxCollider[] NPCWaypoints;
 
+    [SerializeField]
+    private TextReader NPC;
+
     public int playerRank = -1;
 
     public void SetPrize(int[] newPrice)
@@ -27,6 +30,7 @@ public class EndTent : MonoBehaviour
         int reward = prize[Mathf.Clamp(playerRank - 1, 0, prize.Length - 1)];
         PlayerManager.Instance().Inventory().AddMoney(reward);
         Debug.Log($"플레이어 {playerRank}등 상금 [{reward}] 받음");
+        NPC.PlayConversation("RaceEndTentChat" + Mathf.Clamp(playerRank - 1, 0, 3));
         playerRank = -1;
     }
 }

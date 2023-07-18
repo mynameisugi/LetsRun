@@ -218,6 +218,7 @@ MonoBehaviour:
   - {fileID: 5266278123868800227}
   - {fileID: 6584018917688224304}
   - {fileID: 5783677253924806046}
+  NPC: {fileID: 1820024537488806951}
   playerRank: -1
 --- !u!1 &2006884855807350193
 GameObject:
@@ -1386,6 +1387,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 40f626e2e2dc9924a858f26cd7944143, type: 3}
+--- !u!114 &1820024537488806951 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2992172728686768708, guid: 40f626e2e2dc9924a858f26cd7944143,
+    type: 3}
+  m_PrefabInstance: {fileID: 3514025499284186723}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ff658a01ade2a846b680fc80d68ee51, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &6622539680036692459 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7720206955179640712, guid: 40f626e2e2dc9924a858f26cd7944143,

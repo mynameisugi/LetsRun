@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 9209858815275992884}
   - component: {fileID: 1771233381905887261}
   - component: {fileID: 6805501613358644340}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Grabbable
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -109,7 +109,7 @@ GameObject:
   - component: {fileID: 8576914928287434346}
   - component: {fileID: 2057824273756122787}
   - component: {fileID: 7438755448405117661}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: FoodHotteock
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -422,10 +422,25 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 11a8c080607cf47c299aff53087e0334, type: 2}
+    - target: {fileID: -5159644267529826863, guid: 8e6aaa4d9ae310c46af2947542b2e1ec,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: -435065460499414210, guid: 8e6aaa4d9ae310c46af2947542b2e1ec,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 8e6aaa4d9ae310c46af2947542b2e1ec,
         type: 3}
       propertyPath: m_Name
       value: pancake
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 8e6aaa4d9ae310c46af2947542b2e1ec,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 2669138721105086689, guid: 8e6aaa4d9ae310c46af2947542b2e1ec,
         type: 3}
