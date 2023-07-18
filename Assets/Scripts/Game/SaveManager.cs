@@ -18,7 +18,7 @@ public class SaveManager
     public void LoadFromPrefs(int slot = 0)
     {
         string json = PlayerPrefs.GetString(GetSlotPref(slot), string.Empty);
-        if (string.IsNullOrEmpty(json)) { Reset(); SaveToPrefs(0); return; }
+        if (string.IsNullOrEmpty(json)) { Reset(); return; }
         saveData = (Dictionary<string, object>)JsonConvert.DeserializeObject(json, typeof(Dictionary<string, object>));
 
     }
