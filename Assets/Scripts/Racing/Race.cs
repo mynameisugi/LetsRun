@@ -302,11 +302,19 @@ public class Race : MonoBehaviour
                     RaceType.Normal => Random.Range(14f, 20f),
                     _ => Random.Range(12f, 18f)
                 },
-                skin = Random.Range(0, 10),
+                skin = GetRandomSkin(),
                 SteerStrength = type switch { RaceType.Hard => 50f, RaceType.Normal => 40f, _ => 30f }
             };
 
             return stats;
+
+            static int GetRandomSkin()
+            {
+                if (!PlayerManager.Instance().horse) return Random.Range(0, 10);
+                int s = Random.Range(0, 9);
+                if (s >= PlayerManager.Instance().horse.stats.skin) ++s;
+                return s;
+            }
         }
     }
 
