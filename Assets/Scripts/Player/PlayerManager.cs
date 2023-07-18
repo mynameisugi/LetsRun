@@ -57,8 +57,22 @@ public class PlayerManager : MonoBehaviour
     private void Start()
     {
         inventory = new PlayerInventory(this);
-        // Load Horse
-        const string HorseKey = "PlayerHorseStats";
+        
+        // Save Horse
+        GameManager.Instance().Save.OnSaveToPref += (save) =>
+        {
+            if (!horse) return;
+            var horseData = horse.stats.ToSaveString();
+            GameManager.Instance().Save.SaveValue(HorseKey, horseData);
+        };
+
+        GUI = GetComponentInChildren<GUIController>();
+    }
+
+    private const string HorseKey = "PlayerHorseStats";
+
+    public void LoadHorse()
+    {
         var data = GameManager.Instance().Save.LoadValue(HorseKey, "");
         if (!string.IsNullOrEmpty(data))
         {
@@ -69,15 +83,6 @@ public class PlayerManager : MonoBehaviour
             horse.playerRidable = true;
             horse.stats = HorseStats.FromSaveString(data);
         }
-        // Save Horse
-        GameManager.Instance().Save.OnSaveToPref += (save) =>
-        {
-            if (!horse) return;
-            var horseData = horse.stats.ToSaveString();
-            GameManager.Instance().Save.SaveValue(HorseKey, horseData);
-        };
-
-        GUI = GetComponentInChildren<GUIController>();
     }
 
 

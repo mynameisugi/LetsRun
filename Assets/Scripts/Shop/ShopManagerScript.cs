@@ -68,6 +68,7 @@ public class ShopManagerScript : MonoBehaviour
     {
         if (GameSettings.Values.rumble)
             PlayerManager.Instance().Action().GetDevice(0).SendHapticImpulse(0, 0.2f, 0.5f);
+        aSource.volume = 0.3f * GameSettings.Values.SE;
         aSource.Play();
 
         var player = PlayerManager.Instance();
