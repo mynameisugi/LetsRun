@@ -31,6 +31,14 @@ public class PlayerManager : MonoBehaviour
     public static PlayerManager Instance()
         => GameObject.FindGameObjectWithTag("Player").transform.root.GetComponent<PlayerManager>();
 
+    private static PlayerManager instance = null;
+
+    private void Awake()
+    {
+        if (!instance) instance = this;
+        else if (instance != this) Destroy(gameObject);
+    }
+
     /// <summary>
     /// 플레이어 실제 위치
     /// </summary>
