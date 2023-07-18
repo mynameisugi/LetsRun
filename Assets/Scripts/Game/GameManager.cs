@@ -1,9 +1,11 @@
 using System;
 using System.Collections;
+using UnityEditor.SearchService;
 using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
 using UnityEngine.SceneManagement;
+using Scene = UnityEngine.SceneManagement.Scene;
 
 public class GameManager : MonoBehaviour
 {
@@ -155,7 +157,13 @@ public class GameManager : MonoBehaviour
 
     public void StartIntro()
     {
+        SceneManager.sceneLoaded += InstantiateIntro;
         SceneManager.LoadScene(0);
-        Instantiate(introPrefab);
+        
+        void InstantiateIntro(Scene scene, LoadSceneMode mode)
+        {
+            Instantiate(introPrefab);
+            SceneManager.sceneLoaded -= InstantiateIntro;
+        }
     }
 }
