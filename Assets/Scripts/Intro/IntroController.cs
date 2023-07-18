@@ -55,6 +55,13 @@ public class IntroController : MonoBehaviour
             horse.playerRidable = true;
             horse.stats.skin = i;
 
+            horse.stats.SpeedWalk = 2f;
+            horse.stats.SpeedTrot = 4f;
+            horse.stats.SpeedCanter = 6f;
+            horse.stats.SpeedGallop = 18f;
+            horse.stats.SteerStrength = 35f;
+            horse.stats.GallopAmount = 4f;
+
             horses[i] = horse;
         }
     }
