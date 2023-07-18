@@ -1055,7 +1055,7 @@ MonoBehaviour:
   textTime: {fileID: 5735239790407865612}
   arm: {fileID: 6527071412521350482}
   popup: {fileID: 2884739073367694350}
-  tickSound: {fileID: 8300000, guid: d7d417639e8b2e44ab91a2dc99fa87da, type: 3}
+  tickSound: {fileID: 8300000, guid: 53a1b954f0c2ae2469989565e88013c9, type: 3}
 --- !u!1 &1023874780829698409
 GameObject:
   m_ObjectHideFlags: 0
