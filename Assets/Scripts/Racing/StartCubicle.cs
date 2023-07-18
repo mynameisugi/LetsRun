@@ -31,6 +31,6 @@ public class StartCubicle : MonoBehaviour
 
     public void ShowOpening()
     {
-        // opening.SetActive(true);
+        opening.SetActive(true);
     }
 }

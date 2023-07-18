@@ -137,8 +137,8 @@ public class TrophyController : MonoBehaviour
 
         canvasGroup.alpha = 0f;
 
-        yield return new WaitForSeconds(3f);
+        //yield return new WaitForSeconds(3f);
 
-        objectToDestroy.SetActive(false);
+        //objectToDestroy.SetActive(false);
     }
 }
